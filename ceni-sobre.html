@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - CENI-RJ</title>
+    
+    <meta name="description" content="Conheça o CENI-RJ - Definição, características e objetivos dos negócios de impacto no Rio de Janeiro">
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="ceni-animations.css">
+    
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --accent: #000000;
+            --background: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --grid-line: #e0e0e0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            text-decoration: none;
+        }
+        .skip-link:focus { top: 0; }
+
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            z-index: 9999;
+            transition: width 0.2s;
+        }
+
+        .breadcrumb-container {
+            background: var(--background);
+            border-bottom: 1px solid var(--grid-line);
+            padding: 1rem 0;
+        }
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            list-style: none;
+        }
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        .breadcrumb a:hover { color: var(--primary); }
+        .breadcrumb .active {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        
+        .swiss-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+        
+        .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
+        .col-8 { grid-column: span 8; position: relative; z-index: 1; }
+        .col-6 { grid-column: span 6; position: relative; z-index: 1; }
+        
+        .gov-header {
+            background: var(--primary);
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .gov-header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .gov-logo-img { height: 50px; }
+        
+        .main-nav {
+            display: flex;
+            gap: 0;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            transition: background 0.2s;
+        }
+        
+        .main-nav a:first-child { border-left: 1px solid rgba(255,255,255,0.2); }
+        .main-nav a:hover, .main-nav a.active { background: rgba(255,255,255,0.1); }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 80%;
+                max-width: 300px;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 5rem 0 2rem 0;
+                transition: right 0.3s ease;
+                z-index: 9999;
+                box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+            }
+            .main-nav.active { right: 0; }
+            .main-nav a {
+                border: none !important;
+                border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+                padding: 1.5rem 2rem;
+            }
+            .mobile-menu-toggle { display: block; }
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 9998;
+            }
+            .mobile-overlay.active { display: block; }
+        }
+        
+        .section-number {
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--primary);
+            opacity: 0.15;
+            position: absolute;
+            top: -2rem;
+            left: -1rem;
+            z-index: 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .hero-section {
+            padding: 6rem 0 4rem 0;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-line {
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            margin: 2rem 0;
+        }
+        
+        .definition-box {
+            border: 4px solid var(--accent);
+            padding: 3rem;
+            margin: 4rem 0;
+            background: white;
+        }
+        
+        .definition-box p {
+            font-size: 1.5rem;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+        
+        .caracteristica-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .caracteristica-list li {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--grid-line);
+            font-size: 1.125rem;
+            display: flex;
+            align-items: start;
+            gap: 2rem;
+        }
+        
+        .caracteristica-list li:last-child { border-bottom: none; }
+        
+        .caracteristica-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            min-width: 60px;
+        }
+        
+        .negative-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .negative-list li {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 1.125rem;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .negative-list li:last-child { border-bottom: none; }
+        
+        .marcos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .marco-card {
+            border: 2px solid var(--accent);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .marco-number {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--primary);
+        }
+        
+        .marco-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .stat-item {
+            border-left: 4px solid var(--primary);
+            padding-left: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--primary);
+        }
+        
+        .objetivos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .objetivo-item {
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+        }
+        
+        .objetivo-item h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: var(--primary);
+            transform: translateY(-4px);
+        }
+        
+        .page-footer {
+            background: var(--accent);
+            color: white;
+            padding: 4rem 0 2rem 0;
+            margin-top: 8rem;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            opacity: 0.6;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .footer-section a:hover { text-decoration: underline; }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+        }
+        
+        .mb-8 { margin-bottom: 8rem; }
+        .mb-6 { margin-bottom: 6rem; }
+        .mt-6 { margin-top: 6rem; }
+        
+        @media (max-width: 968px) {
+            .swiss-grid { 
+                padding: 0 2rem; 
+                grid-template-columns: 1fr;
+            }
+            .breadcrumb { padding: 0 2rem; }
+            .col-8, .col-6 { grid-column: 1 / -1; }
+            .hero-title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .marcos-grid, .stats-grid, .objetivos-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .header-grid { padding: 0 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    <div class="progress-indicator" id="progressBar"></div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <header class="gov-header">
+        <div class="header-grid">
+            <img src="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png" alt="SEDEICS" class="gov-logo-img" loading="lazy">
+            
+            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navegação principal">
+                <a href="ceni-index.html">Início</a>
+                <a href="ceni-sobre.html" class="active" aria-current="page">Sobre</a>
+                <a href="ceni-gts.html">GTs</a>
+                <a href="ceni-canais.html">Canais</a>
+                <a href="ceni-repositorio.html">Repositório</a>
+            </nav>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-container" aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="ceni-index.html">CENI-RJ</a></li>
+            <li class="active" aria-current="page">→ Sobre</li>
+        </ol>
+    </nav>
+
+    <main id="main-content">
+        <section class="hero-section">
+            <div class="swiss-grid">
+                <div class="col-full">
+                    <span class="label">Institucional</span>
+                    <h1 class="hero-title">
+                        Sobre o<br>CENI-RJ
+                    </h1>
+                    <div class="hero-line"></div>
+                </div>
+                
+                <div class="col-8">
+                    <p style="font-size: 1.25rem; line-height: 1.6;">
+                        O <strong>Comitê Estadual de Investimentos e Negócios de Impacto – CENI-RJ</strong> é uma 
+                        instância estratégica do Governo do Estado do Rio de Janeiro responsável por promover a 
+                        articulação entre governo, instituições de fomento, sociedade civil, universidades, 
+                        organizações intermediárias e setor privado.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <div class="swiss-grid">
+                <div class="col-full" style="position: relative;">
+                    <span class="section-number" aria-hidden="true">01</span>
+                    <span class="label">Definição</span>
+                    <h2 class="section-title">
+                        Negócios de<br>Impacto
+                    </h2>
+                </div>
+                
+                <div class="col-full">
+                    <div class="definition-box">
+                        <p>
+                            Empreendimentos com o objetivo de gerar 
+                            <strong>impacto socioambiental</strong> e 
+                            <strong>resultado financeiro positivo</strong> 
+                            de forma sustentável.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-6">
+                    <span class="label">Características</span>
+                    <ul class="caracteristica-list">
+                        <li>
+                            <span class="caracteristica-number">01</span>
+                            <div>
+                                <strong>Atividade Principal</strong><br>
+                                A solução de impacto é a atividade principal do negócio
+                            </div>
+                        </li>
+                        <li>
+                            <span class="caracteristica-number">02</span>
+                            <div>
+                                <strong>Lógica de Mercado</strong><br>
+                                Busca de retorno financeiro, operando pela lógica de mercado
+                            </div>
+                        </li>
+                        <li>
+                            <span class="caracteristica-number">03</span>
+                            <div>
+                                <strong>Intencionalidade</strong><br>
+                                Resolução de um problema social e/ou ambiental
+                            </div>
+                        </li>
+                        <li>
+                            <span class="caracteristica-number">04</span>
+                            <div>
+                                <strong>Inclusão Social</strong><br>
+                                Presente no ambiente institucional
+                            </div>
+                        </li>
+                        <li>
+                            <span class="caracteristica-number">05</span>
+                            <div>
+                                <strong>Monitoramento</strong><br>
+                                Interesse no monitoramento do impacto gerado
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-width-section full-width-bg">
+            <div class="swiss-grid">
+                <div class="col-full">
+                    <span class="label" style="color: rgba(255,255,255,0.6);">Exclusões</span>
+                    <h2 class="section-title" style="color: white;">
+                        O que NÃO é<br>Negócio de Impacto
+                    </h2>
+                </div>
+                
+                <div class="col-full">
+                    <ul class="negative-list">
+                        <li>
+                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">01</span>
+                            <div>Iniciativas de grupos minorizados que não têm foco em resolver problemas sociais ou ambientais.</div>
+                        </li>
+                        <li>
+                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">02</span>
+                            <div>Organizações sem fins lucrativos que atuam pelo interesse público, mas não operam como negócios.</div>
+                        </li>
+                        <li>
+                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">03</span>
+                            <div>Empreendimentos que têm impacto social apenas de forma indireta, sem que isso faça parte do núcleo do negócio.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-6 mb-8">
+            <div class="swiss-grid">
+                <div class="col-full" style="position: relative;">
+                    <span class="section-number" aria-hidden="true">02</span>
+                    <span class="label">Pioneirismo</span>
+                    <h2 class="section-title">
+                        Rio de Janeiro<br>Lidera no Brasil
+                    </h2>
+                </div>
+                
+                <div class="marcos-grid" style="grid-column: 1 / -1;">
+                    <div class="marco-card">
+                        <div class="marco-number">2°</div>
+                        <div class="marco-label">Estado</div>
+                        <p style="margin-top: 1rem;">A estabelecer a Política Estadual</p>
+                    </div>
+                    
+                    <div class="marco-card">
+                        <div class="marco-number">4°</div>
+                        <div class="marco-label">Estado</div>
+                        <p style="margin-top: 1rem;">A instituir o Comitê Estadual</p>
+                    </div>
+                    
+                    <div class="marco-card">
+                        <div class="marco-number">1ª</div>
+                        <div class="marco-label">FAP</div>
+                        <p style="margin-top: 1rem;">A ter edital dedicado à Pauta</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <div class="swiss-grid">
+                <div class="col-full" style="position: relative;">
+                    <span class="section-number" aria-hidden="true">03</span>
+                    <span class="label">Finalidade</span>
+                    <h2 class="section-title">
+                        Objetivos<br>Estratégicos
+                    </h2>
+                </div>
+                
+                <div class="objetivos-grid" style="grid-column: 1 / -1;">
+                    <div class="objetivo-item">
+                        <h4>Aumento de Negócios</h4>
+                        <p>Expandir o número e escala de negócios de impacto no RJ</p>
+                    </div>
+                    
+                    <div class="objetivo-item">
+                        <h4>Fomento e Crédito</h4>
+                        <p>Facilitar acesso a financiamento e recursos</p>
+                    </div>
+                    
+                    <div class="objetivo-item">
+                        <h4>Participação no Mercado</h4>
+                        <p>Fortalecer presença em compras públicas</p>
+                    </div>
+                    
+                    <div class="objetivo-item">
+                        <h4>Inovação Social</h4>
+                        <p>Promover soluções inovadoras para problemas sociais</p>
+                    </div>
+                    
+                    <div class="objetivo-item">
+                        <h4>Organizações Intermediárias</h4>
+                        <p>Fortalecer ecossistema de suporte (aceleradoras, hubs)</p>
+                    </div>
+                    
+                    <div class="objetivo-item">
+                        <h4>Articulação de Atores</h4>
+                        <p>Integrar governo, sociedade civil e setor privado</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <div class="swiss-grid">
+                <div class="col-full" style="position: relative;">
+                    <span class="section-number" aria-hidden="true">04</span>
+                    <span class="label">Estrutura</span>
+                    <h2 class="section-title">
+                        Composição do<br>Ecossistema
+                    </h2>
+                </div>
+                
+                <div class="col-6">
+                    <p style="font-size: 1.25rem; line-height: 1.6;">
+                        Governança <strong>multissetorial</strong> que reúne representantes 
+                        do Governo do Estado e da sociedade civil em 17 organizações estratégicas.
+                    </p>
+                </div>
+                
+                <div class="stats-grid" style="grid-column: 1 / -1;">
+                    <div class="stat-item">
+                        <div class="stat-number">17</div>
+                        <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 700; margin-top: 0.5rem;">
+                            Organizações Participantes
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 700; margin-top: 0.5rem;">
+                            Grupos de Trabalho
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">34</div>
+                        <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 700; margin-top: 0.5rem;">
+                            Membros (Titular + Suplente)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="page-footer">
+        <div class="swiss-grid">
+            <div class="footer-grid" style="grid-column: 1 / -1;">
+                <div class="footer-section">
+                    <h4>Sobre</h4>
+                    <p>
+                        Promovemos a articulação entre governo, instituições de fomento, 
+                        sociedade civil e setor privado para fortalecer o ecossistema de 
+                        impacto socioambiental no Rio de Janeiro.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Navegação</h4>
+                    <a href="ceni-index.html">Início</a>
+                    <a href="ceni-sobre.html">Sobre o Comitê</a>
+                    <a href="ceni-gts.html">Grupos de Trabalho</a>
+                    <a href="ceni-canais.html">Canais</a>
+                    <a href="ceni-repositorio.html">Repositório</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br">
+                        <i class="fas fa-envelope"></i> nucleo.acompanhamento@desenvolvimento.rj.gov.br
+                    </a>
+                    <a href="mailto:gabinete@desenvolvimento.rj.gov.br">
+                        <i class="fas fa-envelope"></i> gabinete@desenvolvimento.rj.gov.br
+                    </a>
+                    <p style="margin-top: 1rem;"><i class="fas fa-map-marker-alt"></i> SEDEICS - Rio de Janeiro, RJ</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom" style="grid-column: 1 / -1;">
+                <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
+                <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
+                <p>Desenvolvido por Gabriel Felizardo da Silva</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="ceni-animations.js"></script>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        const header = document.querySelector('.gov-header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
+        });
+
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = mainNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isOpen);
+            menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 300);
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
