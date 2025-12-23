@@ -189,11 +189,11 @@
         }
         
         .section-number {
-            font-size: 8rem;
+            font-size: 10rem;
             font-weight: 900;
             line-height: 1;
             color: var(--primary);
-            opacity: 0.15;
+            opacity: 0.08;
             position: absolute;
             top: -2rem;
             left: -1rem;
@@ -339,6 +339,13 @@
             color: var(--primary);
         }
         
+        .stat-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+        
         .objetivos-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -356,6 +363,11 @@
             font-weight: 700;
             text-transform: uppercase;
             margin-bottom: 0.5rem;
+        }
+
+        .objetivo-item p {
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .back-to-top {
@@ -441,6 +453,7 @@
             .col-8, .col-6 { grid-column: 1 / -1; }
             .hero-title { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
+            .section-number { font-size: 6rem; }
             .marcos-grid, .stats-grid, .objetivos-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .header-grid { padding: 0 2rem; }
@@ -605,19 +618,19 @@
                     <div class="marco-card">
                         <div class="marco-number">2°</div>
                         <div class="marco-label">Estado</div>
-                        <p style="margin-top: 1rem;">A estabelecer a Política Estadual</p>
+                        <p style="margin-top: 1rem; font-size: 1rem;">A estabelecer a Política Estadual</p>
                     </div>
                     
                     <div class="marco-card">
                         <div class="marco-number">4°</div>
                         <div class="marco-label">Estado</div>
-                        <p style="margin-top: 1rem;">A instituir o Comitê Estadual</p>
+                        <p style="margin-top: 1rem; font-size: 1rem;">A instituir o Comitê Estadual</p>
                     </div>
                     
                     <div class="marco-card">
                         <div class="marco-number">1ª</div>
                         <div class="marco-label">FAP</div>
-                        <p style="margin-top: 1rem;">A ter edital dedicado à Pauta</p>
+                        <p style="margin-top: 1rem; font-size: 1rem;">A ter edital dedicado à Pauta</p>
                     </div>
                 </div>
             </div>
@@ -687,21 +700,21 @@
                 <div class="stats-grid" style="grid-column: 1 / -1;">
                     <div class="stat-item">
                         <div class="stat-number">17</div>
-                        <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 700; margin-top: 0.5rem;">
+                        <div class="stat-label">
                             Organizações Participantes
                         </div>
                     </div>
                     
                     <div class="stat-item">
                         <div class="stat-number">5</div>
-                        <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 700; margin-top: 0.5rem;">
+                        <div class="stat-label">
                             Grupos de Trabalho
                         </div>
                     </div>
                     
                     <div class="stat-item">
                         <div class="stat-number">34</div>
-                        <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 700; margin-top: 0.5rem;">
+                        <div class="stat-label">
                             Membros (Titular + Suplente)
                         </div>
                     </div>
