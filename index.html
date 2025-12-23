@@ -39,6 +39,10 @@
         .loading-container {
             text-align: center;
             max-width: 600px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .logo-large {
@@ -162,16 +166,23 @@
         }
         
         .footer-simple {
-            position: fixed;
-            bottom: 1rem;
-            left: 0;
-            right: 0;
+            width: 100%;
+            max-width: 1200px;
             text-align: center;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: #999;
             animation: fadeIn 1s ease 1.5s both;
+            margin-top: 4rem;
+            padding: 2rem 1rem 1rem 1rem;
+        }
+
+        .footer-simple p {
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            color: #999;
+            animation: none;
         }
         
         @keyframes fadeInDown {
@@ -227,8 +238,8 @@
             }
             
             .footer-simple {
-                position: static;
-                margin-top: 4rem;
+                margin-top: 3rem;
+                padding: 1.5rem 1rem 1rem 1rem;
             }
         }
         
@@ -294,10 +305,11 @@
         <div class="loader" id="loader" aria-label="Carregando"></div>
     </div>
     
-    <div class="footer-simple">
+    <footer class="footer-simple">
+        <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
         <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
-        <p>© <span id="current-year"></span> Governo do Estado do Rio de Janeiro</p>
-    </div>
+        <p>Desenvolvido por Gabriel Felizardo da Silva</p>
+    </footer>
     
     <script>
         // Set current year
