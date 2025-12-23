@@ -193,11 +193,11 @@
         }
         
         .section-number {
-            font-size: 15rem;
+            font-size: 10rem;
             font-weight: 900;
             line-height: 1;
             color: var(--primary);
-            opacity: 0.1;
+            opacity: 0.08;
             position: absolute;
             top: -3rem;
             left: -2rem;
@@ -327,6 +327,17 @@
             color: white;
             transform: translateY(-4px);
         }
+
+        .org-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            transition: color 0.2s;
+        }
+
+        .org-item:hover .org-icon {
+            color: white;
+        }
         
         .org-item h4 {
             font-size: 1rem;
@@ -422,6 +433,7 @@
             .col-8 { grid-column: 1 / -1; }
             .hero-title { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
+            .section-number { font-size: 6rem; }
             .gt-number-large { font-size: 5rem; }
             .footer-grid { grid-template-columns: 1fr; }
             .header-grid { padding: 0 2rem; }
@@ -597,103 +609,103 @@
                 
                 <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏛️</div>
+                        <i class="fas fa-landmark org-icon"></i>
                         <h4>Casa Civil</h4>
                         <p>Governo do Estado</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+                        <i class="fas fa-users org-icon"></i>
                         <h4>SEGOV</h4>
                         <p>Secretaria de Governo</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">👩</div>
+                        <i class="fas fa-venus org-icon"></i>
                         <h4>Secretaria da Mulher</h4>
                         <p>Governo do Estado</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎭</div>
+                        <i class="fas fa-palette org-icon"></i>
                         <h4>SECEC</h4>
                         <p>Cultura e Economia Criativa</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                        <i class="fas fa-bolt org-icon"></i>
                         <h4>SEEEM</h4>
                         <p>Energia e Economia do Mar</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌳</div>
+                        <i class="fas fa-leaf org-icon"></i>
                         <h4>SEAS</h4>
                         <p>Ambiente e Sustentabilidade</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">💼</div>
+                        <i class="fas fa-briefcase org-icon"></i>
                         <h4>SETRAB</h4>
                         <p>Trabalho e Renda</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔬</div>
+                        <i class="fas fa-flask org-icon"></i>
                         <h4>FAPERJ</h4>
                         <p>Fundação de Amparo à Pesquisa</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+                        <i class="fas fa-graduation-cap org-icon"></i>
                         <h4>PUC-Rio</h4>
                         <p>Universidade</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏫</div>
+                        <i class="fas fa-university org-icon"></i>
                         <h4>UFRJ</h4>
                         <p>Universidade Federal</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏭</div>
+                        <i class="fas fa-industry org-icon"></i>
                         <h4>Firjan</h4>
                         <p>Sistema FIRJAN</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                        <i class="fas fa-chart-line org-icon"></i>
                         <h4>SEBRAE-RJ</h4>
                         <p>Apoio a Pequenos Negócios</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏢</div>
+                        <i class="fas fa-building org-icon"></i>
                         <h4>ABERJ</h4>
                         <p>Associação Brasileira</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">💡</div>
+                        <i class="fas fa-lightbulb org-icon"></i>
                         <h4>Impact Hub Rio</h4>
                         <p>Hub de Inovação Social</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🛍️</div>
+                        <i class="fas fa-store org-icon"></i>
                         <h4>Fecomércio RJ</h4>
                         <p>Federação do Comércio</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌊</div>
+                        <i class="fas fa-water org-icon"></i>
                         <h4>Rio de Impacto</h4>
                         <p>Organização de Impacto</p>
                     </div>
                     
                     <div class="org-item">
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                        <i class="fas fa-globe org-icon"></i>
                         <h4>Comissão ODS RJ</h4>
                         <p>Objetivos de Desenvolvimento</p>
                     </div>
