@@ -315,11 +315,11 @@
         }
         
         .section-number {
-            font-size: 8rem;
+            font-size: 10rem;
             font-weight: 900;
             line-height: 1;
             color: var(--primary);
-            opacity: 0.1;
+            opacity: 0.08;
             position: absolute;
             top: -2rem;
             left: -2rem;
@@ -357,7 +357,7 @@
         }
         
         .gt-simple-card:hover {
-            transform: translateY(-8px);
+            transform: translate(4px, -8px);
             text-decoration: none;
             color: white;
             box-shadow: 0 12px 24px rgba(0,0,0,0.15);
@@ -566,6 +566,7 @@
             .hero-number { font-size: 8rem; }
             .hero-title { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
+            .section-number { font-size: 6rem; }
             .stats-grid { grid-template-columns: 1fr; gap: 2rem; }
             .gts-simple { grid-template-columns: 1fr; }
             .timeline { 
@@ -616,18 +617,18 @@
         <section class="hero-section">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <p class="hero-number" aria-hidden="true" data-animate="fade-down" style="transform: translateY(-40px);">CENI</p>
-                    <div class="hero-line" aria-hidden="true" data-animate="scale-in" data-delay="200" style="transform: scale(0.5);"></div>
-                    <h1 class="hero-title" data-animate="fade-up" data-delay="300" style="transform: translateY(40px);">
+                    <p class="hero-number" aria-hidden="true" data-animate="fade-down">CENI</p>
+                    <div class="hero-line" aria-hidden="true" data-animate="scale-in" data-delay="200"></div>
+                    <h1 class="hero-title" data-animate="fade-up" data-delay="300">
                         Comitê Estadual de<br>
                         Investimentos e Negócios<br>
                         de Impacto
                     </h1>
-                    <p class="hero-description" data-animate="fade-up" data-delay="400" style="transform: translateY(40px);">
+                    <p class="hero-description" data-animate="fade-up" data-delay="400">
                         Articulando governo, sociedade civil e setor privado para fortalecer 
                         o ecossistema de impacto socioambiental no Estado do Rio de Janeiro.
                     </p>
-                    <div data-animate="fade-up" data-delay="500" style="transform: translateY(40px);">
+                    <div data-animate="fade-up" data-delay="500">
                         <a href="ceni-sobre.html" class="btn-swiss">Conheça o Comitê</a>
                         <a href="ceni-gts.html" class="btn-swiss btn-swiss-outline">Grupos de Trabalho</a>
                     </div>
@@ -639,15 +640,15 @@
         <section class="full-width-section full-width-bg-primary" aria-label="Estatísticas do comitê">
             <div class="swiss-grid">
                 <div class="stats-grid" style="grid-column: 1 / -1;">
-                    <div class="stat-item" data-animate="scale-in" data-delay="0" style="transform: scale(0.8);">
+                    <div class="stat-item" data-animate="scale-in" data-delay="0">
                         <span class="stat-number">17</span>
                         <span class="stat-label">Organizações<br>Participantes</span>
                     </div>
-                    <div class="stat-item" data-animate="scale-in" data-delay="150" style="transform: scale(0.8);">
+                    <div class="stat-item" data-animate="scale-in" data-delay="150">
                         <span class="stat-number">5</span>
                         <span class="stat-label">Grupos de<br>Trabalho</span>
                     </div>
-                    <div class="stat-item" data-animate="scale-in" data-delay="300" style="transform: scale(0.8);">
+                    <div class="stat-item" data-animate="scale-in" data-delay="300">
                         <span class="stat-number">34</span>
                         <span class="stat-label">Membros Ativos<br>(Titular + Suplente)</span>
                     </div>
@@ -660,52 +661,52 @@
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
                     <span class="section-number" aria-hidden="true">01</span>
-                    <span class="label" data-animate="fade-up" style="transform: translateY(20px);">Estrutura Operacional</span>
-                    <h2 class="section-title" data-animate="fade-up" data-delay="100" style="transform: translateY(20px);">
+                    <span class="label" data-animate="fade-up">Estrutura Operacional</span>
+                    <h2 class="section-title" data-animate="fade-up" data-delay="100">
                         Grupos de<br>Trabalho
                     </h2>
                 </div>
                 
                 <div class="col-8">
-                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;" data-animate="fade-up" data-delay="200" style="transform: translateY(20px);">
+                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;" data-animate="fade-up" data-delay="200">
                         5 Grupos de Trabalho articulam 17 organizações entre governo, sociedade civil, 
                         universidades e setor privado para executar as estratégias do comitê:
                     </p>
                 </div>
                 
                 <div class="gts-simple" style="grid-column: 1 / -1;">
-                    <a href="ceni-gts.html#gt1" class="gt-simple-card gt1" aria-label="Ir para GT 1" data-animate="fade-up" data-delay="0" style="transform: translateY(40px);">
+                    <a href="ceni-gts.html#gt1" class="gt-simple-card gt1" aria-label="Ir para GT 1" data-animate="fade-up" data-delay="0">
                         <div class="gt-simple-number">01</div>
                         <h3>Capital e<br>Financiamento</h3>
                         <p>Mobilizar mecanismos financeiros e acesso a capital</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt2" class="gt-simple-card gt2" aria-label="Ir para GT 2" data-animate="fade-up" data-delay="100" style="transform: translateY(40px);">
+                    <a href="ceni-gts.html#gt2" class="gt-simple-card gt2" aria-label="Ir para GT 2" data-animate="fade-up" data-delay="100">
                         <div class="gt-simple-number">02</div>
                         <h3>Fomento a<br>Negócios</h3>
                         <p>Formação, aceleração e desenvolvimento técnico</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt3" class="gt-simple-card gt3" aria-label="Ir para GT 3" data-animate="fade-up" data-delay="200" style="transform: translateY(40px);">
+                    <a href="ceni-gts.html#gt3" class="gt-simple-card gt3" aria-label="Ir para GT 3" data-animate="fade-up" data-delay="200">
                         <div class="gt-simple-number">03</div>
                         <h3>Organizações<br>Intermediárias</h3>
                         <p>Fortalecer aceleradoras, hubs e institutos</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt4" class="gt-simple-card gt4" aria-label="Ir para GT 4" data-animate="fade-up" data-delay="300" style="transform: translateY(40px);">
+                    <a href="ceni-gts.html#gt4" class="gt-simple-card gt4" aria-label="Ir para GT 4" data-animate="fade-up" data-delay="300">
                         <div class="gt-simple-number">04</div>
                         <h3>Ambiente<br>Normativo</h3>
                         <p>Marcos regulatórios e políticas públicas</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt5" class="gt-simple-card gt5" aria-label="Ir para GT 5" data-animate="fade-up" data-delay="400" style="transform: translateY(40px);">
+                    <a href="ceni-gts.html#gt5" class="gt-simple-card gt5" aria-label="Ir para GT 5" data-animate="fade-up" data-delay="400">
                         <div class="gt-simple-number">05</div>
                         <h3>Articulação<br>Interfederativa</h3>
                         <p>Integração com municípios e entes federativos</p>
                     </a>
                 </div>
                 
-                <div class="col-full" style="text-align: center;" data-animate="fade-up" data-delay="500" style="transform: translateY(20px);">
+                <div class="col-full" style="text-align: center;" data-animate="fade-up" data-delay="500">
                     <a href="ceni-gts.html" class="btn-swiss">Ver Detalhes dos Grupos</a>
                 </div>
             </div>
@@ -715,7 +716,7 @@
         <section class="mb-8">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <div class="destaque-box" data-animate="scale-in" style="transform: scale(0.9);">
+                    <div class="destaque-box" data-animate="scale-in">
                         <span class="destaque-badge">Em Destaque</span>
                         <h2 style="font-size: 2.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem;">
                             Edital FAPERJ<br>1ª FAP Dedicada à Pauta
@@ -737,21 +738,21 @@
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
                     <span class="section-number" aria-hidden="true">02</span>
-                    <span class="label" data-animate="fade-up" style="transform: translateY(20px);">Agenda 2026</span>
-                    <h2 class="section-title" data-animate="fade-up" data-delay="100" style="transform: translateY(20px);">
+                    <span class="label" data-animate="fade-up">Agenda 2026</span>
+                    <h2 class="section-title" data-animate="fade-up" data-delay="100">
                         Próximos<br>Passos
                     </h2>
                 </div>
                 
                 <div class="col-8">
-                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;" data-animate="fade-up" data-delay="200" style="transform: translateY(20px);">
+                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;" data-animate="fade-up" data-delay="200">
                         O primeiro trimestre de 2026 marca o início das atividades estruturantes do CENI-RJ. 
                         Confira a agenda de consolidação do comitê:
                     </p>
                 </div>
                 
                 <div class="timeline" style="grid-column: 1 / -1;">
-                    <div class="timeline-item" data-animate="fade-right" data-delay="0" style="transform: translateX(-40px);">
+                    <div class="timeline-item" data-animate="fade-right" data-delay="0">
                         <div class="timeline-month">Janeiro 2026</div>
                         <ul>
                             <li>Contribuições para o Regimento Interno</li>
@@ -760,7 +761,7 @@
                         </ul>
                     </div>
                     
-                    <div class="timeline-item" data-animate="fade-left" data-delay="200" style="transform: translateX(40px);">
+                    <div class="timeline-item" data-animate="fade-left" data-delay="200">
                         <div class="timeline-month">Fevereiro - Março 2026</div>
                         <ul>
                             <li>Consolidação do Regimento Interno</li>
@@ -771,7 +772,7 @@
                     </div>
                 </div>
                 
-                <div class="col-full" style="text-align: center; margin-top: 2rem;" data-animate="fade-up" data-delay="400" style="transform: translateY(20px);">
+                <div class="col-full" style="text-align: center; margin-top: 2rem;" data-animate="fade-up" data-delay="400">
                     <a href="ceni-sobre.html" class="btn-swiss">Conheça Mais Sobre o CENI-RJ</a>
                 </div>
             </div>
