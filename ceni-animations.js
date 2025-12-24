@@ -37,9 +37,8 @@
     }
 
     // ========================================
-    // PARALLAX SUTIL (DESABILITADO)
+    // PARALLAX DESABILITADO
     // ========================================
-    // Parallax removido - números decorativos devem permanecer fixos
     const parallaxElements = [];
     let ticking = false;
 
@@ -79,11 +78,16 @@
     }
 
     // ========================================
-    // DETECÇÃO DE SEÇÃO ATIVA
+    // DETECÇÃO DE SEÇÃO ATIVA (OTIMIZADA)
     // ========================================
+    let sectionUpdateTimeout;
+    
     function updateActiveSection() {
         const sections = document.querySelectorAll('section[id], .gt-section[id]');
         const navLinks = document.querySelectorAll('.main-nav a[href^="#"], .nav-grid a[href^="#"]');
+        
+        // Usar apenas as seções visíveis
+        if (sections.length === 0) return;
         
         let currentSection = '';
         const scrollPosition = window.pageYOffset + CONFIG.sectionDetectionOffset;
@@ -104,12 +108,22 @@
             }
         });
     }
+    
+    // Throttle para updateActiveSection
+    function requestSectionUpdate() {
+        if (!sectionUpdateTimeout) {
+            sectionUpdateTimeout = setTimeout(() => {
+                updateActiveSection();
+                sectionUpdateTimeout = null;
+            }, 200); // Executar no máximo a cada 200ms
+        }
+    }
 
     // ========================================
-    // ANIMAÇÕES DE ENTRADA APRIMORADAS
+    // ANIMAÇÕES DE ENTRADA APRIMORADAS (OTIMIZADO)
     // ========================================
     const observerOptions = {
-        threshold: [0, 0.1, 0.5],
+        threshold: [0, 0.1],  // Reduzido de [0, 0.1, 0.5] para menos cálculos
         rootMargin: '0px 0px -10% 0px'
     };
 
@@ -119,54 +133,33 @@
                 const element = entry.target;
                 const delay = element.getAttribute('data-delay') || '0';
                 
-                // Adiciona pequeno delay baseado na posição vertical
-                const additionalDelay = Math.min(entry.boundingClientRect.top / 10, 100);
-                const totalDelay = parseInt(delay) + additionalDelay;
+                // Delay simplificado - sem cálculo baseado em posição
+                const totalDelay = parseInt(delay);
                 
                 setTimeout(() => {
                     element.classList.add('animated');
                     
                     // Disparar evento customizado
                     element.dispatchEvent(new CustomEvent('ceni:animated', {
-                        detail: { element, intersectionRatio: entry.intersectionRatio }
+                        detail: { element }
                     }));
                 }, totalDelay);
                 
+                // Parar de observar imediatamente
                 animationObserver.unobserve(element);
             }
         });
     }, observerOptions);
 
     // ========================================
-    // SCROLL SNAP SUTIL PARA SEÇÕES
+    // SCROLL SNAP DESABILITADO
     // ========================================
+    // Snap removido para evitar conflitos com scroll natural
     let scrollTimeout;
     let lastScrollTop = 0;
 
     function handleScrollEnd() {
-        const currentScrollTop = window.pageYOffset;
-        const scrollDirection = currentScrollTop > lastScrollTop ? 'down' : 'up';
-        lastScrollTop = currentScrollTop;
-
-        // Encontrar seção mais próxima
-        const sections = document.querySelectorAll('section, .gt-section');
-        let closestSection = null;
-        let closestDistance = Infinity;
-
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            const distance = Math.abs(rect.top);
-            
-            if (distance < closestDistance && distance < window.innerHeight / 2) {
-                closestDistance = distance;
-                closestSection = section;
-            }
-        });
-
-        // Snap sutil apenas se estiver muito próximo de uma seção
-        if (closestSection && closestDistance < 50) {
-            smoothScrollTo(closestSection, 400);
-        }
+        // Função vazia - snap desabilitado para melhor performance
     }
 
     // ========================================
@@ -212,25 +205,30 @@
     }
 
     // ========================================
-    // PREVENÇÃO DE JANK EM SCROLL
+    // PREVENÇÃO DE JANK EM SCROLL (OTIMIZADO)
     // ========================================
     let scrollTimer;
+    let isScrolling = false;
     
     function handleScroll() {
         // Cancelar timer anterior
         clearTimeout(scrollTimer);
         
-        // Adicionar classe durante scroll
-        document.body.classList.add('is-scrolling');
+        // Adicionar classe durante scroll (apenas uma vez)
+        if (!isScrolling) {
+            document.body.classList.add('is-scrolling');
+            isScrolling = true;
+        }
         
-        // Atualizar elementos
+        // Atualizar apenas o progress bar (mais leve)
         requestProgressUpdate();
-        updateActiveSection();
         
         // Remover classe após scroll terminar
         scrollTimer = setTimeout(() => {
             document.body.classList.remove('is-scrolling');
-            handleScrollEnd();
+            isScrolling = false;
+            // Atualizar seção ativa apenas quando parar de rolar
+            requestSectionUpdate();
         }, 150);
     }
 
@@ -252,14 +250,15 @@
         initSmoothLinks();
         initBackToTop();
 
-        // Adicionar listener de scroll otimizado
+        // Adicionar listener de scroll otimizado com passive
         window.addEventListener('scroll', handleScroll, { passive: true });
 
-        // Primeira execução
+        // Primeira execução (apenas progress)
         updateProgress();
-        updateActiveSection();
+        // Atualizar seção ativa após um pequeno delay inicial
+        setTimeout(requestSectionUpdate, 100);
 
-        console.log(`⚡ CENI Enhanced Scroll: Sistema ativado`);
+        console.log(`⚡ CENI Enhanced Scroll: Sistema ativado (OTIMIZADO)`);
         console.log(`   → Animações: ${animatedElements.length} elementos`);
     }
 
@@ -277,14 +276,13 @@
         scrollTo: smoothScrollTo,
         refresh: () => {
             updateProgress();
-            updateParallax();
-            updateActiveSection();
+            requestSectionUpdate();
         },
         stats: () => {
-            console.log('📊 CENI Scroll Stats:');
-            console.log(`   Parallax elements: ${parallaxElements.length}`);
+            console.log('📊 CENI Scroll Stats (Otimizado):');
             console.log(`   Scroll position: ${window.pageYOffset}px`);
             console.log(`   Progress: ${Math.round((window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100)}%`);
+            console.log(`   Performance mode: ACTIVE`);
         }
     };
 
