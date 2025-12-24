@@ -628,3 +628,9 @@ img.reveal {
 @media (min-width: 969px) {
     .hide-desktop { display: none !important; }
 }
+.gov-header, .gov-header *, .gov-logo-img {
+    transform: none !important;
+    backface-visibility: visible !important;
+    perspective: none !important;
+    will-change: auto !important;
+}
