@@ -11,14 +11,6 @@ body.is-scrolling * {
     pointer-events: auto;
 }
 
-/* Preparar elementos para parallax */
-.section-number,
-.hero-number {
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-}
-
 /* ========================================
    SCROLL SUAVE GLOBAL APRIMORADO
    ======================================== */
@@ -177,7 +169,7 @@ body.is-scrolling .gt-section {
 }
 
 /* ========================================
-   NÚMEROS DE SEÇÃO COM PARALLAX
+   NÚMEROS DE SEÇÃO (SEM PARALLAX)
    ======================================== */
 .section-number {
     font-size: 10rem;
@@ -189,7 +181,6 @@ body.is-scrolling .gt-section {
     top: -2rem;
     left: -1rem;
     z-index: 0;
-    transition: transform 0.05s linear;
 }
 
 .hero-number {
@@ -199,7 +190,6 @@ body.is-scrolling .gt-section {
     color: var(--primary, #1e3a8a);
     letter-spacing: -0.05em;
     margin: 0;
-    transition: transform 0.05s linear;
 }
 
 /* ========================================
@@ -233,13 +223,6 @@ body.is-scrolling .gt-section {
         transition-duration: 0.5s !important;
     }
     
-    /* Desabilitar parallax em mobile para melhor performance */
-    .section-number,
-    .hero-number {
-        will-change: auto;
-        transform: none !important;
-    }
-    
     /* Botão back to top menor em mobile */
     .back-to-top {
         width: 45px;
@@ -270,13 +253,6 @@ body.is-scrolling .gt-section {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
-    }
-    
-    /* Desabilitar parallax */
-    .section-number,
-    .hero-number {
-        transform: none !important;
-        will-change: auto;
     }
     
     /* Mostrar elementos imediatamente */
@@ -328,11 +304,6 @@ button:focus-visible {
         transform: none !important;
     }
     
-    .section-number,
-    .hero-number {
-        transform: none !important;
-    }
-    
     body.is-scrolling {
         pointer-events: auto;
     }
@@ -374,8 +345,6 @@ button:focus-visible {
 
 /* Forçar aceleração de hardware em elementos animados */
 [data-animate],
-.section-number,
-.hero-number,
 .back-to-top {
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -386,7 +355,3 @@ button:focus-visible {
 .progress-indicator {
     contain: layout style;
 }
-
-/* ========================================
-   FIM DO ARQUIVO
-   ======================================== */
