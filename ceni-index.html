@@ -119,12 +119,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
-        }
-        
-        .gov-header.scrolled {
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .header-grid {
@@ -574,12 +568,10 @@
             .header-grid { padding: 0 clamp(1rem, 4vw, 2rem); }
         }
         
-        /* Smooth scroll global */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Focus states melhorados */
         :focus-visible {
             outline: 3px solid var(--primary);
             outline-offset: 4px;
@@ -828,19 +820,10 @@
         </div>
     </footer>
 
-    <!-- Sistema de Animações -->
     <script src="ceni-animations.js"></script>
 
-    <!-- Scripts do Site -->
     <script>
-        // Year
         document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Sticky header
-        const header = document.querySelector('.gov-header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
 
         // Progress indicator
         window.addEventListener('scroll', () => {
