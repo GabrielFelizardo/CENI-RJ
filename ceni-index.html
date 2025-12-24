@@ -5,47 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CENI-RJ - Início</title>
     
-    <!-- Meta Tags SEO Expandidas -->
+    <!-- Meta Tags SEO -->
     <meta name="description" content="Comitê Estadual de Investimentos e Negócios de Impacto do Rio de Janeiro - Articulando governo, sociedade civil e setor privado">
     <meta name="keywords" content="CENI-RJ, negócios de impacto, Rio de Janeiro, sustentabilidade, investimento social">
-    <meta name="author" content="Gabriel Felizardo da Silva - SEDEICS">
-    
-    <!-- Open Graph Completo -->
     <meta property="og:title" content="CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto">
     <meta property="og:description" content="Fortalecendo o ecossistema de impacto socioambiental no Estado do Rio de Janeiro">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ceni-rj.gov.br">
-    <meta property="og:image" content="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png">
-    <meta property="og:locale" content="pt_BR">
     
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto">
-    <meta name="twitter:description" content="Fortalecendo o ecossistema de impacto socioambiental no Rio de Janeiro">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png">
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- Preconnect Performance -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+    <!-- CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🏛️</text></svg>">
-    
-    <!-- Stylesheet CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    
-    <!-- Sistema de Animações V2 -->
-    <link rel="stylesheet" href="ceni-animations-v2.css">
+    <!-- Sistema de Animações -->
+    <link rel="stylesheet" href="ceni-animations.css">
     
     <style>
-        /* ========================================
-           ESTILOS ESPECÍFICOS DA PÁGINA INICIAL
-           ======================================== */
-        
-        /* Variáveis Locais */
         :root {
-            --hero-gradient: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --primary-dark: #1e293b;
+            --accent: #000000;
+            --background: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --grid-line: #e0e0e0;
+            --gt1-color: #1e3a8a;
+            --gt2-color: #1e5631;
+            --gt3-color: #e89bb8;
+            --gt4-color: #e8632e;
+            --gt5-color: #f4b942;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -61,100 +53,78 @@
             overflow-x: hidden;
         }
 
-        /* ========================================
-           ACESSIBILIDADE AVANÇADA
-           ======================================== */
         .skip-link {
             position: absolute;
             top: -40px;
             left: 0;
             background: var(--accent);
             color: white;
-            padding: 0.75rem 1.5rem;
-            z-index: var(--z-toast);
+            padding: 8px;
+            z-index: 100;
             text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            letter-spacing: 0.1em;
-            transition: top var(--transition-fast);
         }
-        
-        .skip-link:focus { 
-            top: 0; 
-            outline: 3px solid var(--primary);
-            outline-offset: 2px;
-        }
+        .skip-link:focus { top: 0; }
 
-        /* Progress Indicator Melhorado */
         .progress-indicator {
             position: fixed;
             top: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
-            z-index: var(--z-toast);
-            transition: width var(--transition-fast);
-            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+            background: var(--primary);
+            z-index: 9999;
+            transition: width 0.2s;
         }
 
-        /* Breadcrumb Refinado */
         .breadcrumb-container {
             background: var(--background);
             border-bottom: 1px solid var(--grid-line);
             padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: var(--z-sticky);
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
         }
-        
         .breadcrumb {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 clamp(1.5rem, 4vw, 3rem);
+            padding: 0 3rem;
             display: flex;
             gap: 0.5rem;
-            font-size: var(--text-sm);
+            font-size: 0.875rem;
             list-style: none;
-            align-items: center;
         }
-        
         .breadcrumb a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color var(--transition-fast);
         }
-        
-        .breadcrumb a:hover { 
-            color: var(--primary);
-        }
-        
+        .breadcrumb a:hover { color: var(--primary); }
         .breadcrumb .active {
             color: var(--text-primary);
             font-weight: 700;
         }
         
-        /* ========================================
-           HEADER RESPONSIVO AVANÇADO
-           ======================================== */
+        .swiss-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(1.5rem, 4vw, 3rem);
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: clamp(1rem, 3vw, 2rem);
+            position: relative;
+        }
+        
+        .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
+        .col-8 { grid-column: span 8; position: relative; z-index: 1; }
+        
         .gov-header {
             background: var(--primary);
-            padding: clamp(1rem, 3vw, 2rem) 0;
+            padding: 2rem 0;
             border-bottom: 4px solid var(--accent);
             position: sticky;
             top: 0;
-            z-index: var(--z-sticky);
-            transition: all var(--transition-base);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0);
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
         
         .gov-header.scrolled {
             padding: 1rem 0;
-            box-shadow: var(--shadow-lg);
-            background: rgba(30, 58, 138, 0.98);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .header-grid {
@@ -164,19 +134,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 2rem;
         }
         
         .gov-logo-img { 
             height: clamp(40px, 6vw, 50px);
-            transition: transform var(--transition-base);
         }
         
-        .gov-logo-img:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Navegação Desktop Melhorada */
         .main-nav {
             display: flex;
             gap: 0;
@@ -191,38 +154,12 @@
             text-decoration: none;
             padding: 0.75rem 1.5rem;
             border-right: 1px solid rgba(255,255,255,0.2);
-            transition: all var(--transition-fast);
-            position: relative;
-            overflow: hidden;
+            transition: background 0.2s;
         }
         
-        .main-nav a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--accent);
-            transform: translateX(-100%);
-            transition: transform var(--transition-base);
-        }
-        
-        .main-nav a:hover::before,
-        .main-nav a.active::before {
-            transform: translateX(0);
-        }
-        
-        .main-nav a:first-child { 
-            border-left: 1px solid rgba(255,255,255,0.2); 
-        }
-        
-        .main-nav a:hover, 
-        .main-nav a.active { 
-            background: rgba(255,255,255,0.1);
-        }
+        .main-nav a:first-child { border-left: 1px solid rgba(255,255,255,0.2); }
+        .main-nav a:hover, .main-nav a.active { background: rgba(255,255,255,0.1); }
 
-        /* Mobile Menu Otimizado */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -231,43 +168,30 @@
             font-size: 1.5rem;
             cursor: pointer;
             padding: 0.5rem;
-            transition: transform var(--transition-fast);
-        }
-        
-        .mobile-menu-toggle:active {
-            transform: scale(0.95);
         }
 
-        /* Mobile Navigation */
         @media (max-width: 968px) {
             .main-nav {
                 position: fixed;
                 top: 0;
                 right: -100%;
                 height: 100vh;
-                width: min(80%, 300px);
+                width: 80%;
+                max-width: 300px;
                 background: var(--primary);
                 flex-direction: column;
                 padding: 5rem 0 2rem 0;
-                transition: right var(--transition-base);
-                z-index: var(--z-modal);
-                box-shadow: var(--shadow-xl);
+                transition: right 0.3s ease;
+                z-index: 9999;
+                box-shadow: -4px 0 12px rgba(0,0,0,0.3);
             }
-            
-            .main-nav.active { 
-                right: 0; 
-            }
-            
+            .main-nav.active { right: 0; }
             .main-nav a {
                 border: none !important;
                 border-bottom: 1px solid rgba(255,255,255,0.1) !important;
                 padding: 1.5rem 2rem;
             }
-            
-            .mobile-menu-toggle { 
-                display: block; 
-            }
-            
+            .mobile-menu-toggle { display: block; }
             .mobile-overlay {
                 display: none;
                 position: fixed;
@@ -275,55 +199,26 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(0,0,0,0.6);
-                z-index: var(--z-overlay);
-                backdrop-filter: blur(2px);
-                transition: opacity var(--transition-base);
+                background: rgba(0,0,0,0.5);
+                z-index: 9998;
             }
-            
-            .mobile-overlay.active { 
-                display: block; 
-            }
-        }
-        
-        /* ========================================
-           HERO SECTION DINÂMICA
-           ======================================== */
-        .hero-section {
-            padding: clamp(4rem, 10vw, 6rem) 0 clamp(5rem, 12vw, 8rem) 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent 0%, rgba(30, 58, 138, 0.03) 100%);
-            pointer-events: none;
+            .mobile-overlay.active { display: block; }
         }
         
         .hero-number {
-            font-size: clamp(6rem, 20vw, 15rem);
+            font-size: clamp(8rem, 15vw, 15rem);
             font-weight: 900;
             line-height: 0.9;
             color: var(--primary);
             letter-spacing: -0.05em;
             margin: 0;
-            background: var(--hero-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .hero-title {
-            font-size: clamp(2rem, 6vw, 4rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 700;
             line-height: 1.1;
-            margin: clamp(2rem, 4vw, 3rem) 0 2rem 0;
+            margin: 3rem 0 2rem 0;
             text-transform: uppercase;
             letter-spacing: -0.02em;
         }
@@ -338,11 +233,15 @@
             display: block;
         }
         
+        .hero-section {
+            padding: clamp(4rem, 10vw, 6rem) 0 clamp(5rem, 12vw, 8rem) 0;
+        }
+        
         .hero-line {
             width: 100px;
             height: 4px;
             background: var(--primary);
-            margin: clamp(2rem, 4vw, 3rem) 0;
+            margin: 3rem 0;
         }
         
         .hero-description {
@@ -352,7 +251,6 @@
             color: var(--text-secondary);
         }
         
-        /* Botões Melhorados */
         .btn-swiss {
             display: inline-block;
             padding: clamp(0.875rem, 2vw, 1rem) clamp(2rem, 4vw, 2.5rem);
@@ -364,34 +262,16 @@
             font-weight: 700;
             letter-spacing: 0.1em;
             border: none;
-            transition: all var(--transition-base);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             margin-top: 2rem;
             margin-right: 1rem;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-swiss::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary);
-            transition: left var(--transition-base);
-            z-index: -1;
-        }
-        
-        .btn-swiss:hover::before {
-            left: 0;
         }
         
         .btn-swiss:hover {
+            background: var(--primary);
             color: white;
             transform: translateX(4px);
-            box-shadow: var(--shadow-md);
         }
         
         .btn-swiss:active {
@@ -404,17 +284,12 @@
             border: 2px solid var(--accent);
         }
         
-        .btn-swiss-outline::before {
-            background: var(--accent);
-        }
-        
         .btn-swiss-outline:hover {
+            background: var(--accent);
             color: white;
+            transform: translateX(4px);
         }
         
-        /* ========================================
-           STATS GRID APRIMORADO
-           ======================================== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -425,34 +300,14 @@
         .stat-item {
             border-left: 4px solid white;
             padding-left: 2rem;
-            position: relative;
-        }
-        
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            left: -4px;
-            top: 0;
-            width: 4px;
-            height: 0;
-            background: var(--accent);
-            transition: height var(--transition-slow);
-        }
-        
-        .stat-item.animated::before {
-            height: 100%;
         }
         
         .stat-number {
-            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-size: clamp(4rem, 8vw, 6rem);
             font-weight: 900;
             line-height: 1;
             display: block;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, white 0%, rgba(255,255,255,0.8) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .stat-label {
@@ -463,9 +318,6 @@
             opacity: 0.9;
         }
         
-        /* ========================================
-           SECTION NUMBERING SYSTEM
-           ======================================== */
         .section-number {
             font-size: clamp(6rem, 15vw, 10rem);
             font-weight: 900;
@@ -474,9 +326,8 @@
             opacity: 0.08;
             position: absolute;
             top: -2rem;
-            left: clamp(-1rem, -3vw, -2rem);
+            left: -2rem;
             z-index: 0;
-            user-select: none;
         }
         
         .section-title {
@@ -487,12 +338,9 @@
             letter-spacing: -0.02em;
             margin-bottom: 3rem;
             position: relative;
-            z-index: var(--z-base);
+            z-index: 1;
         }
         
-        /* ========================================
-           GTs PREVIEW RESPONSIVO
-           ======================================== */
         .gts-simple {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
@@ -504,36 +352,19 @@
             border: 2px solid var(--accent);
             padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.5rem);
             text-align: center;
-            transition: all var(--transition-base);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             text-decoration: none;
             color: inherit;
             display: block;
             min-height: 200px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gt-simple-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            transition: left var(--transition-base);
-            z-index: -1;
-        }
-        
-        .gt-simple-card:hover::before {
-            left: 0;
         }
         
         .gt-simple-card:hover {
             transform: translate(4px, -8px);
             text-decoration: none;
             color: white;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
         }
         
         .gt-simple-card.gt1 { border-color: var(--gt1-color); }
@@ -542,17 +373,17 @@
         .gt-simple-card.gt4 { border-color: var(--gt4-color); }
         .gt-simple-card.gt5 { border-color: var(--gt5-color); }
         
-        .gt-simple-card.gt1::before { background: var(--gt1-color); }
-        .gt-simple-card.gt2::before { background: var(--gt2-color); }
-        .gt-simple-card.gt3::before { background: var(--gt3-color); }
-        .gt-simple-card.gt4::before { background: var(--gt4-color); }
-        .gt-simple-card.gt5::before { background: var(--gt5-color); }
+        .gt-simple-card.gt1:hover { background: var(--gt1-color); }
+        .gt-simple-card.gt2:hover { background: var(--gt2-color); }
+        .gt-simple-card.gt3:hover { background: var(--gt3-color); }
+        .gt-simple-card.gt4:hover { background: var(--gt4-color); }
+        .gt-simple-card.gt5:hover { background: var(--gt5-color); }
         
         .gt-simple-number {
             font-size: clamp(2.5rem, 5vw, 3rem);
             font-weight: 900;
             margin-bottom: 1rem;
-            transition: all var(--transition-base);
+            transition: color 0.3s;
         }
         
         .gt1 .gt-simple-number { color: var(--gt1-color); }
@@ -561,10 +392,7 @@
         .gt4 .gt-simple-number { color: var(--gt4-color); }
         .gt5 .gt-simple-number { color: var(--gt5-color); }
         
-        .gt-simple-card:hover .gt-simple-number { 
-            color: white;
-            transform: scale(1.1);
-        }
+        .gt-simple-card:hover .gt-simple-number { color: white; }
         
         .gt-simple-card h3 {
             font-size: clamp(0.875rem, 2vw, 1rem);
@@ -583,27 +411,11 @@
         
         .gt-simple-card:hover p { opacity: 1; }
         
-        /* ========================================
-           DESTAQUE BOX MELHORADO
-           ======================================== */
         .destaque-box {
             background: var(--accent);
             color: white;
             padding: clamp(3rem, 6vw, 4rem) clamp(2rem, 4vw, 3rem);
             margin: clamp(4rem, 8vw, 6rem) 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .destaque-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-            pointer-events: none;
         }
         
         .destaque-badge {
@@ -618,9 +430,6 @@
             margin-bottom: 2rem;
         }
         
-        /* ========================================
-           TIMELINE RESPONSIVA
-           ======================================== */
         .timeline {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -640,23 +449,10 @@
             background: var(--grid-line);
         }
         
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 0;
-                transform: none;
-            }
-        }
-        
         .timeline-item {
             border: 4px solid var(--accent);
             padding: clamp(1.5rem, 3vw, 2rem);
             background: white;
-            transition: all var(--transition-base);
-        }
-        
-        .timeline-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
         }
         
         .timeline-month {
@@ -688,9 +484,6 @@
             color: var(--primary);
         }
 
-        /* ========================================
-           BACK TO TOP BUTTON
-           ======================================== */
         .back-to-top {
             position: fixed;
             bottom: 2rem;
@@ -705,9 +498,9 @@
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
-            transition: all var(--transition-base);
-            z-index: var(--z-dropdown);
-            box-shadow: var(--shadow-lg);
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .back-to-top.visible {
@@ -718,12 +511,8 @@
         .back-to-top:hover {
             background: var(--primary);
             transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
         }
         
-        /* ========================================
-           FOOTER PROFISSIONAL
-           ======================================== */
         .page-footer {
             background: var(--accent);
             color: white;
@@ -754,14 +543,9 @@
             text-decoration: none;
             margin-bottom: 0.75rem;
             font-size: clamp(0.8rem, 1.5vw, 0.875rem);
-            transition: all var(--transition-fast);
-            padding-left: 0;
         }
         
-        .footer-section a:hover { 
-            text-decoration: underline;
-            padding-left: 4px;
-        }
+        .footer-section a:hover { text-decoration: underline; }
         
         .footer-bottom {
             border-top: 1px solid rgba(255,255,255,0.1);
@@ -775,34 +559,47 @@
         .footer-bottom p { margin-bottom: 0.5rem; }
         
         .mb-8 { margin-bottom: clamp(6rem, 10vw, 8rem); }
+        
+        @media (max-width: 968px) {
+            .swiss-grid { 
+                padding: 0 clamp(1rem, 4vw, 2rem);
+                grid-template-columns: 1fr;
+            }
+            .breadcrumb { padding: 0 clamp(1rem, 4vw, 2rem); }
+            .col-8 { grid-column: 1 / -1; }
+            .timeline::before {
+                left: 0;
+                transform: none;
+            }
+            .header-grid { padding: 0 clamp(1rem, 4vw, 2rem); }
+        }
+        
+        /* Smooth scroll global */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Focus states melhorados */
+        :focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 4px;
+        }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
-    <div class="progress-indicator" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+    <div class="progress-indicator" id="progressBar"></div>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
 
-    <header class="gov-header" role="banner">
+    <header class="gov-header">
         <div class="header-grid">
-            <img src="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png" 
-                 alt="Logo SEDEICS - Secretaria de Desenvolvimento Econômico" 
-                 class="gov-logo-img" 
-                 loading="eager"
-                 width="200"
-                 height="50">
+            <img src="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png" alt="SEDEICS" class="gov-logo-img" loading="lazy">
             
-            <button class="mobile-menu-toggle" 
-                    id="menuToggle" 
-                    aria-label="Abrir menu de navegação" 
-                    aria-expanded="false"
-                    aria-controls="mainNav">
-                <i class="fas fa-bars" aria-hidden="true"></i>
+            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+                <i class="fas fa-bars"></i>
             </button>
 
-            <nav class="main-nav" 
-                 id="mainNav" 
-                 role="navigation" 
-                 aria-label="Navegação principal">
+            <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navegação principal">
                 <a href="ceni-index.html" class="active" aria-current="page">Início</a>
                 <a href="ceni-sobre.html">Sobre</a>
                 <a href="ceni-gts.html">GTs</a>
@@ -819,14 +616,14 @@
         </ol>
     </nav>
 
-    <main id="main-content" role="main">
+    <main id="main-content">
         <!-- HERO -->
-        <section class="hero-section" aria-labelledby="hero-title">
+        <section class="hero-section">
             <div class="swiss-grid">
                 <div class="col-full">
                     <p class="hero-number" aria-hidden="true" data-animate="fade-down">CENI</p>
                     <div class="hero-line" aria-hidden="true" data-animate="scale-in" data-delay="200"></div>
-                    <h1 id="hero-title" class="hero-title" data-animate="fade-up" data-delay="300">
+                    <h1 class="hero-title" data-animate="fade-up" data-delay="300">
                         Comitê Estadual de<br>
                         Investimentos e Negócios<br>
                         de Impacto
@@ -864,12 +661,12 @@
         </section>
 
         <!-- GTS PREVIEW -->
-        <section style="margin-top: 6rem; margin-bottom: 8rem;" aria-labelledby="gts-title">
+        <section style="margin-top: 6rem; margin-bottom: 8rem;">
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
                     <span class="section-number" aria-hidden="true">01</span>
                     <span class="label" data-animate="fade-up">Estrutura Operacional</span>
-                    <h2 id="gts-title" class="section-title" data-animate="fade-up" data-delay="100">
+                    <h2 class="section-title" data-animate="fade-up" data-delay="100">
                         Grupos de<br>Trabalho
                     </h2>
                 </div>
@@ -882,31 +679,31 @@
                 </div>
                 
                 <div class="gts-simple" style="grid-column: 1 / -1;">
-                    <a href="ceni-gts.html#gt1" class="gt-simple-card gt1" aria-label="Ir para GT 1 - Capital e Financiamento" data-animate="fade-up" data-delay="0">
+                    <a href="ceni-gts.html#gt1" class="gt-simple-card gt1" aria-label="Ir para GT 1" data-animate="fade-up" data-delay="0">
                         <div class="gt-simple-number">01</div>
                         <h3>Capital e<br>Financiamento</h3>
                         <p>Mobilizar mecanismos financeiros e acesso a capital</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt2" class="gt-simple-card gt2" aria-label="Ir para GT 2 - Fomento a Negócios" data-animate="fade-up" data-delay="100">
+                    <a href="ceni-gts.html#gt2" class="gt-simple-card gt2" aria-label="Ir para GT 2" data-animate="fade-up" data-delay="100">
                         <div class="gt-simple-number">02</div>
                         <h3>Fomento a<br>Negócios</h3>
                         <p>Formação, aceleração e desenvolvimento técnico</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt3" class="gt-simple-card gt3" aria-label="Ir para GT 3 - Organizações Intermediárias" data-animate="fade-up" data-delay="200">
+                    <a href="ceni-gts.html#gt3" class="gt-simple-card gt3" aria-label="Ir para GT 3" data-animate="fade-up" data-delay="200">
                         <div class="gt-simple-number">03</div>
                         <h3>Organizações<br>Intermediárias</h3>
                         <p>Fortalecer aceleradoras, hubs e institutos</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt4" class="gt-simple-card gt4" aria-label="Ir para GT 4 - Ambiente Normativo" data-animate="fade-up" data-delay="300">
+                    <a href="ceni-gts.html#gt4" class="gt-simple-card gt4" aria-label="Ir para GT 4" data-animate="fade-up" data-delay="300">
                         <div class="gt-simple-number">04</div>
                         <h3>Ambiente<br>Normativo</h3>
                         <p>Marcos regulatórios e políticas públicas</p>
                     </a>
                     
-                    <a href="ceni-gts.html#gt5" class="gt-simple-card gt5" aria-label="Ir para GT 5 - Articulação Interfederativa" data-animate="fade-up" data-delay="400">
+                    <a href="ceni-gts.html#gt5" class="gt-simple-card gt5" aria-label="Ir para GT 5" data-animate="fade-up" data-delay="400">
                         <div class="gt-simple-number">05</div>
                         <h3>Articulação<br>Interfederativa</h3>
                         <p>Integração com municípios e entes federativos</p>
@@ -941,12 +738,12 @@
         </section>
 
         <!-- PRÓXIMOS PASSOS -->
-        <section class="mb-8" aria-labelledby="proximos-title">
+        <section class="mb-8">
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
                     <span class="section-number" aria-hidden="true">02</span>
                     <span class="label" data-animate="fade-up">Agenda 2026</span>
-                    <h2 id="proximos-title" class="section-title" data-animate="fade-up" data-delay="100">
+                    <h2 class="section-title" data-animate="fade-up" data-delay="100">
                         Próximos<br>Passos
                     </h2>
                 </div>
@@ -959,16 +756,16 @@
                 </div>
                 
                 <div class="timeline" style="grid-column: 1 / -1;">
-                    <article class="timeline-item" data-animate="fade-right" data-delay="0">
+                    <div class="timeline-item" data-animate="fade-right" data-delay="0">
                         <div class="timeline-month">Janeiro 2026</div>
                         <ul>
                             <li>Contribuições para o Regimento Interno</li>
                             <li>Inserção em Grupos de Trabalho</li>
                             <li>Indicação para Colíderes</li>
                         </ul>
-                    </article>
+                    </div>
                     
-                    <article class="timeline-item" data-animate="fade-left" data-delay="200">
+                    <div class="timeline-item" data-animate="fade-left" data-delay="200">
                         <div class="timeline-month">Fevereiro - Março 2026</div>
                         <ul>
                             <li>Consolidação do Regimento Interno</li>
@@ -976,7 +773,7 @@
                             <li>1ª Reunião Ordinária</li>
                             <li>Construção Inicial de Estratégia Estadual</li>
                         </ul>
-                    </article>
+                    </div>
                 </div>
                 
                 <div class="col-full" style="text-align: center; margin-top: 2rem;" data-animate="fade-up" data-delay="400">
@@ -986,11 +783,11 @@
         </section>
     </main>
 
-    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo da página">
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
     </button>
 
-    <footer class="page-footer" role="contentinfo">
+    <footer class="page-footer">
         <div class="swiss-grid">
             <div class="footer-grid" style="grid-column: 1 / -1;">
                 <div class="footer-section">
@@ -1002,27 +799,25 @@
                     </p>
                 </div>
                 
-                <nav class="footer-section" aria-label="Navegação do rodapé">
+                <div class="footer-section">
                     <h4>Navegação</h4>
                     <a href="ceni-index.html">Início</a>
                     <a href="ceni-sobre.html">Sobre o Comitê</a>
                     <a href="ceni-gts.html">Grupos de Trabalho</a>
                     <a href="ceni-canais.html">Canais</a>
                     <a href="ceni-repositorio.html">Repositório</a>
-                </nav>
+                </div>
                 
-                <address class="footer-section">
+                <div class="footer-section">
                     <h4>Contato</h4>
                     <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br">
-                        <i class="fas fa-envelope" aria-hidden="true"></i> nucleo.acompanhamento@desenvolvimento.rj.gov.br
+                        <i class="fas fa-envelope"></i> nucleo.acompanhamento@desenvolvimento.rj.gov.br
                     </a>
                     <a href="mailto:gabinete@desenvolvimento.rj.gov.br">
-                        <i class="fas fa-envelope" aria-hidden="true"></i> gabinete@desenvolvimento.rj.gov.br
+                        <i class="fas fa-envelope"></i> gabinete@desenvolvimento.rj.gov.br
                     </a>
-                    <p style="margin-top: 1rem; font-style: normal;">
-                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i> SEDEICS - Rio de Janeiro, RJ
-                    </p>
-                </address>
+                    <p style="margin-top: 1rem;"><i class="fas fa-map-marker-alt"></i> SEDEICS - Rio de Janeiro, RJ</p>
+                </div>
             </div>
             
             <div class="footer-bottom" style="grid-column: 1 / -1;">
@@ -1033,148 +828,55 @@
         </div>
     </footer>
 
-    <!-- Sistema de Animações V2 -->
-    <script src="ceni-animations-v2.js"></script>
+    <!-- Sistema de Animações -->
+    <script src="ceni-animations.js"></script>
 
     <!-- Scripts do Site -->
     <script>
-        // Current Year
+        // Year
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Sticky Header com Throttling
+        // Sticky header
         const header = document.querySelector('.gov-header');
-        let lastScrollY = window.scrollY;
-        let ticking = false;
-        
-        function updateHeader() {
+        window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 100);
-            ticking = false;
-        }
-        
-        window.addEventListener('scroll', () => {
-            lastScrollY = window.scrollY;
-            if (!ticking) {
-                window.requestAnimationFrame(updateHeader);
-                ticking = true;
-            }
         });
 
-        // Progress Indicator Otimizado
-        const progressBar = document.getElementById('progressBar');
-        let progressTicking = false;
-        
-        function updateProgress() {
-            const winScroll = document.documentElement.scrollTop;
+        // Progress indicator
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            progressBar.style.width = scrolled + '%';
-            progressBar.setAttribute('aria-valuenow', Math.round(scrolled));
-            progressTicking = false;
-        }
-        
-        window.addEventListener('scroll', () => {
-            if (!progressTicking) {
-                window.requestAnimationFrame(updateProgress);
-                progressTicking = true;
-            }
+            document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
         });
 
-        // Mobile Menu
+        // Mobile menu
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
         const mobileOverlay = document.getElementById('mobileOverlay');
 
-        function toggleMenu(forceClose = false) {
-            const isOpen = forceClose ? true : mainNav.classList.toggle('active');
-            mobileOverlay.classList.toggle('active', !forceClose && isOpen);
-            menuToggle.setAttribute('aria-expanded', !forceClose && isOpen);
-            menuToggle.innerHTML = (!forceClose && isOpen) ? 
-                '<i class="fas fa-times" aria-hidden="true"></i>' : 
-                '<i class="fas fa-bars" aria-hidden="true"></i>';
-            
-            // Prevenir scroll do body quando menu aberto
-            document.body.style.overflow = (!forceClose && isOpen) ? 'hidden' : '';
-        }
-
-        menuToggle.addEventListener('click', () => toggleMenu());
-        mobileOverlay.addEventListener('click', () => toggleMenu(true));
-
-        // Fechar menu ao pressionar ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-                toggleMenu(true);
-            }
+        menuToggle.addEventListener('click', () => {
+            const isOpen = mainNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isOpen);
+            menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
 
-        // Back to Top
+        mobileOverlay.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+
+        // Back to top
         const backToTop = document.getElementById('backToTop');
-        let backToTopTicking = false;
-        
-        function updateBackToTop() {
-            backToTop.classList.toggle('visible', window.scrollY > 300);
-            backToTopTicking = false;
-        }
-        
         window.addEventListener('scroll', () => {
-            if (!backToTopTicking) {
-                window.requestAnimationFrame(updateBackToTop);
-                backToTopTicking = true;
-            }
+            backToTop.classList.toggle('visible', window.scrollY > 300);
         });
 
         backToTop.addEventListener('click', () => {
-            window.scrollTo({ 
-                top: 0, 
-                behavior: 'smooth' 
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-
-        // Lazy Loading de Imagens
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.classList.add('loaded');
-                            imageObserver.unobserve(img);
-                        }
-                    }
-                });
-            });
-
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        }
-
-        // Analytics (placeholder para futura integração)
-        function trackEvent(category, action, label) {
-            if (window.gtag) {
-                gtag('event', action, {
-                    'event_category': category,
-                    'event_label': label
-                });
-            }
-        }
-
-        // Performance Monitoring
-        if (window.PerformanceObserver) {
-            const perfObserver = new PerformanceObserver((list) => {
-                for (const entry of list.getEntries()) {
-                    if (entry.entryType === 'navigation') {
-                        console.log('📊 Page Load Time:', entry.loadEventEnd - entry.fetchStart, 'ms');
-                    }
-                }
-            });
-            
-            try {
-                perfObserver.observe({ entryTypes: ['navigation'] });
-            } catch (e) {
-                // Observer não suportado
-            }
-        }
     </script>
 </body>
 </html>
