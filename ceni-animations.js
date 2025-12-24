@@ -10,8 +10,8 @@
         rootMargin: '0px 0px -50px 0px',
         
         // Performance Settings
-        useRAF: true, // RequestAnimationFrame para melhor performance
-        batchSize: 10, // Processar animações em lotes
+        useRAF: true,
+        batchSize: 10,
         
         // Delays disponíveis (em ms)
         delays: {
@@ -31,7 +31,6 @@
             '800': 800
         },
         
-        // Animação repetível (para elementos que saem/entram do viewport)
         repeatAnimation: false
     };
 
@@ -39,19 +38,10 @@
     // DETECÇÃO DE CAPACIDADES DO DISPOSITIVO
     // ========================================
     const deviceCapabilities = {
-        // Detectar se usuário prefere movimento reduzido
         prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
-        
-        // Detectar tipo de dispositivo (aproximado)
         isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-        
-        // Detectar suporte a Intersection Observer
         hasIntersectionObserver: 'IntersectionObserver' in window,
-        
-        // Detectar performance do dispositivo (heurística)
         isLowPowerDevice: navigator.hardwareConcurrency ? navigator.hardwareConcurrency <= 4 : false,
-        
-        // Detectar conexão lenta
         isSlowConnection: navigator.connection ? 
             (navigator.connection.effectiveType === '2g' || 
              navigator.connection.effectiveType === 'slow-2g') : false
@@ -61,15 +51,13 @@
     // AJUSTES ADAPTATIVOS DE PERFORMANCE
     // ========================================
     function adjustConfigForPerformance() {
-        // Reduzir complexidade em dispositivos de baixa performance
         if (deviceCapabilities.isLowPowerDevice || deviceCapabilities.isSlowConnection) {
             CONFIG.threshold = [0, 0.5, 1];
             CONFIG.batchSize = 5;
         }
         
-        // Desabilitar animações em mobile se preferência de movimento reduzido
         if (deviceCapabilities.isMobile && deviceCapabilities.prefersReducedMotion) {
-            return false; // Sinaliza para desabilitar animações
+            return false;
         }
         
         return true;
@@ -102,10 +90,9 @@
             scheduleAnimation(item.element, item.delay);
         });
         
-        // Processar próximo lote usando RAF
         if (CONFIG.useRAF && animationQueue.length > 0) {
             requestAnimationFrame(() => {
-                setTimeout(processQueue, 16); // ~60fps
+                setTimeout(processQueue, 16);
             });
         } else if (animationQueue.length > 0) {
             setTimeout(processQueue, 50);
@@ -121,19 +108,16 @@
         const actualDelay = CONFIG.delays[delay] || 0;
         
         if (CONFIG.useRAF && actualDelay > 0) {
-            // Usar RAF para delays maiores
             setTimeout(() => {
                 requestAnimationFrame(() => {
                     triggerAnimation(element);
                 });
             }, actualDelay);
         } else if (actualDelay > 0) {
-            // Usar setTimeout tradicional
             setTimeout(() => {
                 triggerAnimation(element);
             }, actualDelay);
         } else {
-            // Sem delay, animar imediatamente
             if (CONFIG.useRAF) {
                 requestAnimationFrame(() => {
                     triggerAnimation(element);
@@ -148,10 +132,8 @@
     // TRIGGER DE ANIMAÇÃO
     // ========================================
     function triggerAnimation(element) {
-        // Adicionar classe animated
         element.classList.add('animated');
         
-        // Disparar evento customizado
         const event = new CustomEvent('ceni:animated', {
             detail: { 
                 element,
@@ -162,7 +144,6 @@
         });
         element.dispatchEvent(event);
         
-        // Analytics tracking (se disponível)
         if (window.gtag) {
             window.gtag('event', 'animation_triggered', {
                 'animation_type': element.getAttribute('data-animate'),
@@ -180,19 +161,14 @@
         entries.forEach(entry => {
             const element = entry.target;
             
-            // Elemento entrando no viewport
             if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
                 const delay = element.getAttribute('data-delay') || '0';
-                
-                // Adicionar à fila de animação
                 addToQueue(element, delay);
                 
-                // Se não repetir animação, parar de observar
                 if (!CONFIG.repeatAnimation) {
                     observer.unobserve(element);
                 }
             }
-            // Elemento saindo do viewport (se repetição habilitada)
             else if (!entry.isIntersecting && CONFIG.repeatAnimation) {
                 element.classList.remove('animated');
             }
@@ -212,20 +188,39 @@
                 el.style.opacity = '1';
                 el.style.transform = 'none';
                 el.classList.add('animated');
-            }, delay + (index * 50)); // Stagger automático
+            }, delay + (index * 50));
         });
+    }
+
+    // ========================================
+    // FIX PARA LOGO - Remove GPU Acceleration
+    // ========================================
+    function fixLogoRendering() {
+        // Selecionar todos os elementos do header
+        const headerElements = document.querySelectorAll('.gov-header, .gov-header *, .header-grid, .header-grid *, .gov-logo-img');
+        
+        headerElements.forEach(el => {
+            // Remover propriedades de GPU acceleration
+            el.style.transform = 'none';
+            el.style.backfaceVisibility = 'visible';
+            el.style.perspective = 'none';
+            el.style.willChange = 'auto';
+        });
+        
+        console.log('🔧 Logo rendering fixed - GPU acceleration removida do header');
     }
 
     // ========================================
     // INICIALIZAÇÃO INTELIGENTE
     // ========================================
     function init() {
-        console.log('🎨 CENI Animation System V2.0 Iniciando...');
+        console.log('🎨 CENI Animation System V2.1 Iniciando...');
         
-        // Verificar se devemos executar animações
+        // FIX: Aplicar correção do logo IMEDIATAMENTE
+        fixLogoRendering();
+        
         if (!adjustConfigForPerformance()) {
             console.log('⚡ Animações desabilitadas devido a preferências do usuário');
-            // Mostrar tudo imediatamente sem animações
             document.querySelectorAll('[data-animate]').forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'none';
@@ -233,7 +228,6 @@
             return;
         }
         
-        // Verificar se usuário prefere sem animações
         if (deviceCapabilities.prefersReducedMotion) {
             console.log('♿ Modo acessibilidade: Animações simplificadas');
             document.querySelectorAll('[data-animate]').forEach(el => {
@@ -243,19 +237,16 @@
             return;
         }
         
-        // Verificar suporte a Intersection Observer
         if (!deviceCapabilities.hasIntersectionObserver) {
             fallbackAnimation();
             return;
         }
         
-        // Criar Intersection Observer
         observer = new IntersectionObserver(handleIntersection, {
             threshold: CONFIG.threshold,
             rootMargin: CONFIG.rootMargin
         });
         
-        // Observar todos os elementos com data-animate
         const elements = document.querySelectorAll('[data-animate]');
         
         if (elements.length === 0) {
@@ -263,7 +254,6 @@
             return;
         }
         
-        // Adicionar observers de forma eficiente
         elements.forEach(el => {
             observer.observe(el);
         });
@@ -272,7 +262,6 @@
         console.log(`📱 Dispositivo: ${deviceCapabilities.isMobile ? 'Mobile' : 'Desktop'}`);
         console.log(`⚡ Performance: ${deviceCapabilities.isLowPowerDevice ? 'Modo Econômico' : 'Modo Completo'}`);
         
-        // Log de configuração (apenas em desenvolvimento)
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
             console.table({
                 'Intersection Thresholds': CONFIG.threshold.length,
@@ -288,10 +277,8 @@
     // API PÚBLICA EXPANDIDA
     // ========================================
     window.CENIAnimations = {
-        // Versão
-        version: '2.0.0',
+        version: '2.1.0',
         
-        // Reinicializar sistema (para conteúdo dinâmico)
         refresh: function() {
             if (!observer) {
                 console.warn('Observer não inicializado. Executando init()...');
@@ -306,7 +293,6 @@
             return newElements.length;
         },
         
-        // Estatísticas de animação
         stats: function() {
             const total = document.querySelectorAll('[data-animate]').length;
             const animated = document.querySelectorAll('[data-animate].animated').length;
@@ -328,7 +314,6 @@
             return stats;
         },
         
-        // Animar elemento específico manualmente
         animate: function(elementOrSelector) {
             const element = typeof elementOrSelector === 'string' 
                 ? document.querySelector(elementOrSelector)
@@ -343,7 +328,6 @@
             return true;
         },
         
-        // Resetar animação de elemento
         reset: function(elementOrSelector) {
             const element = typeof elementOrSelector === 'string'
                 ? document.querySelector(elementOrSelector)
@@ -356,7 +340,6 @@
             
             element.classList.remove('animated');
             
-            // Re-observar se observer existe
             if (observer) {
                 observer.observe(element);
             }
@@ -364,7 +347,6 @@
             return true;
         },
         
-        // Resetar todas as animações
         resetAll: function() {
             const elements = document.querySelectorAll('[data-animate].animated');
             elements.forEach(el => {
@@ -378,7 +360,6 @@
             return elements.length;
         },
         
-        // Pausar sistema de animações
         pause: function() {
             if (observer) {
                 observer.disconnect();
@@ -386,7 +367,6 @@
             }
         },
         
-        // Retomar sistema de animações
         resume: function() {
             if (observer) {
                 const elements = document.querySelectorAll('[data-animate]:not(.animated)');
@@ -395,26 +375,26 @@
             }
         },
         
-        // Configurar opções em runtime
         configure: function(options) {
             Object.assign(CONFIG, options);
             console.log('⚙️ Configuração atualizada:', options);
             return CONFIG;
         },
         
-        // Obter configuração atual
         getConfig: function() {
             return { ...CONFIG };
         },
         
-        // Obter capacidades do dispositivo
         getDeviceCapabilities: function() {
             return { ...deviceCapabilities };
         },
         
-        // Debug mode
+        fixLogo: function() {
+            fixLogoRendering();
+            console.log('🔧 Logo fix aplicado manualmente');
+        },
+        
         enableDebug: function() {
-            // Adicionar listeners para todos os eventos de animação
             document.addEventListener('ceni:animated', (e) => {
                 console.log('🎬 Animação disparada:', {
                     element: e.detail.element,
@@ -436,17 +416,8 @@
         init();
     }
 
-    // ========================================
-    // HOT MODULE REPLACEMENT (Desenvolvimento)
-    // ========================================
-    if (module && module.hot) {
-        module.hot.accept();
-        module.hot.dispose(() => {
-            if (observer) {
-                observer.disconnect();
-            }
-        });
-    }
+    // Re-aplicar fix do logo após 100ms para garantir
+    setTimeout(fixLogoRendering, 100);
 
     // ========================================
     // LISTENER PARA MUDANÇAS DE PREFERÊNCIA
@@ -455,7 +426,6 @@
     motionMediaQuery.addEventListener('change', (e) => {
         if (e.matches) {
             console.log('♿ Usuário ativou modo de movimento reduzido');
-            // Remover todas as animações ativas
             document.querySelectorAll('[data-animate]').forEach(el => {
                 el.style.transition = 'none';
                 el.style.opacity = '1';
@@ -479,12 +449,11 @@
             
             perfObserver.observe({ entryTypes: ['measure'] });
         } catch (e) {
-            // Performance Observer não suportado ou erro
+            // Performance Observer não suportado
         }
     }
 
-    // Expor versão para debugging
-    console.log('%c CENI-RJ Animation System V2.0 ', 
+    console.log('%c CENI-RJ Animation System V2.1 ', 
                 'background: #1e3a8a; color: white; font-weight: bold; padding: 4px 8px;');
 
 })();
