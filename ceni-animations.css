@@ -484,6 +484,21 @@ button:focus-visible {
     perspective: 1000px;
 }
 
+/* ========================================
+   EXCLUSÕES DE GPU ACCELERATION
+   ======================================== */
+
+/* Fix para logo e elementos do header - Remove artefatos visuais */
+.gov-logo-img,
+.header-grid img,
+.gov-header img {
+    transform: none !important;
+    backface-visibility: visible !important;
+    perspective: none !important;
+    will-change: auto !important;
+    background: transparent;
+}
+
 /* Lazy Load Support */
 img[loading="lazy"] {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
