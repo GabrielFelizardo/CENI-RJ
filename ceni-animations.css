@@ -1,3 +1,74 @@
+:root {
+    /* Cores Base */
+    --primary: #1e3a8a;
+    --primary-light: #2563eb;
+    --primary-dark: #1e293b;
+    --accent: #000000;
+    --background: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --grid-line: #e0e0e0;
+    
+    /* Cores GT */
+    --gt1-color: #1e3a8a;
+    --gt2-color: #1e5631;
+    --gt3-color: #e89bb8;
+    --gt4-color: #e8632e;
+    --gt5-color: #f4b942;
+    
+    /* Sombras Sofisticadas */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+    
+    /* Espaçamento Consistente - Escala Fibonacci */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 0.75rem;  /* 12px */
+    --space-md: 1rem;     /* 16px */
+    --space-lg: 1.5rem;   /* 24px */
+    --space-xl: 2rem;     /* 32px */
+    --space-2xl: 3rem;    /* 48px */
+    --space-3xl: 5rem;    /* 80px */
+    --space-4xl: 8rem;    /* 128px */
+    
+    /* Tipografia Fluida - Escala Perfeita */
+    --text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+    --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --text-3xl: clamp(2rem, 1.6rem + 2vw, 2.5rem);
+    --text-4xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+    --text-5xl: clamp(4rem, 3rem + 5vw, 8rem);
+    
+    /* Transições Consistentes */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Z-index Layers */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-overlay: 500;
+    --z-modal: 1000;
+    --z-toast: 2000;
+    
+    /* Breakpoints como Custom Properties */
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 968px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-2xl: 1400px;
+}
+
+/* ========================================
+   ANIMAÇÕES BASE - Estados Iniciais
+   ======================================== */
 [data-animate] {
     opacity: 0;
     transition-property: opacity, transform;
@@ -6,16 +77,329 @@
     will-change: opacity, transform;
 }
 
-/* Estado animado */
+/* Estado Animado */
 [data-animate].animated {
     opacity: 1 !important;
     transform: none !important;
 }
 
 /* ========================================
-   ACESSIBILIDADE - Respeitar preferências
+   TIPOS DE ANIMAÇÃO - Variações Avançadas
+   ======================================== */
+
+/* Fade Variations */
+[data-animate="fade-up"] {
+    transform: translateY(40px);
+}
+
+[data-animate="fade-down"] {
+    transform: translateY(-40px);
+}
+
+[data-animate="fade-left"] {
+    transform: translateX(-40px);
+}
+
+[data-animate="fade-right"] {
+    transform: translateX(40px);
+}
+
+/* Scale Variations */
+[data-animate="scale-in"] {
+    transform: scale(0.9);
+}
+
+[data-animate="scale-up"] {
+    transform: scale(0.95);
+}
+
+/* Rotate Variations */
+[data-animate="rotate-in"] {
+    transform: rotate(-5deg) scale(0.95);
+}
+
+/* Slide Variations */
+[data-animate="slide-up"] {
+    transform: translateY(60px);
+}
+
+[data-animate="slide-down"] {
+    transform: translateY(-60px);
+}
+
+/* Blur Variations */
+[data-animate="blur-in"] {
+    filter: blur(10px);
+    transform: scale(1.02);
+}
+
+[data-animate].animated[data-animate="blur-in"] {
+    filter: blur(0);
+}
+
+/* ========================================
+   FULL WIDTH SECTIONS - Aprimorado
+   ======================================== */
+.full-width-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: clamp(4rem, 8vw, 6rem) 0;
+}
+
+.full-width-bg {
+    background: var(--accent);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.full-width-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.03) 100%);
+    pointer-events: none;
+}
+
+.full-width-bg-primary {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.full-width-bg-light {
+    background: linear-gradient(180deg, #f5f5f5 0%, #fafafa 100%);
+    color: var(--text-primary);
+}
+
+/* Grid Interno com Contenção */
+.full-width-section .swiss-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 3rem);
+    position: relative;
+    z-index: var(--z-base);
+}
+
+/* ========================================
+   GRID SYSTEM RESPONSIVO AVANÇADO
+   ======================================== */
+.swiss-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 4vw, 3rem);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    position: relative;
+}
+
+/* Colunas Responsivas Inteligentes */
+.col-full { 
+    grid-column: 1 / -1; 
+    position: relative; 
+    z-index: var(--z-base);
+}
+
+.col-8 { 
+    grid-column: span 8; 
+}
+
+.col-6 { 
+    grid-column: span 6; 
+}
+
+.col-4 { 
+    grid-column: span 4; 
+}
+
+.col-3 { 
+    grid-column: span 3; 
+}
+
+/* Container Queries Support */
+@supports (container-type: inline-size) {
+    .swiss-grid {
+        container-type: inline-size;
+        container-name: grid;
+    }
+}
+
+/* ========================================
+   UTILITÁRIOS AVANÇADOS
+   ======================================== */
+
+/* Smooth Scroll Global com Offset */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px;
+}
+
+/* Hover Effects Sofisticados */
+.hover-lift {
+    transition: transform var(--transition-base), 
+                box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.hover-float {
+    transition: transform var(--transition-slow);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.hover-scale {
+    transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Focus States Melhorados */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+    border-radius: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 4px;
+}
+
+/* Selection Styling */
+::selection {
+    background: var(--primary);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: white;
+}
+
+/* ========================================
+   RESPONSIVIDADE AVANÇADA - Múltiplos Breakpoints
+   ======================================== */
+
+/* Extra Small Devices - Telefones Pequenos */
+@media (max-width: 375px) {
+    :root {
+        --space-xl: 1.5rem;
+        --space-2xl: 2rem;
+        --space-3xl: 3rem;
+    }
+    
+    .swiss-grid {
+        gap: 1rem;
+    }
+}
+
+/* Small Devices - Telefones */
+@media (max-width: 576px) {
+    [data-animate] {
+        transition-duration: 0.4s !important;
+    }
+    
+    .full-width-section {
+        padding: 3rem 0;
+    }
+}
+
+/* Medium Devices - Tablets Portrait */
+@media (min-width: 577px) and (max-width: 768px) {
+    .col-8,
+    .col-6 {
+        grid-column: 1 / -1;
+    }
+    
+    .swiss-grid {
+        gap: 1.5rem;
+    }
+}
+
+/* Large Devices - Tablets Landscape */
+@media (min-width: 769px) and (max-width: 968px) {
+    .col-8 {
+        grid-column: span 10;
+    }
+    
+    .col-6 {
+        grid-column: span 6;
+    }
+}
+
+/* Standard Desktop */
+@media (min-width: 969px) and (max-width: 1200px) {
+    .swiss-grid {
+        max-width: 1140px;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1201px) {
+    .swiss-grid {
+        max-width: 1400px;
+    }
+}
+
+/* Ultra-wide Displays */
+@media (min-width: 1600px) {
+    .full-width-section .swiss-grid {
+        max-width: 1600px;
+    }
+}
+
+/* Mobile Consolidado */
+@media (max-width: 968px) {
+    .swiss-grid { 
+        padding: 0 clamp(1rem, 4vw, 2rem);
+        grid-template-columns: 1fr;
+    }
+    
+    .col-8,
+    .col-6,
+    .col-4,
+    .col-3 { 
+        grid-column: 1 / -1; 
+    }
+    
+    .full-width-section {
+        padding: clamp(3rem, 6vw, 4rem) 0;
+    }
+}
+
+/* ========================================
+   ACESSIBILIDADE - Preferências do Usuário
    ======================================== */
 @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
     [data-animate],
     [data-animate].animated {
         animation: none !important;
@@ -25,83 +409,38 @@
     }
 }
 
-/* ========================================
-   FULL WIDTH SECTIONS
-   ======================================== */
-.full-width-section {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    padding: 6rem 0;
+@media (prefers-color-scheme: dark) {
+    /* Preparação para futuro modo escuro */
+    :root {
+        --background-dark: #0a0a0a;
+        --text-dark: #ffffff;
+    }
 }
 
-.full-width-bg {
-    background: var(--accent, #000000);
-    color: white;
-}
-
-.full-width-bg-primary {
-    background: var(--primary, #1e3a8a);
-    color: white;
-}
-
-.full-width-bg-light {
-    background: #f5f5f5;
-    color: var(--text-primary, #000000);
-}
-
-/* Grid interno em full-width sections */
-.full-width-section .swiss-grid {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 3rem;
-}
-
-/* ========================================
-   UTILITÁRIOS
-   ======================================== */
-
-/* Smooth scroll global */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Hover effects suaves */
-.hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-}
-
-/* ========================================
-   MOBILE OPTIMIZATIONS
-   ======================================== */
-@media (max-width: 968px) {
-    /* Reduzir duração em mobile para melhor performance */
+@media (prefers-contrast: high) {
+    :root {
+        --primary: #1e40af;
+        --text-secondary: #444444;
+    }
+    
     [data-animate] {
-        transition-duration: 0.4s !important;
-    }
-    
-    /* Full width sections no mobile */
-    .full-width-section {
-        padding: 4rem 0;
-    }
-    
-    .full-width-section .swiss-grid {
-        padding: 0 2rem;
+        border: 2px solid transparent;
     }
 }
 
 /* ========================================
-   PRINT STYLES
+   PRINT STYLES - Otimizado
    ======================================== */
 @media print {
+    *,
+    *::before,
+    *::after {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
     [data-animate],
     .full-width-section {
         opacity: 1 !important;
@@ -111,4 +450,167 @@ html {
         margin: 0 !important;
         padding: 1rem 0 !important;
     }
+    
+    .swiss-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+        padding: 0 !important;
+    }
+    
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+    
+    .page-footer,
+    .gov-header,
+    .breadcrumb-container,
+    .back-to-top,
+    .mobile-menu-toggle,
+    .progress-indicator {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* GPU Acceleration para Animações Críticas */
+.hover-lift,
+.hover-scale,
+[data-animate] {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Lazy Load Support */
+img[loading="lazy"] {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 100% 0; }
+}
+
+img[loading="lazy"].loaded {
+    animation: none;
+    background: none;
+}
+
+/* ========================================
+   MICROINTERAÇÕES ADICIONAIS
+   ======================================== */
+
+/* Button Ripple Effect */
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.btn-swiss {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-swiss::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-swiss:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Smooth Reveal para Imagens */
+@keyframes imageReveal {
+    0% {
+        clip-path: inset(0 100% 0 0);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+img.reveal {
+    animation: imageReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Text Gradient Effect */
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========================================
+   UTILITY CLASSES EXPANDIDAS
+   ======================================== */
+
+/* Spacing Utilities */
+.mt-auto { margin-top: auto; }
+.mb-auto { margin-bottom: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+.p-xs { padding: var(--space-xs); }
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+
+/* Display Utilities */
+.d-none { display: none; }
+.d-block { display: block; }
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+
+/* Flexbox Utilities */
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Text Utilities */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-uppercase { text-transform: uppercase; }
+.text-lowercase { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+
+/* Visibility Utilities Responsivas */
+@media (max-width: 576px) {
+    .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 577px) and (max-width: 968px) {
+    .hide-tablet { display: none !important; }
+}
+
+@media (min-width: 969px) {
+    .hide-desktop { display: none !important; }
 }
