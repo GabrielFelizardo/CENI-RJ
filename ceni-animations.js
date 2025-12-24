@@ -7,7 +7,6 @@
     const CONFIG = {
         smoothScrollDuration: 800,
         smoothScrollEasing: t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
-        parallaxIntensity: 0.3,
         progressThrottle: 16,
         sectionDetectionOffset: 100
     };
@@ -38,33 +37,20 @@
     }
 
     // ========================================
-    // PARALLAX SUTIL EM NÚMEROS DE SEÇÃO
+    // PARALLAX SUTIL (DESABILITADO)
     // ========================================
-    const parallaxElements = document.querySelectorAll('.section-number, .hero-number');
+    // Parallax removido - números decorativos devem permanecer fixos
+    const parallaxElements = [];
     let ticking = false;
 
     function updateParallax() {
-        const scrolled = window.pageYOffset;
-        
-        parallaxElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top + scrolled;
-            const elementVisible = elementTop < (scrolled + window.innerHeight) && 
-                                   elementTop + element.offsetHeight > scrolled;
-            
-            if (elementVisible) {
-                const offset = (scrolled - elementTop) * CONFIG.parallaxIntensity;
-                element.style.transform = `translateY(${offset}px)`;
-            }
-        });
-        
+        // Função vazia - parallax desabilitado
         ticking = false;
     }
 
     function requestParallaxUpdate() {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
+        // Não faz nada - parallax desabilitado
+        ticking = false;
     }
 
     // ========================================
@@ -239,7 +225,6 @@
         
         // Atualizar elementos
         requestProgressUpdate();
-        requestParallaxUpdate();
         updateActiveSection();
         
         // Remover classe após scroll terminar
@@ -272,11 +257,9 @@
 
         // Primeira execução
         updateProgress();
-        updateParallax();
         updateActiveSection();
 
         console.log(`⚡ CENI Enhanced Scroll: Sistema ativado`);
-        console.log(`   → Parallax: ${parallaxElements.length} elementos`);
         console.log(`   → Animações: ${animatedElements.length} elementos`);
     }
 
@@ -298,7 +281,7 @@
             updateActiveSection();
         },
         stats: () => {
-            console.log('CENI Scroll Stats:');
+            console.log('📊 CENI Scroll Stats:');
             console.log(`   Parallax elements: ${parallaxElements.length}`);
             console.log(`   Scroll position: ${window.pageYOffset}px`);
             console.log(`   Progress: ${Math.round((window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100)}%`);
