@@ -193,19 +193,62 @@
     }
 
     // ========================================
-    // FIX PARA LOGO - Remove GPU Acceleration
+    // FIX APRIMORADO PARA LOGO - VERSÃO COMPLETA
     // ========================================
     function fixLogoRendering() {
-        // Selecionar todos os elementos do header
-        const headerElements = document.querySelectorAll('.gov-header, .gov-header *, .header-grid, .header-grid *, .gov-logo-img');
+        // Selecionar TODOS os elementos do header e logo
+        const headerSelectors = [
+            '.gov-header',
+            '.gov-header *',
+            '.header-grid',
+            '.header-grid *',
+            '.gov-logo-img',
+            'img.gov-logo-img',
+            '.gov-header img'
+        ];
         
-        headerElements.forEach(el => {
-            // Remover propriedades de GPU acceleration
-            el.style.transform = 'none';
-            el.style.backfaceVisibility = 'visible';
-            el.style.perspective = 'none';
-            el.style.willChange = 'auto';
+        headerSelectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                // Remover TODAS as propriedades de GPU acceleration
+                el.style.transform = 'none';
+                el.style.transformStyle = 'flat';
+                el.style.backfaceVisibility = 'visible';
+                el.style.perspective = 'none';
+                el.style.willChange = 'auto';
+                el.style.webkitTransform = 'none';
+                el.style.mozTransform = 'none';
+                el.style.msTransform = 'none';
+                el.style.oTransform = 'none';
+                
+                // Remover animações
+                el.style.animation = 'none';
+                el.style.transition = 'none';
+                
+                // Garantir opacidade total
+                el.style.opacity = '1';
+                
+                // Remover atributo data-animate se existir
+                if (el.hasAttribute('data-animate')) {
+                    el.removeAttribute('data-animate');
+                }
+            });
         });
+        
+        // Fix específico para a logo
+        const logo = document.querySelector('.gov-logo-img');
+        if (logo) {
+            logo.style.imageRendering = 'crisp-edges';
+            logo.style.display = 'block';
+            logo.style.maxWidth = '100%';
+            logo.style.height = 'auto';
+            
+            // Prevenir hover effects indesejados
+            logo.style.filter = 'none';
+            
+            // Garantir que não seja afetado por parent transforms
+            logo.style.isolation = 'isolate';
+        }
         
         console.log('🔧 Logo rendering fixed - GPU acceleration removida do header');
     }
@@ -416,8 +459,52 @@
         init();
     }
 
-    // Re-aplicar fix do logo após 100ms para garantir
+    // ========================================
+    // EXECUÇÃO MÚLTIPLA DO FIX DA LOGO
+    // ========================================
+    
+    // Executar imediatamente
+    fixLogoRendering();
+    
+    // Executar após 100ms
     setTimeout(fixLogoRendering, 100);
+    
+    // Executar após 500ms (para garantir depois de animações)
+    setTimeout(fixLogoRendering, 500);
+    
+    // Executar quando página carregar completamente
+    window.addEventListener('load', fixLogoRendering);
+
+    // ========================================
+    // OBSERVER PARA PROTEÇÃO CONTÍNUA DA LOGO
+    // ========================================
+    const headerObserver = new MutationObserver((mutations) => {
+        let needsFix = false;
+        
+        mutations.forEach((mutation) => {
+            if (mutation.target.classList && 
+                (mutation.target.classList.contains('gov-header') || 
+                 mutation.target.classList.contains('header-grid') ||
+                 mutation.target.classList.contains('gov-logo-img'))) {
+                needsFix = true;
+            }
+        });
+        
+        if (needsFix) {
+            fixLogoRendering();
+        }
+    });
+
+    // Observar mudanças no header
+    const header = document.querySelector('.gov-header');
+    if (header) {
+        headerObserver.observe(header, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+            attributeFilter: ['style', 'class']
+        });
+    }
 
     // ========================================
     // LISTENER PARA MUDANÇAS DE PREFERÊNCIA
@@ -455,5 +542,6 @@
 
     console.log('%c CENI-RJ Animation System V2.1 ', 
                 'background: #1e3a8a; color: white; font-weight: bold; padding: 4px 8px;');
+    console.log('✅ Sistema inicializado com proteção de logo ativa');
 
 })();
