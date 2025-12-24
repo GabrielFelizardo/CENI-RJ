@@ -36,6 +36,155 @@
             overflow-x: hidden;
         }
         
+        /* SPLASH SCREEN */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: splashFadeOut 0.8s ease 2.5s forwards;
+            cursor: pointer;
+        }
+        
+        .splash-screen.hidden {
+            display: none;
+        }
+        
+        .splash-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .splash-logo {
+            font-size: clamp(6rem, 20vw, 15rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            margin-bottom: 2rem;
+            animation: splashLogoIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .splash-line {
+            width: 120px;
+            height: 4px;
+            background: white;
+            margin: 0 auto 2rem auto;
+            animation: splashLineIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+        }
+        
+        .splash-title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: splashTextIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+        }
+        
+        .splash-subtitle {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+            margin-top: 1rem;
+            animation: splashTextIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
+        }
+        
+        .splash-skip {
+            position: absolute;
+            bottom: 3rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.6;
+            animation: splashSkipIn 0.5s ease 1.5s both;
+        }
+        
+        @keyframes splashLogoIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        @keyframes splashLineIn {
+            from {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+        
+        @keyframes splashTextIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes splashSkipIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 0.6;
+            }
+        }
+        
+        @keyframes splashFadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        .main-content {
+            opacity: 0;
+            animation: mainContentIn 0.8s ease 3.3s forwards;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        @keyframes mainContentIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Skip splash if already visited */
+        .splash-screen.skip-animation {
+            animation: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .main-content.skip-animation {
+            animation: none;
+            opacity: 1;
+        }
+        
         .loading-container {
             text-align: center;
             max-width: 600px;
@@ -255,86 +404,123 @@
     </style>
 </head>
 <body>
-    <div class="loading-container">
-        <div class="logo-large" aria-hidden="true">CENI</div>
-        <div class="line" aria-hidden="true"></div>
-        
-        <h1>
-            Comitê Estadual de<br>
-            Investimentos e Negócios<br>
-            de Impacto
-        </h1>
-        
-        <p>
-            Articulando governo, sociedade civil e setor privado para fortalecer 
-            o ecossistema de impacto socioambiental no Estado do Rio de Janeiro
-        </p>
-        
-        <nav class="nav-grid" role="navigation" aria-label="Navegação principal">
-            <a href="ceni-index.html" class="nav-card">
-                <div class="nav-card-number">01</div>
-                <h3>Início</h3>
-                <p>Portal principal do CENI-RJ</p>
-            </a>
-            
-            <a href="ceni-sobre.html" class="nav-card">
-                <div class="nav-card-number">02</div>
-                <h3>Sobre</h3>
-                <p>Conheça o comitê</p>
-            </a>
-            
-            <a href="ceni-gts.html" class="nav-card">
-                <div class="nav-card-number">03</div>
-                <h3>Grupos de Trabalho</h3>
-                <p>5 GTs estratégicos</p>
-            </a>
-            
-            <a href="ceni-canais.html" class="nav-card">
-                <div class="nav-card-number">04</div>
-                <h3>Canais</h3>
-                <p>Comunicação oficial</p>
-            </a>
-            
-            <a href="ceni-repositorio.html" class="nav-card">
-                <div class="nav-card-number">05</div>
-                <h3>Repositório</h3>
-                <p>Documentos e atas</p>
-            </a>
-        </nav>
-        
-        <div class="loader" id="loader" aria-label="Carregando"></div>
+    <!-- SPLASH SCREEN -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <div class="splash-logo" aria-hidden="true">CENI</div>
+            <div class="splash-line" aria-hidden="true"></div>
+            <h1 class="splash-title">
+                Bem-vindos ao<br>
+                CENI-RJ
+            </h1>
+            <p class="splash-subtitle">Comitê Estadual de Investimentos e Negócios de Impacto</p>
+        </div>
+        <p class="splash-skip">Clique para pular</p>
     </div>
-    
-    <footer class="footer-simple">
-        <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
-        <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
-        <p>Desenvolvido por Gabriel Felizardo da Silva</p>
-    </footer>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content" id="mainContent">
+        <div class="loading-container">
+            <div class="logo-large" aria-hidden="true">CENI</div>
+            <div class="line" aria-hidden="true"></div>
+            
+            <h1>
+                Comitê Estadual de<br>
+                Investimentos e Negócios<br>
+                de Impacto
+            </h1>
+            
+            <p>
+                Articulando governo, sociedade civil e setor privado para fortalecer 
+                o ecossistema de impacto socioambiental no Estado do Rio de Janeiro
+            </p>
+            
+            <nav class="nav-grid" role="navigation" aria-label="Navegação principal">
+                <a href="ceni-index.html" class="nav-card">
+                    <div class="nav-card-number">01</div>
+                    <h3>Início</h3>
+                    <p>Portal principal do CENI-RJ</p>
+                </a>
+                
+                <a href="ceni-sobre.html" class="nav-card">
+                    <div class="nav-card-number">02</div>
+                    <h3>Sobre</h3>
+                    <p>Conheça o comitê</p>
+                </a>
+                
+                <a href="ceni-gts.html" class="nav-card">
+                    <div class="nav-card-number">03</div>
+                    <h3>Grupos de Trabalho</h3>
+                    <p>5 GTs estratégicos</p>
+                </a>
+                
+                <a href="ceni-canais.html" class="nav-card">
+                    <div class="nav-card-number">04</div>
+                    <h3>Canais</h3>
+                    <p>Comunicação oficial</p>
+                </a>
+                
+                <a href="ceni-repositorio.html" class="nav-card">
+                    <div class="nav-card-number">05</div>
+                    <h3>Repositório</h3>
+                    <p>Documentos e atas</p>
+                </a>
+            </nav>
+            
+            <div class="loader" id="loader" aria-label="Carregando"></div>
+        </div>
+        
+        <footer class="footer-simple">
+            <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
+            <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
+            <p>Desenvolvido por Gabriel Felizardo da Silva</p>
+        </footer>
+    </div>
+    <!-- End Main Content -->
     
     <script>
         // Set current year
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Optional: Auto-redirect after 3 seconds (uncomment if desired)
-        // setTimeout(() => {
-        //     document.getElementById('loader').style.display = 'block';
-        //     window.location.href = 'ceni-index.html';
-        // }, 3000);
+        // Splash screen control
+        const splashScreen = document.getElementById('splashScreen');
+        const mainContent = document.getElementById('mainContent');
+        const hasVisited = sessionStorage.getItem('ceni-visited');
         
-        // Optional: Store first visit in sessionStorage
-        if (!sessionStorage.getItem('visited')) {
-            sessionStorage.setItem('visited', 'true');
+        function skipSplash() {
+            splashScreen.style.animation = 'none';
+            splashScreen.style.opacity = '0';
+            splashScreen.style.visibility = 'hidden';
+            mainContent.style.animation = 'none';
+            mainContent.style.opacity = '1';
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 100);
+        }
+        
+        // Skip splash if already visited
+        if (hasVisited) {
+            splashScreen.classList.add('skip-animation');
+            mainContent.classList.add('skip-animation');
+            splashScreen.classList.add('hidden');
+        } else {
+            // Mark as visited
+            sessionStorage.setItem('ceni-visited', 'true');
+            
+            // Click to skip
+            splashScreen.addEventListener('click', skipSplash);
+            
+            // Auto-remove splash screen after animation
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+            }, 3500);
         }
         
         // Add click tracking for analytics (if needed)
         document.querySelectorAll('.nav-card').forEach(card => {
             card.addEventListener('click', function(e) {
-                // Track navigation click
                 const destination = this.getAttribute('href');
                 console.log('Navigating to:', destination);
-                
-                // Optional: Add analytics tracking here
-                // gtag('event', 'navigation', { 'destination': destination });
             });
         });
     </script>
