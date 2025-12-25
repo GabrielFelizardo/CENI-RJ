@@ -355,6 +355,30 @@
             margin: 0;
         }
 
+        .org-members {
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--grid-line);
+            line-height: 1.6;
+        }
+
+        .org-item:hover .org-members {
+            border-top-color: rgba(255,255,255,0.3);
+        }
+
+        .org-members strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .org-members span {
+            display: block;
+            opacity: 0.8;
+            font-size: 0.7rem;
+        }
+
         .back-to-top {
             position: fixed;
             bottom: 2rem;
@@ -603,112 +627,215 @@
                 <div class="col-8">
                     <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
                         17 organizações compõem o CENI-RJ, representando governo, sociedade civil, 
-                        universidades e setor privado. As organizações participarão de pelo menos 1 GT, 
-                        indicando titular e suplente.
+                        universidades e setor privado.
                     </p>
                 </div>
                 
-                <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <!-- GOVERNO -->
                     <div class="org-item">
                         <i class="fas fa-landmark org-icon"></i>
-                        <h4>Casa Civil</h4>
+                        <h4>Casa Civil - SECC</h4>
                         <p>Governo do Estado</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Rubens Antonio Albuquerque Junior</span>
+                            <strong>Suplente:</strong>
+                            <span>Rafael Landa Montenegro Nuno</span>
+                        </div>
                     </div>
                     
                     <div class="org-item">
                         <i class="fas fa-users org-icon"></i>
                         <h4>SEGOV</h4>
                         <p>Secretaria de Governo</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-venus org-icon"></i>
-                        <h4>Secretaria da Mulher</h4>
-                        <p>Governo do Estado</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-palette org-icon"></i>
-                        <h4>SECEC</h4>
-                        <p>Cultura e Economia Criativa</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-bolt org-icon"></i>
-                        <h4>SEEEM</h4>
-                        <p>Energia e Economia do Mar</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Karoline da Silva Mendez</span>
+                            <strong>Suplente:</strong>
+                            <span>Rafael Landa Montenegro Nuno</span>
+                        </div>
                     </div>
                     
                     <div class="org-item">
                         <i class="fas fa-leaf org-icon"></i>
                         <h4>SEAS</h4>
                         <p>Ambiente e Sustentabilidade</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Ana Larronda Asti</span>
+                            <strong>Suplente:</strong>
+                            <span>Irlaine Alvarenga Cidade</span>
+                        </div>
                     </div>
                     
                     <div class="org-item">
                         <i class="fas fa-briefcase org-icon"></i>
                         <h4>SETRAB</h4>
                         <p>Trabalho e Renda</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Alexandre Mauro Prado</span>
+                            <strong>Suplente:</strong>
+                            <span>Bruno Rocha Rodriguez</span>
+                        </div>
                     </div>
                     
                     <div class="org-item">
-                        <i class="fas fa-flask org-icon"></i>
-                        <h4>FAPERJ</h4>
-                        <p>Fundação de Amparo à Pesquisa</p>
+                        <i class="fas fa-bolt org-icon"></i>
+                        <h4>SEENEMAR</h4>
+                        <p>Energia e Economia do Mar</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Mariana Pisani Mata</span>
+                            <strong>Suplente:</strong>
+                            <span>Erick José Guimarães de Andrade Junior</span>
+                        </div>
                     </div>
                     
                     <div class="org-item">
-                        <i class="fas fa-graduation-cap org-icon"></i>
-                        <h4>PUC-Rio</h4>
-                        <p>Universidade</p>
+                        <i class="fas fa-palette org-icon"></i>
+                        <h4>SECEC</h4>
+                        <p>Cultura e Economia Criativa</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Nilza Valéria Zacarias do Nascimento Oliveira</span>
+                            <strong>Suplente:</strong>
+                            <span>Sergio Almeida Firmino</span>
+                        </div>
                     </div>
                     
                     <div class="org-item">
-                        <i class="fas fa-university org-icon"></i>
-                        <h4>UFRJ</h4>
-                        <p>Universidade Federal</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-industry org-icon"></i>
-                        <h4>Firjan</h4>
-                        <p>Sistema FIRJAN</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-chart-line org-icon"></i>
-                        <h4>SEBRAE-RJ</h4>
-                        <p>Apoio a Pequenos Negócios</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-building org-icon"></i>
-                        <h4>ABERJ</h4>
-                        <p>Associação Brasileira</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-lightbulb org-icon"></i>
-                        <h4>Impact Hub Rio</h4>
-                        <p>Hub de Inovação Social</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-store org-icon"></i>
-                        <h4>Fecomércio RJ</h4>
-                        <p>Federação do Comércio</p>
-                    </div>
-                    
-                    <div class="org-item">
-                        <i class="fas fa-water org-icon"></i>
-                        <h4>Rio de Impacto</h4>
-                        <p>Organização de Impacto</p>
+                        <i class="fas fa-venus org-icon"></i>
+                        <h4>Secretaria da Mulher</h4>
+                        <p>Governo do Estado</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Heloisa Helena de Alencar Aguiar</span>
+                            <strong>Suplente:</strong>
+                            <span>Marcele Porto da Silva</span>
+                        </div>
                     </div>
                     
                     <div class="org-item">
                         <i class="fas fa-globe org-icon"></i>
                         <h4>Comissão ODS RJ</h4>
                         <p>Objetivos de Desenvolvimento</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Ana Larronda Asti</span>
+                            <strong>Suplente:</strong>
+                            <span>Irlaine Alvarenga Cidade</span>
+                        </div>
+                    </div>
+                    
+                    <!-- SOCIEDADE CIVIL -->
+                    <div class="org-item">
+                        <i class="fas fa-chart-line org-icon"></i>
+                        <h4>SEBRAE-RJ</h4>
+                        <p>Apoio a Pequenos Negócios</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Carla Geraldo de Moraes Teixeira Panisset</span>
+                            <strong>Suplente:</strong>
+                            <span>Juliana Cristina Carlos de Oliveira</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-graduation-cap org-icon"></i>
+                        <h4>PUC-Rio</h4>
+                        <p>Universidade</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Marcelo Gattass</span>
+                            <strong>Suplente:</strong>
+                            <span>Gustavo Robichez</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-lightbulb org-icon"></i>
+                        <h4>Impact Hub Rio</h4>
+                        <p>Hub de Inovação Social</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Liliana Pinelli Caldas da Cunha</span>
+                            <strong>Suplente:</strong>
+                            <span>Luciana Rodriguez</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-flask org-icon"></i>
+                        <h4>FAPERJ</h4>
+                        <p>Fundação de Amparo à Pesquisa</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Caroline Alves da Costa</span>
+                            <strong>Suplente:</strong>
+                            <span>Juliana Maciel de Aguiar</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-store org-icon"></i>
+                        <h4>Fecomércio RJ</h4>
+                        <p>Federação do Comércio</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>João Carlos Gomes</span>
+                            <strong>Suplente:</strong>
+                            <span>Guilherme Mercês</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-industry org-icon"></i>
+                        <h4>Firjan</h4>
+                        <p>Sistema FIRJAN</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Jorge Vicente Peron Mendes</span>
+                            <strong>Suplente:</strong>
+                            <span>Eliane Carvalhar Damasceno</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-university org-icon"></i>
+                        <h4>UFRJ</h4>
+                        <p>Universidade Federal</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Helios Malebranche Olbrisch Freres Filho</span>
+                            <strong>Suplente:</strong>
+                            <span>Rita de Cássia Monteiro Afonso</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-building org-icon"></i>
+                        <h4>ABERJ</h4>
+                        <p>Associação de Bancos</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Istvan Karoly Kasznar</span>
+                            <strong>Suplente:</strong>
+                            <span>Angélica Moreira da Silva</span>
+                        </div>
+                    </div>
+                    
+                    <div class="org-item">
+                        <i class="fas fa-water org-icon"></i>
+                        <h4>Rio de Impacto</h4>
+                        <p>Organização de Impacto</p>
+                        <div class="org-members">
+                            <strong>Titular:</strong>
+                            <span>Dayse Maria Valença Ferreira</span>
+                            <strong>Suplente:</strong>
+                            <span>Luciana Costa Souza Tristão</span>
+                        </div>
                     </div>
                 </div>
             </div>
