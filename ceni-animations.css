@@ -1,19 +1,9 @@
-/**
- * CENI-RJ Animation System
- * Sistema de animações de entrada performático
- * Versão: 1.0 - Produção
- * Desenvolvido por: Gabriel Felizardo da Silva
- */
-
-/* ========================================
-   BASE - Preparação para animações
-   ======================================== */
 [data-animate] {
     opacity: 0;
     transition-property: opacity, transform;
     transition-duration: 0.6s;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: opacity, transform;
+    /* will-change removido - aplicado apenas quando necessário */
 }
 
 /* Estado animado */
