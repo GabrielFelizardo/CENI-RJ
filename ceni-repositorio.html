@@ -170,8 +170,9 @@
                 flex-direction: column;
                 padding: 5rem 0 2rem 0;
                 transition: right 0.3s ease;
-                z-index: 9999;
-                box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+                z-index: 10001;
+                box-shadow: -8px 0 32px rgba(0,0,0,0.6);
+                isolation: isolate;
             }
             .main-nav.active { right: 0; }
             .main-nav a {
@@ -179,7 +180,11 @@
                 border-bottom: 1px solid rgba(255,255,255,0.1) !important;
                 padding: 1.5rem 2rem;
             }
-            .mobile-menu-toggle { display: block; }
+            .mobile-menu-toggle { 
+                display: block;
+                position: relative;
+                z-index: 10002;
+            }
             .mobile-overlay {
                 display: none;
                 position: fixed;
@@ -187,8 +192,9 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(0,0,0,0.5);
-                z-index: 9998;
+                background: transparent;
+                z-index: 10000;
+                transition: opacity 0.3s ease;
             }
             .mobile-overlay.active { display: block; }
         }
