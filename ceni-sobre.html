@@ -58,7 +58,7 @@
             left: 0;
             height: 3px;
             background: var(--primary);
-            z-index: 9999;
+            z-index: 10001;
             transition: width 0.2s;
         }
 
@@ -188,8 +188,9 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(0,0,0,0.5);
+                background: transparent;
                 z-index: 9998;
+                transition: opacity 0.3s ease;
             }
             .mobile-overlay.active { display: block; }
         }
@@ -258,7 +259,7 @@
         
         .tab-button:hover {
             color: var(--text-primary);
-            background: rgba(0,0,0,0.02);
+            background: transparent;
         }
         
         .tab-button.active {
