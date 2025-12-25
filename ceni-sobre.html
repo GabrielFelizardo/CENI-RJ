@@ -23,6 +23,11 @@
             --text-primary: #000000;
             --text-secondary: #666666;
             --grid-line: #e0e0e0;
+            --gt1-color: #1e3a8a;
+            --gt2-color: #1e5631;
+            --gt3-color: #e89bb8;
+            --gt4-color: #e8632e;
+            --gt5-color: #f4b942;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -461,39 +466,40 @@
         }
 
         .organograma-box {
-            border: 4px solid var(--accent);
-            padding: 4rem 3rem;
-            margin: 3rem 0;
+            border: 3px solid var(--accent);
+            padding: 2rem 1.5rem;
+            margin: 3rem auto;
             text-align: center;
+            max-width: 700px;
         }
 
         .organograma-nivel {
-            margin: 2rem 0;
+            margin: 1rem 0;
         }
 
         .organograma-nivel-title {
-            font-size: 0.875rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .organograma-box-item {
             display: inline-block;
             border: 2px solid var(--accent);
-            padding: 1.5rem 2rem;
-            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 1rem;
+            font-size: 0.75rem;
         }
 
         .organograma-arrow {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--primary);
-            margin: 1rem 0;
+            margin: 0.5rem 0;
         }
 
         .recursos-grid {
@@ -896,7 +902,7 @@
             </div>
         </section>
 
-        <!-- ORGANOGRAMA -->
+        <!-- ORGANOGRAMA COMPACTO -->
         <section class="mb-8">
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
@@ -941,11 +947,11 @@
                         <div class="organograma-nivel">
                             <div class="organograma-nivel-title">Instâncias Operacionais</div>
                             <div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 1</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 2</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 3</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 4</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 5</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt1-color); color: white; border-color: var(--gt1-color);">GT 1</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt2-color); color: white; border-color: var(--gt2-color);">GT 2</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt3-color); color: white; border-color: var(--gt3-color);">GT 3</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt4-color); color: white; border-color: var(--gt4-color);">GT 4</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt5-color); color: white; border-color: var(--gt5-color);">GT 5</div>
                             </div>
                         </div>
                     </div>
