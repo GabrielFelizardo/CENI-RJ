@@ -237,8 +237,6 @@
             gap: 0;
             border-bottom: 4px solid var(--accent);
             margin-bottom: 3rem;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
         
         .tab-button {
@@ -695,10 +693,10 @@
             .footer-grid { grid-template-columns: 1fr; }
             .header-grid { padding: 0 2rem; }
             
-            /* Tabs mobile */
+            /* Tabs mobile - ativar scroll horizontal */
             .tabs-nav {
-                flex-wrap: nowrap;
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
             
             .tab-button {
