@@ -196,10 +196,49 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(0,0,0,0.5);
+                background: transparent;
                 z-index: 9998;
+                transition: opacity 0.3s ease;
             }
             .mobile-overlay.active { display: block; }
+        }
+        
+        .section-number {
+            font-size: 10rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--primary);
+            opacity: 0.08;
+            position: absolute;
+            top: -3rem;
+            left: -2rem;
+            z-index: 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .hero-section {
+            padding: 6rem 0 8rem 0;
+            position: relative;
         }
         
         .hero-number {
@@ -218,21 +257,6 @@
             margin: 3rem 0 2rem 0;
             text-transform: uppercase;
             letter-spacing: -0.02em;
-        }
-        
-        .label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            display: block;
-        }
-        
-        .hero-section {
-            padding: 6rem 0 8rem 0;
-            position: relative;
         }
         
         .hero-line {
@@ -314,29 +338,6 @@
             font-weight: 700;
             letter-spacing: 0.1em;
             opacity: 0.9;
-        }
-        
-        .section-number {
-            font-size: 10rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--primary);
-            opacity: 0.08;
-            position: absolute;
-            top: -2rem;
-            left: -2rem;
-            z-index: 0;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 1;
         }
         
         .gts-simple {
