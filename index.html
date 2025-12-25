@@ -21,6 +21,9 @@
             --primary: #1e3a8a;
             --accent: #000000;
             --background: #ffffff;
+            --text-secondary: #4a4a4a;
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
         
         body {
@@ -36,7 +39,7 @@
             overflow-x: hidden;
         }
         
-        /* SPLASH SCREEN */
+        /* SPLASH SCREEN OTIMIZADO - 2.5s */
         .splash-screen {
             position: fixed;
             top: 0;
@@ -49,7 +52,7 @@
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            animation: splashFadeOut 1s ease 4s forwards;
+            animation: splashFadeOut 0.6s ease 2s forwards;
             cursor: pointer;
         }
         
@@ -70,7 +73,7 @@
             margin-bottom: 2rem;
             color: rgba(255, 255, 255, 0.95);
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            animation: splashLogoIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: splashLogoIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .splash-line {
@@ -79,7 +82,7 @@
             background: rgba(255, 255, 255, 0.9);
             margin: 0 auto 2rem auto;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            animation: splashLineIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+            animation: splashLineIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
         }
         
         .splash-title {
@@ -91,7 +94,7 @@
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
             margin-bottom: 1rem;
-            animation: splashTextIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+            animation: splashTextIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
         }
         
         .splash-subtitle {
@@ -102,7 +105,7 @@
             color: rgba(255, 255, 255, 0.85);
             text-shadow: 0 1px 4px rgba(0,0,0,0.2);
             margin-top: 1rem;
-            animation: splashTextIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
+            animation: splashTextIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
         }
         
         .splash-skip {
@@ -112,9 +115,18 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            animation: splashSkipIn 0.5s ease 1.5s both;
+            animation: splashSkipIn 0.4s ease 0.8s both;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            transition: all var(--transition-base);
+        }
+        
+        .splash-skip:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
         @keyframes splashLogoIn {
@@ -153,9 +165,11 @@
         @keyframes splashSkipIn {
             from {
                 opacity: 0;
+                transform: translateY(10px);
             }
             to {
-                opacity: 0.8;
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         
@@ -168,7 +182,7 @@
         
         .main-content {
             opacity: 0;
-            animation: mainContentIn 1s ease 5s forwards;
+            animation: mainContentIn 0.8s ease 2.6s forwards;
             width: 100%;
             max-width: 1200px;
             display: flex;
@@ -222,7 +236,7 @@
         p {
             font-size: clamp(1rem, 2vw, 1.25rem);
             line-height: 1.6;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 3rem;
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
         }
@@ -243,9 +257,13 @@
             text-align: center;
             text-decoration: none;
             color: var(--accent);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all var(--transition-base);
             position: relative;
             overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .nav-card::before {
@@ -256,26 +274,48 @@
             width: 100%;
             height: 100%;
             background: var(--accent);
-            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: left var(--transition-base);
             z-index: -1;
+        }
+        
+        .nav-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
         }
         
         .nav-card:hover::before {
             left: 0;
         }
         
+        .nav-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
         .nav-card:hover {
             color: white;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .nav-card:active {
+            transform: translateY(-6px) scale(0.98);
         }
         
         .nav-card-number {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             color: var(--primary);
             margin-bottom: 1rem;
-            transition: color 0.3s;
+            transition: color var(--transition-base);
         }
         
         .nav-card:hover .nav-card-number {
@@ -295,10 +335,17 @@
             margin: 0;
             line-height: 1.5;
             opacity: 0.8;
+            color: inherit;
         }
         
         .nav-card:hover p {
             opacity: 1;
+        }
+        
+        /* Estados de foco melhorados */
+        .nav-card:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 4px;
         }
         
         .footer-simple {
@@ -368,9 +415,20 @@
                 padding: 1rem;
             }
             
+            .nav-card {
+                padding: 2.5rem 2rem;
+                min-height: 180px;
+            }
+            
             .footer-simple {
                 margin-top: 3rem;
                 padding: 1.5rem 1rem 1rem 1rem;
+            }
+            
+            .splash-skip {
+                bottom: 2rem;
+                font-size: 0.7rem;
+                padding: 0.5rem 1rem;
             }
         }
         
@@ -382,12 +440,17 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+            
+            .splash-screen {
+                animation: none;
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- SPLASH SCREEN -->
-    <div class="splash-screen" id="splashScreen">
+    <!-- SPLASH SCREEN OTIMIZADO - 2.5s total -->
+    <div class="splash-screen" id="splashScreen" role="dialog" aria-label="Tela de boas-vindas">
         <div class="splash-content">
             <div class="splash-logo" aria-hidden="true">CENI</div>
             <div class="splash-line" aria-hidden="true"></div>
@@ -397,7 +460,9 @@
             </h1>
             <p class="splash-subtitle">Comitê Estadual de Investimentos e Negócios de Impacto</p>
         </div>
-        <p class="splash-skip">Clique para pular</p>
+        <button class="splash-skip" onclick="skipSplash()" aria-label="Pular introdução">
+            Clique para pular →
+        </button>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -456,7 +521,6 @@
             <p>Desenvolvido por Gabriel Felizardo da Silva</p>
         </footer>
     </div>
-    <!-- End Main Content -->
     
     <script>
         // Set current year
@@ -477,19 +541,23 @@
             }, 100);
         }
         
-        // Click to skip splash
-        splashScreen.addEventListener('click', skipSplash);
-        
-        // Auto-remove splash screen after animation (5 seconds total)
+        // Auto-remove splash screen após 2.6s (animação completa)
         setTimeout(() => {
             splashScreen.classList.add('hidden');
-        }, 5500);
+        }, 3000);
         
-        // Add click tracking for analytics (if needed)
+        // Acessibilidade: permitir ESC para pular splash
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !splashScreen.classList.contains('hidden')) {
+                skipSplash();
+            }
+        });
+        
+        // Analytics tracking (opcional)
         document.querySelectorAll('.nav-card').forEach(card => {
             card.addEventListener('click', function(e) {
                 const destination = this.getAttribute('href');
-                console.log('Navigating to:', destination);
+                console.log('Navegando para:', destination);
             });
         });
     </script>
