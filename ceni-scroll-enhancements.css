@@ -64,7 +64,7 @@ body.is-scrolling .gt-section {
     transition-property: opacity, transform;
     transition-duration: 0.8s;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: opacity, transform;
+    /* will-change removido - aplicado dinamicamente via JS quando necessário */
 }
 
 /* Variações de entrada */
@@ -146,7 +146,7 @@ body.is-scrolling .gt-section {
 .back-to-top.visible {
     opacity: 1;
     visibility: visible;
-    animation: backToTopPulse 2s ease-in-out infinite;
+    /* Animação de pulso removida para melhor performance */
 }
 
 .back-to-top:hover {
@@ -157,15 +157,6 @@ body.is-scrolling .gt-section {
 
 .back-to-top:active {
     transform: translateY(-2px) scale(0.98);
-}
-
-@keyframes backToTopPulse {
-    0%, 100% {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    50% {
-        box-shadow: 0 4px 20px rgba(30, 58, 138, 0.5);
-    }
 }
 
 /* ========================================
@@ -343,12 +334,10 @@ button:focus-visible {
    MELHORIAS DE PERFORMANCE ADICIONAIS
    ======================================== */
 
-/* Forçar aceleração de hardware em elementos animados */
-[data-animate],
+/* Aceleração de hardware aplicada apenas onde necessário */
 .back-to-top {
     transform: translateZ(0);
     backface-visibility: hidden;
-    perspective: 1000px;
 }
 
 /* Otimizar repaint durante scroll */
