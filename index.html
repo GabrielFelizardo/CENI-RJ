@@ -49,7 +49,7 @@
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            animation: splashFadeOut 0.8s ease 2.5s forwards;
+            animation: splashFadeOut 1s ease 4s forwards;
             cursor: pointer;
         }
         
@@ -68,32 +68,39 @@
             line-height: 0.9;
             letter-spacing: -0.05em;
             margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             animation: splashLogoIn 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .splash-line {
             width: 120px;
             height: 4px;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             margin: 0 auto 2rem auto;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             animation: splashLineIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
         }
         
         .splash-title {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 700;
-            line-height: 1.2;
+            font-size: clamp(1.75rem, 5vw, 3rem);
+            font-weight: 900;
+            line-height: 1.1;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-bottom: 1rem;
             animation: splashTextIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
         }
         
         .splash-subtitle {
             font-size: clamp(0.875rem, 2vw, 1rem);
-            font-weight: 400;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            opacity: 0.8;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
             margin-top: 1rem;
             animation: splashTextIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both;
         }
@@ -102,9 +109,11 @@
             position: absolute;
             bottom: 3rem;
             font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            opacity: 0.6;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
             animation: splashSkipIn 0.5s ease 1.5s both;
         }
         
@@ -146,7 +155,7 @@
                 opacity: 0;
             }
             to {
-                opacity: 0.6;
+                opacity: 0.8;
             }
         }
         
@@ -159,7 +168,7 @@
         
         .main-content {
             opacity: 0;
-            animation: mainContentIn 0.8s ease 3.3s forwards;
+            animation: mainContentIn 1s ease 5s forwards;
             width: 100%;
             max-width: 1200px;
             display: flex;
@@ -173,21 +182,9 @@
             }
         }
         
-        /* Skip splash if already visited */
-        .splash-screen.skip-animation {
-            animation: none;
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .main-content.skip-animation {
-            animation: none;
-            opacity: 1;
-        }
-        
         .loading-container {
             text-align: center;
-            max-width: 600px;
+            max-width: 800px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -289,29 +286,19 @@
             font-size: 1rem;
             font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             line-height: 1.3;
         }
         
         .nav-card p {
             font-size: 0.875rem;
             margin: 0;
+            line-height: 1.5;
             opacity: 0.8;
         }
         
         .nav-card:hover p {
             opacity: 1;
-        }
-        
-        .loader {
-            display: none;
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
         }
         
         .footer-simple {
@@ -370,11 +357,6 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         
         @media (max-width: 768px) {
@@ -439,35 +421,33 @@
                 <a href="ceni-index.html" class="nav-card">
                     <div class="nav-card-number">01</div>
                     <h3>Início</h3>
-                    <p>Portal principal do CENI-RJ</p>
+                    <p>Conheça os números do impacto no RJ</p>
                 </a>
                 
                 <a href="ceni-sobre.html" class="nav-card">
                     <div class="nav-card-number">02</div>
                     <h3>Sobre</h3>
-                    <p>Conheça o comitê</p>
+                    <p>O que são Negócios de Impacto</p>
                 </a>
                 
                 <a href="ceni-gts.html" class="nav-card">
                     <div class="nav-card-number">03</div>
                     <h3>Grupos de Trabalho</h3>
-                    <p>5 GTs estratégicos</p>
+                    <p>17 organizações em 5 frentes estratégicas</p>
                 </a>
                 
                 <a href="ceni-canais.html" class="nav-card">
                     <div class="nav-card-number">04</div>
                     <h3>Canais</h3>
-                    <p>Comunicação oficial</p>
+                    <p>Entre em contato conosco</p>
                 </a>
                 
                 <a href="ceni-repositorio.html" class="nav-card">
                     <div class="nav-card-number">05</div>
                     <h3>Repositório</h3>
-                    <p>Documentos e atas</p>
+                    <p>Documentos, atas e materiais oficiais</p>
                 </a>
             </nav>
-            
-            <div class="loader" id="loader" aria-label="Carregando"></div>
         </div>
         
         <footer class="footer-simple">
@@ -485,7 +465,6 @@
         // Splash screen control
         const splashScreen = document.getElementById('splashScreen');
         const mainContent = document.getElementById('mainContent');
-        const hasVisited = sessionStorage.getItem('ceni-visited');
         
         function skipSplash() {
             splashScreen.style.animation = 'none';
@@ -498,23 +477,13 @@
             }, 100);
         }
         
-        // Skip splash if already visited
-        if (hasVisited) {
-            splashScreen.classList.add('skip-animation');
-            mainContent.classList.add('skip-animation');
+        // Click to skip splash
+        splashScreen.addEventListener('click', skipSplash);
+        
+        // Auto-remove splash screen after animation (5 seconds total)
+        setTimeout(() => {
             splashScreen.classList.add('hidden');
-        } else {
-            // Mark as visited
-            sessionStorage.setItem('ceni-visited', 'true');
-            
-            // Click to skip
-            splashScreen.addEventListener('click', skipSplash);
-            
-            // Auto-remove splash screen after animation
-            setTimeout(() => {
-                splashScreen.classList.add('hidden');
-            }, 3500);
-        }
+        }, 5500);
         
         // Add click tracking for analytics (if needed)
         document.querySelectorAll('.nav-card').forEach(card => {
