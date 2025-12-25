@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="ceni-animations.css">
     <link rel="stylesheet" href="ceni-scroll-enhancements.css">
+    <link rel="stylesheet" href="ceni-theme-enhanced.css">
     
     <style>
         :root {
@@ -21,13 +22,9 @@
             --accent: #000000;
             --background: #ffffff;
             --text-primary: #000000;
-            --text-secondary: #666666;
+            --text-secondary: #4a4a4a;
             --grid-line: #e0e0e0;
-            --gt1-color: #1e3a8a;
-            --gt2-color: #1e5631;
-            --gt3-color: #e89bb8;
-            --gt4-color: #e8632e;
-            --gt5-color: #f4b942;
+            --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -102,7 +99,6 @@
         .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
         .col-8 { grid-column: span 8; position: relative; z-index: 1; }
         .col-6 { grid-column: span 6; position: relative; z-index: 1; }
-        .col-4 { grid-column: span 4; position: relative; z-index: 1; }
         
         .gov-header {
             background: var(--primary);
@@ -158,6 +154,8 @@
             font-size: 1.5rem;
             cursor: pointer;
             padding: 0.5rem;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         @media (max-width: 968px) {
@@ -180,8 +178,9 @@
                 border: none !important;
                 border-bottom: 1px solid rgba(255,255,255,0.1) !important;
                 padding: 1.5rem 2rem;
+                min-height: 44px;
             }
-            .mobile-menu-toggle { display: block; }
+            .mobile-menu-toggle { display: flex; align-items: center; justify-content: center; }
             .mobile-overlay {
                 display: none;
                 position: fixed;
@@ -193,29 +192,6 @@
                 z-index: 9998;
             }
             .mobile-overlay.active { display: block; }
-        }
-        
-        .section-number {
-            font-size: 10rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--primary);
-            opacity: 0.08;
-            position: absolute;
-            top: -2rem;
-            left: -1rem;
-            z-index: 0;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 1;
         }
         
         .label {
@@ -248,10 +224,84 @@
             margin: 2rem 0;
         }
         
+        /* ======================================
+           SISTEMA DE TABS
+           ====================================== */
+        
+        .tabs-container {
+            margin: 4rem 0;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            gap: 0;
+            border-bottom: 4px solid var(--accent);
+            margin-bottom: 3rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .tab-button {
+            background: transparent;
+            border: none;
+            padding: 1.25rem 2rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border-bottom: 4px solid transparent;
+            margin-bottom: -4px;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .tab-button:hover {
+            color: var(--text-primary);
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .tab-button.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: rgba(30, 58, 138, 0.03);
+        }
+        
+        .tab-button:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 4px;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ======================================
+           COMPONENTES DA PÁGINA
+           ====================================== */
+        
         .definition-box {
             border: 4px solid var(--accent);
             padding: 3rem;
-            margin: 4rem 0;
+            margin: 3rem 0;
             background: white;
         }
         
@@ -350,7 +400,7 @@
 
         .marco-legal-box {
             border: 2px solid var(--accent);
-            padding: 2rem;
+            padding: 2.5rem;
         }
 
         .marco-legal-box h4 {
@@ -467,7 +517,7 @@
 
         .organograma-box {
             border: 3px solid var(--accent);
-            padding: 2rem 1.5rem;
+            padding: 2.5rem 2rem;
             margin: 3rem auto;
             text-align: center;
             max-width: 700px;
@@ -489,7 +539,7 @@
         .organograma-box-item {
             display: inline-block;
             border: 2px solid var(--accent);
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.25rem;
             margin: 0.25rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -511,8 +561,8 @@
 
         .recurso-card {
             border: 2px solid var(--accent);
-            padding: 2rem;
-            transition: all 0.3s;
+            padding: 2.5rem;
+            transition: all var(--transition-base);
             text-decoration: none;
             color: inherit;
             display: block;
@@ -548,7 +598,7 @@
             font-size: 2rem;
             color: var(--primary);
             margin-bottom: 1rem;
-            transition: color 0.3s;
+            transition: color var(--transition-base);
         }
 
         .recurso-card:hover .recurso-icon {
@@ -572,6 +622,11 @@
             transition: all 0.3s;
             z-index: 999;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .back-to-top.visible {
             opacity: 1;
@@ -625,26 +680,39 @@
             opacity: 0.6;
         }
         
-        .mb-8 { margin-bottom: 8rem; }
-        .mb-6 { margin-bottom: 6rem; }
-        .mt-6 { margin-top: 6rem; }
-        
         @media (max-width: 968px) {
             .swiss-grid { 
                 padding: 0 2rem; 
                 grid-template-columns: 1fr;
             }
             .breadcrumb { padding: 0 2rem; }
-            .col-8, .col-6, .col-4 { grid-column: 1 / -1; }
+            .col-8, .col-6 { grid-column: 1 / -1; }
             .hero-title { font-size: 2.5rem; }
-            .section-title { font-size: 2rem; }
-            .section-number { font-size: 6rem; }
             .marcos-grid, .stats-grid, .objetivos-grid, 
             .marcos-legais-grid, .recursos-grid, .exemplo-grid { 
                 grid-template-columns: 1fr; 
             }
             .footer-grid { grid-template-columns: 1fr; }
             .header-grid { padding: 0 2rem; }
+            
+            /* Tabs mobile */
+            .tabs-nav {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+            
+            .tab-button {
+                padding: 1.25rem 1.5rem;
+                font-size: 0.75rem;
+            }
+            
+            .definition-box,
+            .exemplo-box,
+            .marco-legal-box,
+            .recurso-card,
+            .organograma-box {
+                padding: 2rem !important;
+            }
         }
     </style>
 </head>
@@ -700,417 +768,351 @@
             </div>
         </section>
 
-        <!-- MARCOS LEGAIS -->
-        <section class="mb-8">
+        <!-- SISTEMA DE TABS -->
+        <section class="tabs-container">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">01</span>
-                    <span class="label">Fundamentação</span>
-                    <h2 class="section-title">
-                        Marcos<br>Legais
-                    </h2>
-                </div>
-
-                <div class="col-8">
-                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
-                        O CENI-RJ está fundamentado em instrumentos legais estaduais e nacionais que 
-                        consolidam a agenda de negócios de impacto no Brasil.
-                    </p>
-                </div>
-                
-                <div class="marcos-legais-grid" style="grid-column: 1 / -1;">
-                    <div class="marco-legal-box">
-                        <h4><i class="fas fa-landmark"></i> Marcos Estaduais</h4>
-                        
-                        <div class="marco-legal-item">
-                            <strong>Lei Estadual nº 8.571/2019</strong>
-                            <p>Institui a Política Estadual de Investimentos e Negócios de Impacto</p>
-                        </div>
-                        
-                        <div class="marco-legal-item">
-                            <strong>Decreto Estadual nº 49.635/2025</strong>
-                            <p>Regulamenta a Política e cria oficialmente o Comitê Estadual de Investimentos e Negócios de Impacto – CENI-RJ</p>
-                        </div>
-                    </div>
-                    
-                    <div class="marco-legal-box">
-                        <h4><i class="fas fa-flag"></i> Marcos Nacionais</h4>
-                        
-                        <div class="marco-legal-item">
-                            <strong>Decreto Federal nº 11.646/2023</strong>
-                            <p>Institui o ENIMPACTO – Estratégia Nacional de Investimentos e Negócios de Impacto</p>
-                        </div>
-                        
-                        <div class="marco-legal-item">
-                            <strong>Portaria MDIC nº 192/2024</strong>
-                            <p>Estrutura o SIMPACTO – Sistema Nacional de Investimentos e Negócios de Impacto</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- DEFINIÇÃO + EXEMPLO -->
-        <section class="mb-8">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">02</span>
-                    <span class="label">Definição</span>
-                    <h2 class="section-title">
-                        Negócios de<br>Impacto
-                    </h2>
-                </div>
-                
                 <div class="col-full">
-                    <div class="definition-box">
-                        <p>
-                            Empreendimentos com o objetivo de gerar 
-                            <strong>impacto socioambiental</strong> e 
-                            <strong>resultado financeiro positivo</strong> 
-                            de forma sustentável.
-                        </p>
-                    </div>
-                </div>
+                    <nav class="tabs-nav" role="tablist" aria-label="Seções de conteúdo">
+                        <button class="tab-button active" role="tab" aria-selected="true" aria-controls="tab-marcos" id="btn-marcos">
+                            Marcos Legais
+                        </button>
+                        <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-definicao" id="btn-definicao">
+                            Definição
+                        </button>
+                        <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-governanca" id="btn-governanca">
+                            Governança
+                        </button>
+                        <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-objetivos" id="btn-objetivos">
+                            Objetivos
+                        </button>
+                        <button class="tab-button" role="tab" aria-selected="false" aria-controls="tab-recursos" id="btn-recursos">
+                            Saiba Mais
+                        </button>
+                    </nav>
 
-                <!-- EXEMPLO PRÁTICO -->
-                <div class="col-full">
-                    <div class="exemplo-box">
-                        <h4><i class="fas fa-lightbulb"></i> Exemplo Prático: "LimpAção"</h4>
-                        <p style="margin-bottom: 2rem; opacity: 0.9;">
-                            Sabão ecológico feito por mulheres de comunidades
-                        </p>
+                    <!-- TAB 1: MARCOS LEGAIS -->
+                    <div class="tab-content active" role="tabpanel" id="tab-marcos" aria-labelledby="btn-marcos">
+                        <div class="col-8">
+                            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
+                                O CENI-RJ está fundamentado em instrumentos legais estaduais e nacionais que 
+                                consolidam a agenda de negócios de impacto no Brasil.
+                            </p>
+                        </div>
                         
-                        <div class="exemplo-grid">
-                            <div class="exemplo-item">
-                                <strong><i class="fas fa-recycle"></i> Solução de Impacto</strong>
-                                <p>Produção de sabão e produtos de limpeza a partir de óleo de cozinha reciclado</p>
+                        <div class="marcos-legais-grid">
+                            <div class="marco-legal-box">
+                                <h4><i class="fas fa-landmark"></i> Marcos Estaduais</h4>
+                                
+                                <div class="marco-legal-item">
+                                    <strong>Lei Estadual nº 8.571/2019</strong>
+                                    <p>Institui a Política Estadual de Investimentos e Negócios de Impacto</p>
+                                </div>
+                                
+                                <div class="marco-legal-item">
+                                    <strong>Decreto Estadual nº 49.635/2025</strong>
+                                    <p>Regulamenta a Política e cria oficialmente o Comitê Estadual de Investimentos e Negócios de Impacto – CENI-RJ</p>
+                                </div>
                             </div>
                             
-                            <div class="exemplo-item">
-                                <strong><i class="fas fa-dollar-sign"></i> Retorno Financeiro</strong>
-                                <p>Venda dos produtos em mercados locais e pequenos atacados</p>
+                            <div class="marco-legal-box">
+                                <h4><i class="fas fa-flag"></i> Marcos Nacionais</h4>
+                                
+                                <div class="marco-legal-item">
+                                    <strong>Decreto Federal nº 11.646/2023</strong>
+                                    <p>Institui o ENIMPACTO – Estratégia Nacional de Investimentos e Negócios de Impacto</p>
+                                </div>
+                                
+                                <div class="marco-legal-item">
+                                    <strong>Portaria MDIC nº 192/2024</strong>
+                                    <p>Estrutura o SIMPACTO – Sistema Nacional de Investimentos e Negócios de Impacto</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="marcos-grid">
+                            <div class="marco-card">
+                                <div class="marco-number">2°</div>
+                                <div class="marco-label">Estado</div>
+                                <p style="margin-top: 1rem; font-size: 1rem;">A estabelecer a Política Estadual</p>
                             </div>
                             
-                            <div class="exemplo-item">
-                                <strong><i class="fas fa-heart"></i> Intencionalidade</strong>
-                                <p>Reduzir descarte inadequado de óleo e gerar renda local</p>
+                            <div class="marco-card">
+                                <div class="marco-number">4°</div>
+                                <div class="marco-label">Estado</div>
+                                <p style="margin-top: 1rem; font-size: 1rem;">A instituir o Comitê Estadual</p>
+                            </div>
+                            
+                            <div class="marco-card">
+                                <div class="marco-number">1ª</div>
+                                <div class="marco-label">FAP</div>
+                                <p style="margin-top: 1rem; font-size: 1rem;">A ter edital dedicado à Pauta</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-6">
-                    <span class="label">Características</span>
-                    <ul class="caracteristica-list">
-                        <li>
-                            <span class="caracteristica-number">01</span>
-                            <div>
-                                <strong>Atividade Principal</strong><br>
-                                A solução de impacto é a atividade principal do negócio
-                            </div>
-                        </li>
-                        <li>
-                            <span class="caracteristica-number">02</span>
-                            <div>
-                                <strong>Lógica de Mercado</strong><br>
-                                Busca de retorno financeiro, operando pela lógica de mercado
-                            </div>
-                        </li>
-                        <li>
-                            <span class="caracteristica-number">03</span>
-                            <div>
-                                <strong>Intencionalidade</strong><br>
-                                Resolução de um problema social e/ou ambiental
-                            </div>
-                        </li>
-                        <li>
-                            <span class="caracteristica-number">04</span>
-                            <div>
-                                <strong>Inclusão Social</strong><br>
-                                Presente no ambiente institucional
-                            </div>
-                        </li>
-                        <li>
-                            <span class="caracteristica-number">05</span>
-                            <div>
-                                <strong>Monitoramento</strong><br>
-                                Interesse no monitoramento do impacto gerado
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
 
-        <section class="full-width-section full-width-bg">
-            <div class="swiss-grid">
-                <div class="col-full">
-                    <span class="label" style="color: rgba(255,255,255,0.6);">Exclusões</span>
-                    <h2 class="section-title" style="color: white;">
-                        O que NÃO é<br>Negócio de Impacto
-                    </h2>
-                </div>
-                
-                <div class="col-full">
-                    <ul class="negative-list">
-                        <li>
-                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">01</span>
-                            <div>Iniciativas de grupos minorizados que não têm foco em resolver problemas sociais ou ambientais.</div>
-                        </li>
-                        <li>
-                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">02</span>
-                            <div>Organizações sem fins lucrativos que atuam pelo interesse público, mas não operam como negócios.</div>
-                        </li>
-                        <li>
-                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">03</span>
-                            <div>Empreendimentos que têm impacto social apenas de forma indireta, sem que isso faça parte do núcleo do negócio.</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+                    <!-- TAB 2: DEFINIÇÃO -->
+                    <div class="tab-content" role="tabpanel" id="tab-definicao" aria-labelledby="btn-definicao">
+                        <div class="definition-box">
+                            <p>
+                                Empreendimentos com o objetivo de gerar 
+                                <strong>impacto socioambiental</strong> e 
+                                <strong>resultado financeiro positivo</strong> 
+                                de forma sustentável.
+                            </p>
+                        </div>
 
-        <section class="mt-6 mb-8">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">03</span>
-                    <span class="label">Pioneirismo</span>
-                    <h2 class="section-title">
-                        Rio de Janeiro<br>Lidera no Brasil
-                    </h2>
-                </div>
-                
-                <div class="marcos-grid" style="grid-column: 1 / -1;">
-                    <div class="marco-card">
-                        <div class="marco-number">2°</div>
-                        <div class="marco-label">Estado</div>
-                        <p style="margin-top: 1rem; font-size: 1rem;">A estabelecer a Política Estadual</p>
-                    </div>
-                    
-                    <div class="marco-card">
-                        <div class="marco-number">4°</div>
-                        <div class="marco-label">Estado</div>
-                        <p style="margin-top: 1rem; font-size: 1rem;">A instituir o Comitê Estadual</p>
-                    </div>
-                    
-                    <div class="marco-card">
-                        <div class="marco-number">1ª</div>
-                        <div class="marco-label">FAP</div>
-                        <p style="margin-top: 1rem; font-size: 1rem;">A ter edital dedicado à Pauta</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                        <div class="exemplo-box">
+                            <h4><i class="fas fa-lightbulb"></i> Exemplo Prático: "LimpAção"</h4>
+                            <p style="margin-bottom: 2rem; opacity: 0.9;">
+                                Sabão ecológico feito por mulheres de comunidades
+                            </p>
+                            
+                            <div class="exemplo-grid">
+                                <div class="exemplo-item">
+                                    <strong><i class="fas fa-recycle"></i> Solução de Impacto</strong>
+                                    <p>Produção de sabão e produtos de limpeza a partir de óleo de cozinha reciclado</p>
+                                </div>
+                                
+                                <div class="exemplo-item">
+                                    <strong><i class="fas fa-dollar-sign"></i> Retorno Financeiro</strong>
+                                    <p>Venda dos produtos em mercados locais e pequenos atacados</p>
+                                </div>
+                                
+                                <div class="exemplo-item">
+                                    <strong><i class="fas fa-heart"></i> Intencionalidade</strong>
+                                    <p>Reduzir descarte inadequado de óleo e gerar renda local</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <span class="label">Características</span>
+                        <ul class="caracteristica-list">
+                            <li>
+                                <span class="caracteristica-number">01</span>
+                                <div>
+                                    <strong>Atividade Principal</strong><br>
+                                    A solução de impacto é a atividade principal do negócio
+                                </div>
+                            </li>
+                            <li>
+                                <span class="caracteristica-number">02</span>
+                                <div>
+                                    <strong>Lógica de Mercado</strong><br>
+                                    Busca de retorno financeiro, operando pela lógica de mercado
+                                </div>
+                            </li>
+                            <li>
+                                <span class="caracteristica-number">03</span>
+                                <div>
+                                    <strong>Intencionalidade</strong><br>
+                                    Resolução de um problema social e/ou ambiental
+                                </div>
+                            </li>
+                            <li>
+                                <span class="caracteristica-number">04</span>
+                                <div>
+                                    <strong>Inclusão Social</strong><br>
+                                    Presente no ambiente institucional
+                                </div>
+                            </li>
+                            <li>
+                                <span class="caracteristica-number">05</span>
+                                <div>
+                                    <strong>Monitoramento</strong><br>
+                                    Interesse no monitoramento do impacto gerado
+                                </div>
+                            </li>
+                        </ul>
 
-        <!-- ORGANOGRAMA COMPACTO -->
-        <section class="mb-8">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">04</span>
-                    <span class="label">Governança</span>
-                    <h2 class="section-title">
-                        Estrutura do<br>Comitê
-                    </h2>
-                </div>
-                
-                <div class="col-full">
-                    <div class="organograma-box">
-                        <div class="organograma-nivel">
-                            <div class="organograma-nivel-title">Instância Deliberativa</div>
-                            <div class="organograma-box-item">COMITÊ - PLENÁRIO</div>
-                        </div>
-                        
-                        <div class="organograma-arrow">↓</div>
-                        
-                        <div class="organograma-nivel">
-                            <div class="organograma-nivel-title">Presidência</div>
-                            <div class="organograma-box-item">SEDEICS</div>
-                        </div>
-                        
-                        <div class="organograma-arrow">↓</div>
-                        
-                        <div class="organograma-nivel">
-                            <div class="organograma-nivel-title">Secretaria Executiva</div>
-                            <div class="organograma-box-item">SUBAPE - SEC. EXECUTIVA</div>
-                        </div>
-                        
-                        <div class="organograma-arrow">↓</div>
-                        
-                        <div class="organograma-nivel">
-                            <div class="organograma-nivel-title">Composição</div>
-                            <div class="organograma-box-item" style="background: var(--primary); color: white;">GOVERNO</div>
-                            <div class="organograma-box-item" style="background: var(--accent); color: white;">SOCIEDADE CIVIL</div>
-                        </div>
-                        
-                        <div class="organograma-arrow">↓</div>
-                        
-                        <div class="organograma-nivel">
-                            <div class="organograma-nivel-title">Instâncias Operacionais</div>
-                            <div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt1-color); color: white; border-color: var(--gt1-color);">GT 1</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt2-color); color: white; border-color: var(--gt2-color);">GT 2</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt3-color); color: white; border-color: var(--gt3-color);">GT 3</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt4-color); color: white; border-color: var(--gt4-color);">GT 4</div>
-                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: var(--gt5-color); color: white; border-color: var(--gt5-color);">GT 5</div>
+                        <div class="full-width-section full-width-bg" style="margin-top: 4rem;">
+                            <div class="swiss-grid">
+                                <div class="col-full">
+                                    <span class="label" style="color: rgba(255,255,255,0.6);">Exclusões</span>
+                                    <h2 style="font-size: 2.5rem; font-weight: 700; text-transform: uppercase; color: white; margin-bottom: 2rem;">
+                                        O que NÃO é<br>Negócio de Impacto
+                                    </h2>
+                                </div>
+                                
+                                <div class="col-full">
+                                    <ul class="negative-list">
+                                        <li>
+                                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">01</span>
+                                            <div>Iniciativas de grupos minorizados que não têm foco em resolver problemas sociais ou ambientais.</div>
+                                        </li>
+                                        <li>
+                                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">02</span>
+                                            <div>Organizações sem fins lucrativos que atuam pelo interesse público, mas não operam como negócios.</div>
+                                        </li>
+                                        <li>
+                                            <span style="font-size: 2rem; font-weight: 900; min-width: 60px;">03</span>
+                                            <div>Empreendimentos que têm impacto social apenas de forma indireta, sem que isso faça parte do núcleo do negócio.</div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="mb-8">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">05</span>
-                    <span class="label">Finalidade</span>
-                    <h2 class="section-title">
-                        Objetivos<br>Estratégicos
-                    </h2>
-                </div>
-                
-                <div class="objetivos-grid" style="grid-column: 1 / -1;">
-                    <div class="objetivo-item">
-                        <h4>Aumento de Negócios</h4>
-                        <p>Expandir o número e escala de negócios de impacto no RJ</p>
-                    </div>
-                    
-                    <div class="objetivo-item">
-                        <h4>Fomento e Crédito</h4>
-                        <p>Facilitar acesso a financiamento e recursos</p>
-                    </div>
-                    
-                    <div class="objetivo-item">
-                        <h4>Participação no Mercado</h4>
-                        <p>Fortalecer presença em compras públicas</p>
-                    </div>
-                    
-                    <div class="objetivo-item">
-                        <h4>Inovação Social</h4>
-                        <p>Promover soluções inovadoras para problemas sociais</p>
-                    </div>
-                    
-                    <div class="objetivo-item">
-                        <h4>Organizações Intermediárias</h4>
-                        <p>Fortalecer ecossistema de suporte (aceleradoras, hubs)</p>
-                    </div>
-                    
-                    <div class="objetivo-item">
-                        <h4>Articulação de Atores</h4>
-                        <p>Integrar governo, sociedade civil e setor privado</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <!-- TAB 3: GOVERNANÇA -->
+                    <div class="tab-content" role="tabpanel" id="tab-governanca" aria-labelledby="btn-governanca">
+                        <div class="organograma-box">
+                            <div class="organograma-nivel">
+                                <div class="organograma-nivel-title">Instância Deliberativa</div>
+                                <div class="organograma-box-item">COMITÊ - PLENÁRIO</div>
+                            </div>
+                            
+                            <div class="organograma-arrow">↓</div>
+                            
+                            <div class="organograma-nivel">
+                                <div class="organograma-nivel-title">Presidência</div>
+                                <div class="organograma-box-item">SEDEICS</div>
+                            </div>
+                            
+                            <div class="organograma-arrow">↓</div>
+                            
+                            <div class="organograma-nivel">
+                                <div class="organograma-nivel-title">Secretaria Executiva</div>
+                                <div class="organograma-box-item">SUBAPE - SEC. EXECUTIVA</div>
+                            </div>
+                            
+                            <div class="organograma-arrow">↓</div>
+                            
+                            <div class="organograma-nivel">
+                                <div class="organograma-nivel-title">Composição</div>
+                                <div class="organograma-box-item" style="background: var(--primary); color: white;">GOVERNO</div>
+                                <div class="organograma-box-item" style="background: var(--accent); color: white;">SOCIEDADE CIVIL</div>
+                            </div>
+                            
+                            <div class="organograma-arrow">↓</div>
+                            
+                            <div class="organograma-nivel">
+                                <div class="organograma-nivel-title">Instâncias Operacionais</div>
+                                <div>
+                                    <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: #1e3a8a; color: white;">GT 1</div>
+                                    <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: #1e5631; color: white;">GT 2</div>
+                                    <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: #e89bb8; color: white;">GT 3</div>
+                                    <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: #e8632e; color: white;">GT 4</div>
+                                    <div class="organograma-box-item" style="margin: 0.25rem; padding: 0.5rem 1rem; font-size: 0.75rem; background: #f4b942; color: white;">GT 5</div>
+                                </div>
+                            </div>
+                        </div>
 
-        <section class="mb-8">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">06</span>
-                    <span class="label">Estrutura</span>
-                    <h2 class="section-title">
-                        Composição do<br>Ecossistema
-                    </h2>
-                </div>
-                
-                <div class="col-6">
-                    <p style="font-size: 1.25rem; line-height: 1.6;">
-                        Governança <strong>multissetorial</strong> que reúne representantes 
-                        do Governo do Estado e da sociedade civil em 17 organizações estratégicas.
-                    </p>
-                </div>
-                
-                <div class="stats-grid" style="grid-column: 1 / -1;">
-                    <div class="stat-item">
-                        <div class="stat-number">17</div>
-                        <div class="stat-label">
-                            Organizações Participantes
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number">17</div>
+                                <div class="stat-label">
+                                    Organizações Participantes
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-number">5</div>
+                                <div class="stat-label">
+                                    Grupos de Trabalho
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-number">34</div>
+                                <div class="stat-label">
+                                    Membros (Titular + Suplente)
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="stat-item">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">
-                            Grupos de Trabalho
+
+                    <!-- TAB 4: OBJETIVOS -->
+                    <div class="tab-content" role="tabpanel" id="tab-objetivos" aria-labelledby="btn-objetivos">
+                        <div class="objetivos-grid">
+                            <div class="objetivo-item">
+                                <h4>Aumento de Negócios</h4>
+                                <p>Expandir o número e escala de negócios de impacto no RJ</p>
+                            </div>
+                            
+                            <div class="objetivo-item">
+                                <h4>Fomento e Crédito</h4>
+                                <p>Facilitar acesso a financiamento e recursos</p>
+                            </div>
+                            
+                            <div class="objetivo-item">
+                                <h4>Participação no Mercado</h4>
+                                <p>Fortalecer presença em compras públicas</p>
+                            </div>
+                            
+                            <div class="objetivo-item">
+                                <h4>Inovação Social</h4>
+                                <p>Promover soluções inovadoras para problemas sociais</p>
+                            </div>
+                            
+                            <div class="objetivo-item">
+                                <h4>Organizações Intermediárias</h4>
+                                <p>Fortalecer ecossistema de suporte (aceleradoras, hubs)</p>
+                            </div>
+                            
+                            <div class="objetivo-item">
+                                <h4>Articulação de Atores</h4>
+                                <p>Integrar governo, sociedade civil e setor privado</p>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="stat-item">
-                        <div class="stat-number">34</div>
-                        <div class="stat-label">
-                            Membros (Titular + Suplente)
+
+                    <!-- TAB 5: RECURSOS -->
+                    <div class="tab-content" role="tabpanel" id="tab-recursos" aria-labelledby="btn-recursos">
+                        <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
+                            Acesse materiais, estudos e recursos externos para aprofundar seu conhecimento 
+                            sobre investimentos e negócios de impacto no Brasil.
+                        </p>
+                        
+                        <div class="recursos-grid">
+                            <a href="https://www.gov.br/mdic/pt-br/assuntos/enimpacto" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-flag"></i></div>
+                                <h4>ENIMPACTO – Estratégia Nacional</h4>
+                                <p>Página oficial do Governo Federal sobre a Estratégia Nacional de Investimentos e Negócios de Impacto</p>
+                            </a>
+                            
+                            <a href="https://mapa2023.pipelabo.com/" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-map-marked-alt"></i></div>
+                                <h4>Mapa de Negócios de Impacto 2023</h4>
+                                <p>Principal diagnóstico nacional sobre negócios de impacto - Pipe.Labo</p>
+                            </a>
+                            
+                            <a href="https://conteudo.ice.org.br/curso-com-impacto" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <h4>Curso "Com Impacto" – ICE (Gratuito)</h4>
+                                <p>Curso referência para quem inicia na agenda de impacto</p>
+                            </a>
+                            
+                            <a href="https://sitawi.net/tendencias-para-a-economia-de-impacto-em-2025/" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-chart-line"></i></div>
+                                <h4>Tendências para a Economia de Impacto 2025</h4>
+                                <p>Análise anual com projeções sobre o crescimento da economia de impacto – SITAWI</p>
+                            </a>
+                            
+                            <a href="https://coalizaopeloimpacto.org.br/" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-handshake"></i></div>
+                                <h4>Coalizão pelo Impacto</h4>
+                                <p>Iniciativa colaborativa nacional que articula organizações e fortalece ações estruturantes</p>
+                            </a>
+                            
+                            <a href="https://repositorio.ipea.gov.br/entities/publication/c18700ba-8509-40e2-8bd3-eac806441b2e" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-file-alt"></i></div>
+                                <h4>IPEA – Marco Conceitual e Agenda Pública</h4>
+                                <p>Documento estruturante que consolida definições oficiais e orienta políticas públicas</p>
+                            </a>
+                            
+                            <a href="https://repositorio.ipea.gov.br/entities/publication/ffcfe2ba-6911-48ba-84d9-31d40de54074" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-chart-bar"></i></div>
+                                <h4>IPEA – Panorama dos Negócios de Impacto</h4>
+                                <p>Análise abrangente sobre perfil, desafios e oportunidades dos negócios de impacto no Brasil</p>
+                            </a>
+                            
+                            <a href="https://www.oecd.org/en/publications/social-impact-investment_9789264233430-en.html" target="_blank" rel="noopener" class="recurso-card">
+                                <div class="recurso-icon"><i class="fas fa-globe"></i></div>
+                                <h4>OECD – Social Impact Investment Report</h4>
+                                <p>Relatório internacional com métricas e tendências globais de investimento de impacto</p>
+                            </a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- RECURSOS EXTERNOS -->
-        <section class="mb-8">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">07</span>
-                    <span class="label">Aprofundamento</span>
-                    <h2 class="section-title">
-                        Saiba<br>Mais
-                    </h2>
-                </div>
-
-                <div class="col-8">
-                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
-                        Acesse materiais, estudos e recursos externos para aprofundar seu conhecimento 
-                        sobre investimentos e negócios de impacto no Brasil.
-                    </p>
-                </div>
-                
-                <div class="recursos-grid" style="grid-column: 1 / -1;">
-                    <a href="https://www.gov.br/mdic/pt-br/assuntos/enimpacto" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-flag"></i></div>
-                        <h4>ENIMPACTO – Estratégia Nacional</h4>
-                        <p>Página oficial do Governo Federal sobre a Estratégia Nacional de Investimentos e Negócios de Impacto</p>
-                    </a>
-                    
-                    <a href="https://mapa2023.pipelabo.com/" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-map-marked-alt"></i></div>
-                        <h4>Mapa de Negócios de Impacto 2023</h4>
-                        <p>Principal diagnóstico nacional sobre negócios de impacto - Pipe.Labo</p>
-                    </a>
-                    
-                    <a href="https://conteudo.ice.org.br/curso-com-impacto" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <h4>Curso "Com Impacto" – ICE (Gratuito)</h4>
-                        <p>Curso referência para quem inicia na agenda de impacto</p>
-                    </a>
-                    
-                    <a href="https://sitawi.net/tendencias-para-a-economia-de-impacto-em-2025/" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-chart-line"></i></div>
-                        <h4>Tendências para a Economia de Impacto 2025</h4>
-                        <p>Análise anual com projeções sobre o crescimento da economia de impacto – SITAWI</p>
-                    </a>
-                    
-                    <a href="https://coalizaopeloimpacto.org.br/" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-handshake"></i></div>
-                        <h4>Coalizão pelo Impacto</h4>
-                        <p>Iniciativa colaborativa nacional que articula organizações e fortalece ações estruturantes</p>
-                    </a>
-                    
-                    <a href="https://repositorio.ipea.gov.br/entities/publication/c18700ba-8509-40e2-8bd3-eac806441b2e" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-file-alt"></i></div>
-                        <h4>IPEA – Marco Conceitual e Agenda Pública</h4>
-                        <p>Documento estruturante que consolida definições oficiais e orienta políticas públicas</p>
-                    </a>
-                    
-                    <a href="https://repositorio.ipea.gov.br/entities/publication/ffcfe2ba-6911-48ba-84d9-31d40de54074" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-chart-bar"></i></div>
-                        <h4>IPEA – Panorama dos Negócios de Impacto</h4>
-                        <p>Análise abrangente sobre perfil, desafios e oportunidades dos negócios de impacto no Brasil</p>
-                    </a>
-                    
-                    <a href="https://www.oecd.org/en/publications/social-impact-investment_9789264233430-en.html" target="_blank" rel="noopener" class="recurso-card">
-                        <div class="recurso-icon"><i class="fas fa-globe"></i></div>
-                        <h4>OECD – Social Impact Investment Report</h4>
-                        <p>Relatório internacional com métricas e tendências globais de investimento de impacto</p>
-                    </a>
                 </div>
             </div>
         </section>
@@ -1166,17 +1168,20 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
+        // Header sticky
         const header = document.querySelector('.gov-header');
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 100);
         });
 
+        // Progress indicator
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
         });
 
+        // Mobile menu
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
         const mobileOverlay = document.getElementById('mobileOverlay');
@@ -1195,6 +1200,7 @@
             menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
         });
 
+        // Back to top
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             backToTop.classList.toggle('visible', window.scrollY > 300);
@@ -1202,6 +1208,67 @@
 
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ======================================
+        // SISTEMA DE TABS
+        // ======================================
+        
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active de todos
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Adiciona active ao clicado
+                button.classList.add('active');
+                button.setAttribute('aria-selected', 'true');
+                
+                // Mostra conteúdo correspondente
+                const tabId = button.getAttribute('aria-controls');
+                document.getElementById(tabId).classList.add('active');
+                
+                // Scroll suave ao início das tabs
+                document.querySelector('.tabs-container').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            });
+        });
+        
+        // Navegação por teclado entre tabs
+        tabButtons.forEach((button, index) => {
+            button.addEventListener('keydown', (e) => {
+                let newIndex;
+                
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    newIndex = (index + 1) % tabButtons.length;
+                    tabButtons[newIndex].click();
+                    tabButtons[newIndex].focus();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    newIndex = (index - 1 + tabButtons.length) % tabButtons.length;
+                    tabButtons[newIndex].click();
+                    tabButtons[newIndex].focus();
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    tabButtons[0].click();
+                    tabButtons[0].focus();
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    tabButtons[tabButtons.length - 1].click();
+                    tabButtons[tabButtons.length - 1].focus();
+                }
+            });
         });
     </script>
 </body>
