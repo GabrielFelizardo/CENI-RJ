@@ -97,6 +97,7 @@
         .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
         .col-8 { grid-column: span 8; position: relative; z-index: 1; }
         .col-6 { grid-column: span 6; position: relative; z-index: 1; }
+        .col-4 { grid-column: span 4; position: relative; z-index: 1; }
         
         .gov-header {
             background: var(--primary);
@@ -254,6 +255,48 @@
             line-height: 1.4;
             font-weight: 500;
         }
+
+        .exemplo-box {
+            background: var(--primary);
+            color: white;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .exemplo-box h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .exemplo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .exemplo-item {
+            border-left: 3px solid white;
+            padding-left: 1.5rem;
+        }
+
+        .exemplo-item strong {
+            display: block;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .exemplo-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
         
         .caracteristica-list {
             list-style: none;
@@ -292,6 +335,52 @@
         }
         
         .negative-list li:last-child { border-bottom: none; }
+
+        .marcos-legais-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .marco-legal-box {
+            border: 2px solid var(--accent);
+            padding: 2rem;
+        }
+
+        .marco-legal-box h4 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .marco-legal-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .marco-legal-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .marco-legal-item strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .marco-legal-item p {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--text-secondary);
+        }
         
         .marcos-grid {
             display: grid;
@@ -369,6 +458,95 @@
         .objetivo-item p {
             font-size: 1rem;
             line-height: 1.6;
+        }
+
+        .organograma-box {
+            border: 4px solid var(--accent);
+            padding: 4rem 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .organograma-nivel {
+            margin: 2rem 0;
+        }
+
+        .organograma-nivel-title {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .organograma-box-item {
+            display: inline-block;
+            border: 2px solid var(--accent);
+            padding: 1.5rem 2rem;
+            margin: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        .organograma-arrow {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .recursos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .recurso-card {
+            border: 2px solid var(--accent);
+            padding: 2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .recurso-card:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .recurso-card h4 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .recurso-card p {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .recurso-card:hover p {
+            opacity: 1;
+        }
+
+        .recurso-card .recurso-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: color 0.3s;
+        }
+
+        .recurso-card:hover .recurso-icon {
+            color: white;
         }
 
         .back-to-top {
@@ -451,11 +629,14 @@
                 grid-template-columns: 1fr;
             }
             .breadcrumb { padding: 0 2rem; }
-            .col-8, .col-6 { grid-column: 1 / -1; }
+            .col-8, .col-6, .col-4 { grid-column: 1 / -1; }
             .hero-title { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
             .section-number { font-size: 6rem; }
-            .marcos-grid, .stats-grid, .objetivos-grid { grid-template-columns: 1fr; }
+            .marcos-grid, .stats-grid, .objetivos-grid, 
+            .marcos-legais-grid, .recursos-grid, .exemplo-grid { 
+                grid-template-columns: 1fr; 
+            }
             .footer-grid { grid-template-columns: 1fr; }
             .header-grid { padding: 0 2rem; }
         }
@@ -513,10 +694,61 @@
             </div>
         </section>
 
+        <!-- MARCOS LEGAIS -->
         <section class="mb-8">
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
                     <span class="section-number" aria-hidden="true">01</span>
+                    <span class="label">Fundamentação</span>
+                    <h2 class="section-title">
+                        Marcos<br>Legais
+                    </h2>
+                </div>
+
+                <div class="col-8">
+                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
+                        O CENI-RJ está fundamentado em instrumentos legais estaduais e nacionais que 
+                        consolidam a agenda de negócios de impacto no Brasil.
+                    </p>
+                </div>
+                
+                <div class="marcos-legais-grid" style="grid-column: 1 / -1;">
+                    <div class="marco-legal-box">
+                        <h4><i class="fas fa-landmark"></i> Marcos Estaduais</h4>
+                        
+                        <div class="marco-legal-item">
+                            <strong>Lei Estadual nº 8.571/2019</strong>
+                            <p>Institui a Política Estadual de Investimentos e Negócios de Impacto</p>
+                        </div>
+                        
+                        <div class="marco-legal-item">
+                            <strong>Decreto Estadual nº 49.635/2025</strong>
+                            <p>Regulamenta a Política e cria oficialmente o Comitê Estadual de Investimentos e Negócios de Impacto – CENI-RJ</p>
+                        </div>
+                    </div>
+                    
+                    <div class="marco-legal-box">
+                        <h4><i class="fas fa-flag"></i> Marcos Nacionais</h4>
+                        
+                        <div class="marco-legal-item">
+                            <strong>Decreto Federal nº 11.646/2023</strong>
+                            <p>Institui o ENIMPACTO – Estratégia Nacional de Investimentos e Negócios de Impacto</p>
+                        </div>
+                        
+                        <div class="marco-legal-item">
+                            <strong>Portaria MDIC nº 192/2024</strong>
+                            <p>Estrutura o SIMPACTO – Sistema Nacional de Investimentos e Negócios de Impacto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFINIÇÃO + EXEMPLO -->
+        <section class="mb-8">
+            <div class="swiss-grid">
+                <div class="col-full" style="position: relative;">
+                    <span class="section-number" aria-hidden="true">02</span>
                     <span class="label">Definição</span>
                     <h2 class="section-title">
                         Negócios de<br>Impacto
@@ -531,6 +763,33 @@
                             <strong>resultado financeiro positivo</strong> 
                             de forma sustentável.
                         </p>
+                    </div>
+                </div>
+
+                <!-- EXEMPLO PRÁTICO -->
+                <div class="col-full">
+                    <div class="exemplo-box">
+                        <h4><i class="fas fa-lightbulb"></i> Exemplo Prático: "LimpAção"</h4>
+                        <p style="margin-bottom: 2rem; opacity: 0.9;">
+                            Sabão ecológico feito por mulheres de comunidades
+                        </p>
+                        
+                        <div class="exemplo-grid">
+                            <div class="exemplo-item">
+                                <strong><i class="fas fa-recycle"></i> Solução de Impacto</strong>
+                                <p>Produção de sabão e produtos de limpeza a partir de óleo de cozinha reciclado</p>
+                            </div>
+                            
+                            <div class="exemplo-item">
+                                <strong><i class="fas fa-dollar-sign"></i> Retorno Financeiro</strong>
+                                <p>Venda dos produtos em mercados locais e pequenos atacados</p>
+                            </div>
+                            
+                            <div class="exemplo-item">
+                                <strong><i class="fas fa-heart"></i> Intencionalidade</strong>
+                                <p>Reduzir descarte inadequado de óleo e gerar renda local</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -608,7 +867,7 @@
         <section class="mt-6 mb-8">
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">02</span>
+                    <span class="section-number" aria-hidden="true">03</span>
                     <span class="label">Pioneirismo</span>
                     <h2 class="section-title">
                         Rio de Janeiro<br>Lidera no Brasil
@@ -637,10 +896,67 @@
             </div>
         </section>
 
+        <!-- ORGANOGRAMA -->
         <section class="mb-8">
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">03</span>
+                    <span class="section-number" aria-hidden="true">04</span>
+                    <span class="label">Governança</span>
+                    <h2 class="section-title">
+                        Estrutura do<br>Comitê
+                    </h2>
+                </div>
+                
+                <div class="col-full">
+                    <div class="organograma-box">
+                        <div class="organograma-nivel">
+                            <div class="organograma-nivel-title">Instância Deliberativa</div>
+                            <div class="organograma-box-item">COMITÊ - PLENÁRIO</div>
+                        </div>
+                        
+                        <div class="organograma-arrow">↓</div>
+                        
+                        <div class="organograma-nivel">
+                            <div class="organograma-nivel-title">Presidência</div>
+                            <div class="organograma-box-item">SEDEICS</div>
+                        </div>
+                        
+                        <div class="organograma-arrow">↓</div>
+                        
+                        <div class="organograma-nivel">
+                            <div class="organograma-nivel-title">Secretaria Executiva</div>
+                            <div class="organograma-box-item">SUBAPE - SEC. EXECUTIVA</div>
+                        </div>
+                        
+                        <div class="organograma-arrow">↓</div>
+                        
+                        <div class="organograma-nivel">
+                            <div class="organograma-nivel-title">Composição</div>
+                            <div class="organograma-box-item" style="background: var(--primary); color: white;">GOVERNO</div>
+                            <div class="organograma-box-item" style="background: var(--accent); color: white;">SOCIEDADE CIVIL</div>
+                        </div>
+                        
+                        <div class="organograma-arrow">↓</div>
+                        
+                        <div class="organograma-nivel">
+                            <div class="organograma-nivel-title">Instâncias Operacionais</div>
+                            <div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 1</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 2</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 3</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 4</div>
+                                <div class="organograma-box-item" style="margin: 0.25rem; padding: 1rem 1.5rem; font-size: 0.875rem;">GT 5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <div class="swiss-grid">
+                <div class="col-full" style="position: relative;">
+                    <span class="section-number" aria-hidden="true">05</span>
                     <span class="label">Finalidade</span>
                     <h2 class="section-title">
                         Objetivos<br>Estratégicos
@@ -684,7 +1000,7 @@
         <section class="mb-8">
             <div class="swiss-grid">
                 <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">04</span>
+                    <span class="section-number" aria-hidden="true">06</span>
                     <span class="label">Estrutura</span>
                     <h2 class="section-title">
                         Composição do<br>Ecossistema
@@ -719,6 +1035,76 @@
                             Membros (Titular + Suplente)
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECURSOS EXTERNOS -->
+        <section class="mb-8">
+            <div class="swiss-grid">
+                <div class="col-full" style="position: relative;">
+                    <span class="section-number" aria-hidden="true">07</span>
+                    <span class="label">Aprofundamento</span>
+                    <h2 class="section-title">
+                        Saiba<br>Mais
+                    </h2>
+                </div>
+
+                <div class="col-8">
+                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
+                        Acesse materiais, estudos e recursos externos para aprofundar seu conhecimento 
+                        sobre investimentos e negócios de impacto no Brasil.
+                    </p>
+                </div>
+                
+                <div class="recursos-grid" style="grid-column: 1 / -1;">
+                    <a href="https://www.gov.br/mdic/pt-br/assuntos/enimpacto" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-flag"></i></div>
+                        <h4>ENIMPACTO – Estratégia Nacional</h4>
+                        <p>Página oficial do Governo Federal sobre a Estratégia Nacional de Investimentos e Negócios de Impacto</p>
+                    </a>
+                    
+                    <a href="https://mapa2023.pipelabo.com/" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <h4>Mapa de Negócios de Impacto 2023</h4>
+                        <p>Principal diagnóstico nacional sobre negócios de impacto - Pipe.Labo</p>
+                    </a>
+                    
+                    <a href="https://conteudo.ice.org.br/curso-com-impacto" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h4>Curso "Com Impacto" – ICE (Gratuito)</h4>
+                        <p>Curso referência para quem inicia na agenda de impacto</p>
+                    </a>
+                    
+                    <a href="https://sitawi.net/tendencias-para-a-economia-de-impacto-em-2025/" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4>Tendências para a Economia de Impacto 2025</h4>
+                        <p>Análise anual com projeções sobre o crescimento da economia de impacto – SITAWI</p>
+                    </a>
+                    
+                    <a href="https://coalizaopeloimpacto.org.br/" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-handshake"></i></div>
+                        <h4>Coalizão pelo Impacto</h4>
+                        <p>Iniciativa colaborativa nacional que articula organizações e fortalece ações estruturantes</p>
+                    </a>
+                    
+                    <a href="https://repositorio.ipea.gov.br/entities/publication/c18700ba-8509-40e2-8bd3-eac806441b2e" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-file-alt"></i></div>
+                        <h4>IPEA – Marco Conceitual e Agenda Pública</h4>
+                        <p>Documento estruturante que consolida definições oficiais e orienta políticas públicas</p>
+                    </a>
+                    
+                    <a href="https://repositorio.ipea.gov.br/entities/publication/ffcfe2ba-6911-48ba-84d9-31d40de54074" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-chart-bar"></i></div>
+                        <h4>IPEA – Panorama dos Negócios de Impacto</h4>
+                        <p>Análise abrangente sobre perfil, desafios e oportunidades dos negócios de impacto no Brasil</p>
+                    </a>
+                    
+                    <a href="https://www.oecd.org/en/publications/social-impact-investment_9789264233430-en.html" target="_blank" rel="noopener" class="recurso-card">
+                        <div class="recurso-icon"><i class="fas fa-globe"></i></div>
+                        <h4>OECD – Social Impact Investment Report</h4>
+                        <p>Relatório internacional com métricas e tendências globais de investimento de impacto</p>
+                    </a>
                 </div>
             </div>
         </section>
