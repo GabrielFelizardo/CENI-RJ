@@ -1,12 +1,5 @@
-/* ========================================
-   CENI-RJ - MOBILE ENHANCEMENTS
-   Otimizações adicionais para experiência mobile
-   ======================================== */
-
-/* ========================================
-   OVERLAY MOBILE COM FEEDBACK VISUAL
-   ======================================== */
 @media (max-width: 968px) {
+    /* Overlay com feedback visual ao toque */
     .mobile-overlay {
         background: rgba(0, 0, 0, 0) !important;
         transition: background-color 0.3s ease !important;
@@ -229,23 +222,19 @@
 
 /* ========================================
    SCROLL BEHAVIOR MOBILE
+   Observação: Configurações de header estão em ceni-header-enhanced.css
    ======================================== */
 @media (max-width: 968px) {
     /* Scroll padding ajustado para header mobile */
     html {
-        scroll-padding-top: 90px !important;
+        scroll-padding-top: 85px !important;
     }
     
     /* Sections com scroll margin adequado */
     section,
     .gt-section,
     .categoria-section {
-        scroll-margin-top: 90px !important;
-    }
-    
-    /* Smooth scroll otimizado */
-    html {
-        scroll-behavior: smooth !important;
+        scroll-margin-top: 85px !important;
     }
 }
 
