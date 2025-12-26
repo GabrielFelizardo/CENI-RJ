@@ -1,8 +1,3 @@
-/* ========================================
-   FOOTER ENHANCED - JAVASCRIPT
-   Comportamentos interativos e accordion mobile
-   ======================================== */
-
 (function() {
     'use strict';
 
@@ -11,32 +6,9 @@
     // ========================================
     
     function initFooterEnhancements() {
-        initColoredLogo();
         initMobileAccordion();
         initCopyToClipboard();
         initFooterAnimation();
-    }
-
-    // ========================================
-    // LOGO COLORIDO ESTILO SKINS
-    // ========================================
-    
-    function initColoredLogo() {
-        const logoText = document.querySelector('.footer-logo-text');
-        
-        if (!logoText) return;
-        
-        // Pegar texto original
-        const originalText = logoText.textContent;
-        
-        // Quebrar em letras individuais e envolver cada uma em <span>
-        const coloredHTML = originalText
-            .split('')
-            .map(letter => `<span>${letter}</span>`)
-            .join('');
-        
-        // Substituir conteúdo
-        logoText.innerHTML = coloredHTML;
     }
 
     // ========================================
