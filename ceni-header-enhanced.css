@@ -1,3 +1,8 @@
+/* ========================================
+   HEADER APRIMORADO - NÍVEL FOOTER
+   Sistema visual refinado com microinterações
+   ======================================== */
+
 :root {
     --header-height: 90px;
     --header-height-scrolled: 70px;
@@ -371,6 +376,8 @@
     
     .main-nav a::after {
         left: 2.5rem;
+        right: auto;
+        margin: 0;
         transform: none;
         width: 0;
         height: 2px;
