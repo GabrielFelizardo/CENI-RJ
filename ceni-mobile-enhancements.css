@@ -1,0 +1,444 @@
+/* ========================================
+   CENI-RJ - MOBILE ENHANCEMENTS
+   Otimizações adicionais para experiência mobile
+   ======================================== */
+
+/* ========================================
+   OVERLAY MOBILE COM FEEDBACK VISUAL
+   ======================================== */
+@media (max-width: 968px) {
+    .mobile-overlay {
+        background: rgba(0, 0, 0, 0) !important;
+        transition: background-color 0.3s ease !important;
+        cursor: pointer;
+    }
+    
+    .mobile-overlay.active {
+        background: rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .mobile-overlay:active {
+        background: rgba(0, 0, 0, 0.25) !important;
+    }
+}
+
+/* ========================================
+   TIPOGRAFIA MOBILE APRIMORADA
+   ======================================== */
+@media (max-width: 968px) {
+    /* Labels e metadados - melhor legibilidade */
+    .label,
+    .breadcrumb,
+    .breadcrumb a,
+    .footer-section h4,
+    .tab-button,
+    .doc-info p,
+    .canal-label,
+    .gt-simple-card p,
+    .footer-bottom p,
+    .footer-bottom-enhanced p {
+        font-size: 0.8125rem !important; /* 13px */
+    }
+    
+    /* Textos descritivos mínimos */
+    .org-members,
+    .org-item p {
+        font-size: 0.8125rem !important;
+    }
+    
+    /* Manter hierarquia em elementos muito pequenos */
+    .splash-skip {
+        font-size: 0.75rem !important; /* Mantido menor apenas no splash */
+    }
+}
+
+/* ========================================
+   ESPAÇAMENTO VERTICAL APRIMORADO
+   ======================================== */
+@media (max-width: 968px) {
+    /* Maior respiração entre elementos de lista */
+    .caracteristica-list li,
+    .faq-item,
+    .timeline-item {
+        padding: 2rem 0 !important;
+    }
+    
+    /* Cards e boxes com mais padding interno */
+    .info-box,
+    .definition-box,
+    .exemplo-box,
+    .destaque-box {
+        padding: 2.5rem 2rem !important;
+    }
+    
+    /* Maior espaçamento entre seções */
+    .categoria-section,
+    .gt-section {
+        margin-bottom: 5rem !important;
+    }
+    
+    /* Hero sections com mais ar */
+    .hero-section {
+        padding: 5rem 0 4rem 0 !important;
+    }
+}
+
+/* ========================================
+   TOUCH TARGETS EXPANDIDOS
+   ======================================== */
+@media (max-width: 968px) {
+    /* Garantir 48x48px em elementos críticos */
+    .back-to-top {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.375rem !important;
+    }
+    
+    .mobile-menu-toggle {
+        min-width: 48px !important;
+        min-height: 48px !important;
+        padding: 0.875rem !important;
+    }
+    
+    /* Links do footer com área de toque expandida */
+    .footer-section-enhanced a,
+    .footer-section a {
+        padding: 0.625rem 0 !important;
+        margin: 0.125rem 0 !important;
+    }
+    
+    /* Botões de FAQ com área maior */
+    .faq-question {
+        padding: 2rem 1rem !important;
+        margin: 0 -1rem !important;
+    }
+    
+    /* Tabs com touch targets adequados */
+    .tab-button {
+        padding: 1.5rem 1.75rem !important;
+        min-height: 48px !important;
+    }
+}
+
+/* ========================================
+   MICROINTERAÇÕES TOUCH APRIMORADAS
+   ======================================== */
+@media (max-width: 968px) {
+    /* Efeito press visual em cards */
+    .nav-card:active,
+    .gt-simple-card:active,
+    .recurso-card:active,
+    .canal-card:active,
+    .org-item:active {
+        transform: translateY(-6px) scale(0.98) !important;
+        transition: transform 0.1s ease !important;
+    }
+    
+    /* Botões com feedback tátil */
+    .btn-swiss:active,
+    .btn-doc:active,
+    .btn-swiss-outline:active {
+        transform: translateX(2px) scale(0.97) !important;
+        transition: transform 0.1s ease !important;
+    }
+    
+    /* Links com destaque ao toque */
+    .main-nav a:active {
+        background: rgba(255, 255, 255, 0.2) !important;
+    }
+    
+    .footer-section-enhanced a:active {
+        transform: translateX(2px) scale(0.98) !important;
+    }
+}
+
+/* ========================================
+   SPLASH SCREEN MOBILE OTIMIZADO
+   ======================================== */
+@media (max-width: 968px) {
+    .splash-skip {
+        bottom: 2.5rem !important;
+        padding: 0.875rem 1.5rem !important;
+        min-height: 48px !important;
+        font-weight: 700 !important;
+    }
+    
+    .splash-logo {
+        font-size: clamp(5rem, 18vw, 8rem) !important;
+    }
+    
+    .splash-title {
+        font-size: clamp(1.5rem, 4.5vw, 2rem) !important;
+        padding: 0 1rem !important;
+    }
+}
+
+/* ========================================
+   PERFORMANCE - ANIMAÇÕES OTIMIZADAS
+   ======================================== */
+@media (max-width: 968px) {
+    /* Reduzir complexidade de animações */
+    [data-animate] {
+        transition-duration: 0.35s !important;
+        transition-timing-function: ease-out !important;
+    }
+    
+    /* Limitar animações simultâneas */
+    [data-animate][data-delay] {
+        transition-delay: 0ms !important; /* Remover delays em mobile */
+    }
+    
+    /* Simplificar transforms em mobile */
+    [data-animate="fade-up"],
+    [data-animate="fade-down"],
+    [data-animate="fade-left"],
+    [data-animate="fade-right"] {
+        transform: translateY(20px) !important; /* Menor distância */
+    }
+    
+    /* Remover will-change para melhor performance */
+    * {
+        will-change: auto !important;
+    }
+}
+
+/* ========================================
+   ACCORDION FOOTER MOBILE REFINADO
+   ======================================== */
+@media (max-width: 968px) {
+    .footer-section-enhanced {
+        padding-bottom: 2rem !important;
+    }
+    
+    .footer-section-enhanced h4 {
+        padding: 1.25rem 0 !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .footer-section-content {
+        padding-top: 0.5rem !important;
+    }
+    
+    /* Primeira seção com indicação visual de estar aberta */
+    .footer-section-enhanced:first-of-type h4 {
+        font-weight: 700 !important;
+    }
+}
+
+/* ========================================
+   SCROLL BEHAVIOR MOBILE
+   ======================================== */
+@media (max-width: 968px) {
+    /* Scroll padding ajustado para header mobile */
+    html {
+        scroll-padding-top: 90px !important;
+    }
+    
+    /* Sections com scroll margin adequado */
+    section,
+    .gt-section,
+    .categoria-section {
+        scroll-margin-top: 90px !important;
+    }
+    
+    /* Smooth scroll otimizado */
+    html {
+        scroll-behavior: smooth !important;
+    }
+}
+
+/* ========================================
+   CONTRASTE E ACESSIBILIDADE MOBILE
+   ======================================== */
+@media (max-width: 968px) {
+    /* Garantir contraste mínimo em textos pequenos */
+    .text-secondary,
+    p.text-secondary,
+    .hero-description {
+        color: #3a3a3a !important; /* Contraste melhorado */
+    }
+    
+    /* Focus states mais visíveis em mobile */
+    *:focus-visible {
+        outline-width: 4px !important;
+        outline-offset: 3px !important;
+    }
+}
+
+/* ========================================
+   CARDS E GRIDS MOBILE
+   ======================================== */
+@media (max-width: 968px) {
+    /* Cards com espaçamento consistente */
+    .nav-card,
+    .gt-simple-card,
+    .recurso-card {
+        padding: 2.5rem 2rem !important;
+        min-height: 200px !important;
+    }
+    
+    /* Documentos e itens com layout otimizado */
+    .documento-item {
+        padding: 2rem !important;
+        gap: 1.5rem !important;
+    }
+    
+    /* Organograma mobile */
+    .organograma-box {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    .organograma-box-item {
+        padding: 0.875rem 1.5rem !important;
+        margin: 0.375rem 0.25rem !important;
+        font-size: 0.8125rem !important;
+    }
+}
+
+/* ========================================
+   STATES E FEEDBACK VISUAL
+   ======================================== */
+@media (max-width: 968px) {
+    /* Loading states mais visíveis */
+    .loading::after {
+        width: 24px !important;
+        height: 24px !important;
+        border-width: 3px !important;
+    }
+    
+    /* Disabled states mais claros */
+    .btn-doc.disabled,
+    button:disabled {
+        opacity: 0.5 !important;
+    }
+    
+    /* Hover removido em touch devices */
+    @media (hover: none) {
+        .nav-card:hover,
+        .gt-simple-card:hover,
+        .recurso-card:hover,
+        .canal-card:hover {
+            transform: none !important;
+        }
+        
+        /* Apenas :active em touch */
+        .nav-card:active {
+            transform: scale(0.98) !important;
+        }
+    }
+}
+
+/* ========================================
+   TABLES E DATA DISPLAY MOBILE
+   ======================================== */
+@media (max-width: 968px) {
+    /* Tabs com scroll horizontal suave */
+    .tabs-nav {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: thin !important;
+        padding-bottom: 0.5rem !important;
+    }
+    
+    .tabs-nav::-webkit-scrollbar {
+        height: 3px !important;
+    }
+    
+    .tabs-nav::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05) !important;
+    }
+    
+    .tabs-nav::-webkit-scrollbar-thumb {
+        background: var(--primary, #1e3a8a) !important;
+        border-radius: 3px !important;
+    }
+}
+
+/* ========================================
+   IMAGENS E MEDIA MOBILE
+   ======================================== */
+@media (max-width: 968px) {
+    /* Logos e imagens responsivas */
+    .gov-logo-img,
+    .footer-logo-img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* QR codes e imagens de exemplo */
+    .qr-code-img {
+        width: 150px !important;
+        height: 150px !important;
+    }
+}
+
+/* ========================================
+   PREFERS REDUCED MOTION - MOBILE
+   ======================================== */
+@media (max-width: 968px) and (prefers-reduced-motion: reduce) {
+    /* Desabilitar todas as animações */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    [data-animate] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ========================================
+   LANDSCAPE MOBILE - OTIMIZAÇÕES
+   ======================================== */
+@media (max-width: 968px) and (orientation: landscape) {
+    /* Reduzir padding vertical em landscape */
+    .hero-section {
+        padding: 3rem 0 2rem 0 !important;
+    }
+    
+    .full-width-section {
+        padding: 3rem 0 !important;
+    }
+    
+    /* Splash menor em landscape */
+    .splash-logo {
+        font-size: clamp(4rem, 15vw, 6rem) !important;
+    }
+    
+    .splash-title {
+        font-size: clamp(1.25rem, 3.5vw, 1.75rem) !important;
+    }
+}
+
+/* ========================================
+   SMALL MOBILE (< 375px) - EXTRA CUIDADO
+   ======================================== */
+@media (max-width: 374px) {
+    /* Reduzir ainda mais os tamanhos */
+    .hero-title {
+        font-size: 2rem !important;
+    }
+    
+    .section-title {
+        font-size: 1.75rem !important;
+    }
+    
+    /* Cards com padding reduzido */
+    .nav-card,
+    .gt-simple-card,
+    .recurso-card {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    /* Swiss grid com padding mínimo */
+    .swiss-grid {
+        padding: 0 1.5rem !important;
+    }
+}
