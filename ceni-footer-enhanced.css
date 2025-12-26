@@ -63,9 +63,33 @@
     font-size: 3rem;
     font-weight: 900;
     line-height: 0.9;
-    color: var(--footer-text);
     letter-spacing: -0.05em;
     margin: 0;
+    
+    /* Gradiente animado com cores dos GTs */
+    background: linear-gradient(
+        90deg,
+        var(--gt1-color, #1e3a8a) 0%,
+        var(--gt2-color, #1e5631) 20%,
+        var(--gt3-color, #e89bb8) 40%,
+        var(--gt4-color, #e8632e) 60%,
+        var(--gt5-color, #f4b942) 80%,
+        var(--gt1-color, #1e3a8a) 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .footer-tagline {
@@ -399,6 +423,18 @@
     
     .page-footer-enhanced[data-animate] {
         animation: none !important;
+    }
+    
+    /* Desabilitar animação do gradiente */
+    .footer-logo-text {
+        animation: none !important;
+        background: linear-gradient(
+            90deg,
+            var(--gt1-color, #1e3a8a) 0%,
+            var(--gt3-color, #e89bb8) 50%,
+            var(--gt5-color, #f4b942) 100%
+        );
+        background-size: 100% 100%;
     }
 }
 
