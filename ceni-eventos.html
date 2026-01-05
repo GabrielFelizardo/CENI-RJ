@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="ceni-theme-enhanced.css">
     <link rel="stylesheet" href="ceni-header-enhanced.css">
     <link rel="stylesheet" href="ceni-footer-enhanced.css">
+    <link rel="stylesheet" href="ceni-dynamic-states.css">
     
     <style>
         :root {
@@ -104,7 +105,6 @@
         
         .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
         .col-8 { grid-column: span 8; position: relative; z-index: 1; }
-        .col-6 { grid-column: span 6; position: relative; z-index: 1; }
 
         @media (max-width: 968px) {
             .main-nav.active { right: 0; }
@@ -153,10 +153,7 @@
             margin: 2rem 0;
         }
         
-        /* ======================================
-           SISTEMA DE FILTROS
-           ====================================== */
-        
+        /* SISTEMA DE FILTROS */
         .filters-container {
             margin: 4rem 0 3rem 0;
             border-bottom: 4px solid var(--accent);
@@ -214,10 +211,7 @@
             color: white;
         }
         
-        /* ======================================
-           CARDS DE EVENTOS
-           ====================================== */
-        
+        /* CARDS DE EVENTOS */
         .eventos-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -441,10 +435,7 @@
             color: var(--accent);
         }
         
-        /* ======================================
-           DESTAQUE / INFO BOX
-           ====================================== */
-        
+        /* INFO BOX */
         .info-box {
             border: 4px solid var(--accent);
             padding: 2rem 3rem;
@@ -459,39 +450,33 @@
         .info-box.destaque .label {
             color: var(--gt5-color);
         }
-        
-        /* ======================================
-           EMPTY STATE
-           ====================================== */
-        
-        .empty-state {
-            text-align: center;
-            padding: 6rem 3rem;
-            color: var(--text-secondary);
-        }
-        
-        .empty-state i {
-            font-size: 4rem;
-            color: var(--grid-line);
-            margin-bottom: 2rem;
-        }
-        
-        .empty-state h3 {
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
             font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        
-        .empty-state p {
-            font-size: 1rem;
-            line-height: 1.6;
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
-        
-        /* ======================================
-           RESPONSIVIDADE
-           ====================================== */
+        .back-to-top:hover {
+            background: var(--primary);
+            transform: translateY(-4px);
+        }
         
         @media (max-width: 968px) {
             .swiss-grid { 
@@ -549,33 +534,6 @@
                 width: 100%;
                 text-align: center;
             }
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 999;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            background: var(--primary);
-            transform: translateY(-4px);
         }
     </style>
 </head>
@@ -639,7 +597,7 @@
         <section>
             <div class="swiss-grid">
                 <div class="col-full">
-                    <div class="info-box destaque">
+                    <div class="info-box destaque" id="proxima-reuniao-container">
                         <span class="label">Próxima Reunião</span>
                         <h3 style="font-size: 1.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">
                             1ª Reunião Ordinária do CENI-RJ
@@ -659,19 +617,19 @@
                     <div class="filters-container">
                         <nav class="filters-nav" role="navigation" aria-label="Filtros de eventos">
                             <button class="filter-button active" data-filter="todos" aria-label="Mostrar todos os eventos">
-                                Todos <span class="count">12</span>
+                                Todos <span class="count" id="count-todos">0</span>
                             </button>
                             <button class="filter-button" data-filter="reuniao" aria-label="Mostrar apenas reuniões">
-                                Reuniões <span class="count">4</span>
+                                Reuniões <span class="count" id="count-reuniao">0</span>
                             </button>
                             <button class="filter-button" data-filter="prazo" aria-label="Mostrar apenas prazos">
-                                Prazos <span class="count">3</span>
+                                Prazos <span class="count" id="count-prazo">0</span>
                             </button>
                             <button class="filter-button" data-filter="marco" aria-label="Mostrar apenas marcos importantes">
-                                Marcos <span class="count">3</span>
+                                Marcos <span class="count" id="count-marco">0</span>
                             </button>
                             <button class="filter-button" data-filter="ecossistema" aria-label="Mostrar apenas eventos do ecossistema">
-                                Ecossistema <span class="count">2</span>
+                                Ecossistema <span class="count" id="count-ecossistema">0</span>
                             </button>
                         </nav>
                     </div>
@@ -679,455 +637,13 @@
             </div>
         </section>
 
-        <!-- LISTA DE EVENTOS -->
+        <!-- LISTA DE EVENTOS - DINÂMICA -->
         <section style="margin-bottom: 6rem;">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <div class="eventos-grid" id="eventosGrid">
-                        
-                        <!-- EVENTO 1 -->
-                        <article class="evento-card" data-category="prazo" data-animate="fade-up">
-                            <div class="evento-date-box">
-                                <div class="evento-day">15</div>
-                                <div class="evento-month">JAN</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category prazo">Prazo</span>
-                                    <h3 class="evento-title">Contribuições ao Regimento Interno</h3>
-                                    <p class="evento-description">
-                                        Data limite para envio de contribuições e sugestões ao Regimento Interno do CENI-RJ. Todos os membros devem revisar o documento e registrar suas propostas através da plataforma digital.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-users"></i>
-                                            <span>Todos os membros</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-file-alt"></i>
-                                            <span>Documento disponível</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Aguardando
-                                    </span>
-                                    <a href="ceni-repositorio.html" class="evento-action">
-                                        Acessar Documento
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 2 -->
-                        <article class="evento-card" data-category="prazo" data-animate="fade-up" data-delay="100">
-                            <div class="evento-date-box">
-                                <div class="evento-day">20</div>
-                                <div class="evento-month">JAN</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category prazo">Prazo</span>
-                                    <h3 class="evento-title">Inserção em Grupos de Trabalho</h3>
-                                    <p class="evento-description">
-                                        Data limite para que cada membro indique sua participação nos Grupos de Trabalho e manifeste interesse em atuar como colíder. Cada organização deve participar de pelo menos um GT.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-users"></i>
-                                            <span>17 organizações</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-clipboard-check"></i>
-                                            <span>Formulário online</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Aguardando
-                                    </span>
-                                    <a href="ceni-gts.html" class="evento-action">
-                                        Ver Grupos
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 3 -->
-                        <article class="evento-card" data-category="marco" data-animate="fade-up" data-delay="200">
-                            <div class="evento-date-box">
-                                <div class="evento-day">31</div>
-                                <div class="evento-month">JAN</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category marco">Marco Importante</span>
-                                    <h3 class="evento-title">Consolidação do Regimento Interno</h3>
-                                    <p class="evento-description">
-                                        Consolidação das contribuições recebidas e publicação da versão final do Regimento Interno do CENI-RJ, que será submetido à aprovação na primeira reunião ordinária.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-gavel"></i>
-                                            <span>Secretaria-Executiva</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Previsto
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Em Elaboração
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 4 -->
-                        <article class="evento-card" data-category="marco" data-animate="fade-up" data-delay="300">
-                            <div class="evento-date-box">
-                                <div class="evento-day">15</div>
-                                <div class="evento-month">FEV</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category marco">Marco Importante</span>
-                                    <h3 class="evento-title">Assinatura ACT com FAPERJ</h3>
-                                    <p class="evento-description">
-                                        Assinatura do Acordo de Cooperação Técnica entre SEDEICS e FAPERJ para estruturação do primeiro edital de uma Fundação de Amparo à Pesquisa dedicado à pauta de negócios de impacto no Brasil.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-handshake"></i>
-                                            <span>SEDEICS + FAPERJ</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-star"></i>
-                                            <span>Primeira FAP no Brasil</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Previsto
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Aguardando
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 5 -->
-                        <article class="evento-card" data-category="reuniao" data-animate="fade-up" data-delay="400">
-                            <div class="evento-date-box">
-                                <div class="evento-day">15</div>
-                                <div class="evento-month">MAR</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category reuniao">Reunião Ordinária</span>
-                                    <h3 class="evento-title">1ª Reunião Ordinária do CENI-RJ</h3>
-                                    <p class="evento-description">
-                                        Primeira reunião ordinária do Comitê com agenda prevista: aprovação do Regimento Interno, definição de colíderes dos GTs, apresentação da Estratégia Estadual Preliminar e planejamento de ações prioritárias.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-clock"></i>
-                                            <span>09h00 - 12h00</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <span>SEDEICS + Online</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Confirmado
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Pauta em Breve
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 6 -->
-                        <article class="evento-card" data-category="prazo" data-animate="fade-up" data-delay="500">
-                            <div class="evento-date-box">
-                                <div class="evento-day">31</div>
-                                <div class="evento-month">MAR</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category prazo">Prazo</span>
-                                    <h3 class="evento-title">Plano de Trabalho dos GTs</h3>
-                                    <p class="evento-description">
-                                        Data limite para que cada Grupo de Trabalho apresente seu plano de trabalho preliminar para o ano de 2026, incluindo objetivos, metas e cronograma de entregas.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-layer-group"></i>
-                                            <span>5 Grupos de Trabalho</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Aguardando
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Template em Breve
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 7 -->
-                        <article class="evento-card" data-category="reuniao" data-animate="fade-up" data-delay="0">
-                            <div class="evento-date-box">
-                                <div class="evento-day">15</div>
-                                <div class="evento-month">JUN</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category reuniao">Reunião Ordinária</span>
-                                    <h3 class="evento-title">2ª Reunião Ordinária do CENI-RJ</h3>
-                                    <p class="evento-description">
-                                        Segunda reunião ordinária do Comitê com apresentação dos primeiros resultados dos Grupos de Trabalho, discussão sobre o mapeamento do ecossistema e avaliação do progresso das ações prioritárias.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-clock"></i>
-                                            <span>09h00 - 12h00</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <span>SEDEICS + Online</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Previsto
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Aguardando
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 8 -->
-                        <article class="evento-card" data-category="ecossistema" data-animate="fade-up" data-delay="100">
-                            <div class="evento-date-box">
-                                <div class="evento-day">20</div>
-                                <div class="evento-month">AGO</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category ecossistema">Evento Externo</span>
-                                    <h3 class="evento-title">Fórum Estadual de Impacto</h3>
-                                    <p class="evento-description">
-                                        Primeiro Fórum Estadual de Investimentos e Negócios de Impacto reunindo membros do CENI-RJ, empreendedores, investidores e organizações do ecossistema para compartilhamento de experiências e networking.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-users"></i>
-                                            <span>Aberto ao público</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <span>Local a definir</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Em Planejamento
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Inscrições em Breve
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 9 -->
-                        <article class="evento-card" data-category="reuniao" data-animate="fade-up" data-delay="200">
-                            <div class="evento-date-box">
-                                <div class="evento-day">15</div>
-                                <div class="evento-month">SET</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category reuniao">Reunião Ordinária</span>
-                                    <h3 class="evento-title">3ª Reunião Ordinária do CENI-RJ</h3>
-                                    <p class="evento-description">
-                                        Terceira reunião ordinária com foco na avaliação semestral das ações do comitê, apresentação de estudos e dados do mapeamento do ecossistema, e planejamento estratégico para o segundo semestre.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-clock"></i>
-                                            <span>09h00 - 12h00</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <span>SEDEICS + Online</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Previsto
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Aguardando
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 10 -->
-                        <article class="evento-card" data-category="ecossistema" data-animate="fade-up" data-delay="300">
-                            <div class="evento-date-box">
-                                <div class="evento-day">10</div>
-                                <div class="evento-month">NOV</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category ecossistema">Evento Externo</span>
-                                    <h3 class="evento-title">Encontro Nacional ENIMPACTO</h3>
-                                    <p class="evento-description">
-                                        Participação do CENI-RJ no Encontro Nacional da Estratégia Nacional de Investimentos e Negócios de Impacto, compartilhando experiências e aprendizados com outros comitês estaduais.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <span>Brasília - DF</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-calendar-alt"></i>
-                                            <span>2 dias</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Previsto
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Mais Informações
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 11 -->
-                        <article class="evento-card" data-category="marco" data-animate="fade-up" data-delay="400">
-                            <div class="evento-date-box">
-                                <div class="evento-day">30</div>
-                                <div class="evento-month">NOV</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category marco">Marco Importante</span>
-                                    <h3 class="evento-title">Lançamento Edital FAPERJ</h3>
-                                    <p class="evento-description">
-                                        Lançamento oficial do primeiro edital de uma Fundação de Amparo à Pesquisa dedicado exclusivamente ao fomento de negócios de impacto no Brasil, marco histórico para o ecossistema nacional.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-trophy"></i>
-                                            <span>1ª FAP no Brasil</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-rocket"></i>
-                                            <span>FAPERJ</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Previsto
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Aguardando
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- EVENTO 12 -->
-                        <article class="evento-card" data-category="reuniao" data-animate="fade-up" data-delay="500">
-                            <div class="evento-date-box">
-                                <div class="evento-day">15</div>
-                                <div class="evento-month">DEZ</div>
-                                <div class="evento-year">2026</div>
-                            </div>
-                            <div class="evento-content">
-                                <div class="evento-header">
-                                    <span class="evento-category reuniao">Reunião Ordinária</span>
-                                    <h3 class="evento-title">4ª Reunião Ordinária do CENI-RJ</h3>
-                                    <p class="evento-description">
-                                        Última reunião ordinária do ano com avaliação anual das ações do comitê, aprovação de relatório de atividades, balanço dos resultados dos Grupos de Trabalho e planejamento estratégico para 2027.
-                                    </p>
-                                    <div class="evento-meta">
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-clock"></i>
-                                            <span>09h00 - 13h00</span>
-                                        </div>
-                                        <div class="evento-meta-item">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <span>SEDEICS + Online</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="evento-footer">
-                                    <span class="evento-status futuro">
-                                        <span class="evento-status-dot"></span>
-                                        Previsto
-                                    </span>
-                                    <button class="evento-action disabled" disabled>
-                                        Aguardando
-                                    </button>
-                                </div>
-                            </div>
-                        </article>
-
-                    </div>
-
-                    <!-- EMPTY STATE (inicialmente escondido) -->
-                    <div class="empty-state" id="emptyState" style="display: none;">
-                        <i class="fas fa-calendar-times"></i>
-                        <h3>Nenhum evento encontrado</h3>
-                        <p>Não há eventos nesta categoria no momento.</p>
+                    <!-- Container dinâmico - será preenchido via JavaScript -->
+                    <div class="eventos-grid" id="eventos-container">
+                        <!-- Eventos serão inseridos aqui via ceni-api-client.js -->
                     </div>
                 </div>
             </div>
@@ -1180,7 +696,7 @@
                 </div>
                 
                 <div class="footer-section-enhanced gt-accent-2">
-                    <h4>Contato</h4>
+                   <h4>Contato</h4>
                     <div class="footer-section-content">
                         <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br" class="footer-contact-link">
                             <i class="fas fa-envelope"></i>
@@ -1196,7 +712,7 @@
                         </a>
                         <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">SEDEICS - Rio de Janeiro, RJ</span>
+                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
                         </div>
                     </div>
                 </div>
@@ -1211,6 +727,10 @@
         </div>
     </footer>
 
+    <!-- Scripts do Sistema Dinâmico -->
+    <script src="ceni-api-client.js"></script>
+    <script src="ceni-utils.js"></script>
+    <script src="proximo-evento-dinamico.js"></script>
     <script src="ceni-animations.js"></script>
     <script src="ceni-footer-enhanced.js"></script>
 
@@ -1256,11 +776,46 @@
         });
 
         // ======================================
-        // SISTEMA DE FILTROS
+        // SISTEMA DE FILTROS COM CONTADORES DINÂMICOS
         // ======================================
         
+        // Atualizar contadores após eventos carregarem
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aguardar eventos carregarem
+            setTimeout(() => {
+                updateEventCounts();
+            }, 1000);
+        });
+
+        function updateEventCounts() {
+            const eventoCards = document.querySelectorAll('.evento-card');
+            
+            // Contar por categoria
+            const counts = {
+                todos: eventoCards.length,
+                reuniao: 0,
+                prazo: 0,
+                marco: 0,
+                ecossistema: 0
+            };
+            
+            eventoCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (counts.hasOwnProperty(category)) {
+                    counts[category]++;
+                }
+            });
+            
+            // Atualizar badges
+            Object.keys(counts).forEach(key => {
+                const badge = document.getElementById(`count-${key}`);
+                if (badge) {
+                    badge.textContent = counts[key];
+                }
+            });
+        }
+        
         const filterButtons = document.querySelectorAll('.filter-button');
-        const eventoCards = document.querySelectorAll('.evento-card');
         const emptyState = document.getElementById('emptyState');
         
         filterButtons.forEach(button => {
@@ -1276,7 +831,9 @@
                 button.setAttribute('aria-selected', 'true');
                 
                 // Filtrar eventos
+                const eventoCards = document.querySelectorAll('.evento-card');
                 let visibleCount = 0;
+                
                 eventoCards.forEach(card => {
                     const category = card.getAttribute('data-category');
                     
@@ -1287,13 +844,6 @@
                         card.classList.add('hidden');
                     }
                 });
-                
-                // Mostrar/esconder empty state
-                if (visibleCount === 0) {
-                    emptyState.style.display = 'block';
-                } else {
-                    emptyState.style.display = 'none';
-                }
                 
                 // Scroll suave para os eventos
                 document.querySelector('.eventos-grid').scrollIntoView({ 
