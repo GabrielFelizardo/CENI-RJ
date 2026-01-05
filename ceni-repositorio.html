@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="ceni-theme-enhanced.css">
     <link rel="stylesheet" href="ceni-header-enhanced.css">
     <link rel="stylesheet" href="ceni-footer-enhanced.css">
+    <link rel="stylesheet" href="ceni-dynamic-states.css">
     
     <style>
         :root {
@@ -268,26 +269,6 @@
         .btn-doc.disabled:hover {
             background: var(--text-secondary);
         }
-        
-        .em-breve-box {
-            border: 4px solid var(--accent);
-            padding: clamp(3rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem);
-            text-align: center;
-            margin: 3rem 0;
-        }
-        
-        .em-breve-box h3 {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-        
-        .em-breve-box p {
-            font-size: clamp(1rem, 2vw, 1.125rem);
-            line-height: 1.6;
-            margin: 0;
-        }
 
         .back-to-top {
             position: fixed;
@@ -412,153 +393,22 @@
                 <div class="col-full">
                     <div class="info-box" data-animate="scale-in">
                         <p style="font-size: clamp(1rem, 2vw, 1.125rem); margin: 0;">
-                            <strong>Em breve:</strong> Este repositório será integrado ao Google Drive para acesso direto aos documentos oficiais do comitê.
+                            <strong>Sistema Integrado:</strong> Documentos atualizados automaticamente via Google Drive.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Documentos Institucionais -->
-        <section class="categoria-section">
+        <!-- CONTAINER DINÂMICO DE DOCUMENTOS -->
+        <section style="margin-bottom: 6rem;">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">01</span>
-                    <div class="categoria-header">
-                        <span class="label">Categoria 01</span>
-                        <h2>Documentos<br>Institucionais</h2>
-                    </div>
-                </div>
-                
-                <ul class="documento-list" style="grid-column: 1 / -1;">
-                    <li class="documento-item" data-animate="fade-up" data-delay="0">
-                        <div class="doc-number">01</div>
-                        <div class="doc-info">
-                            <h4>Decreto de Instituição do CENI-RJ</h4>
-                            <p><i class="fas fa-calendar-alt"></i> Publicação oficial - 2024</p>
-                        </div>
-                        <button class="btn-doc disabled" disabled aria-label="Documento em breve">
-                            <i class="fas fa-clock"></i> Em Breve
-                        </button>
-                    </li>
-                    
-                    <li class="documento-item" data-animate="fade-up" data-delay="100">
-                        <div class="doc-number">02</div>
-                        <div class="doc-info">
-                            <h4>Regimento Interno do CENI-RJ</h4>
-                            <p><i class="fas fa-calendar-alt"></i> Previsão: 1º Trimestre 2026</p>
-                        </div>
-                        <button class="btn-doc disabled" disabled aria-label="Documento em elaboração">
-                            <i class="fas fa-hourglass-half"></i> Em Elaboração
-                        </button>
-                    </li>
-                    
-                    <li class="documento-item" data-animate="fade-up" data-delay="200">
-                        <div class="doc-number">03</div>
-                        <div class="doc-info">
-                            <h4>Política Estadual de Negócios de Impacto</h4>
-                            <p><i class="fas fa-info-circle"></i> Framework regulatório - RJ é o 2º estado</p>
-                        </div>
-                        <button class="btn-doc disabled" disabled aria-label="Documento em breve">
-                            <i class="fas fa-clock"></i> Em Breve
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Atas de Reunião -->
-        <section class="categoria-section">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">02</span>
-                    <div class="categoria-header">
-                        <span class="label">Categoria 02</span>
-                        <h2>Atas de<br>Reunião</h2>
-                    </div>
-                </div>
-                
                 <div class="col-full">
-                    <div class="em-breve-box" data-animate="scale-in">
-                        <h3><i class="fas fa-calendar-check"></i> Primeira Reunião Ordinária</h3>
-                        <p>A primeira reunião ordinária do CENI-RJ está prevista para o 1º trimestre de 2026.</p>
-                        <p style="margin-top: 1rem;">As atas das reuniões serão disponibilizadas aqui após sua realização.</p>
+                    <!-- Container dinâmico - será preenchido via JavaScript -->
+                    <div id="documentos-container">
+                        <!-- Documentos serão inseridos aqui via ceni-api-client.js -->
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Relatórios -->
-        <section class="categoria-section">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">03</span>
-                    <div class="categoria-header">
-                        <span class="label">Categoria 03</span>
-                        <h2>Relatórios e<br>Estudos</h2>
-                    </div>
-                </div>
-                
-                <ul class="documento-list" style="grid-column: 1 / -1;">
-                    <li class="documento-item" data-animate="fade-up" data-delay="0">
-                        <div class="doc-number">01</div>
-                        <div class="doc-info">
-                            <h4>Mapeamento do Ecossistema de Impacto - RJ</h4>
-                            <p><i class="fas fa-flask"></i> Estudo em desenvolvimento pela FAPERJ</p>
-                        </div>
-                        <button class="btn-doc disabled" disabled aria-label="Estudo em desenvolvimento">
-                            <i class="fas fa-hourglass-half"></i> Em Desenvolvimento
-                        </button>
-                    </li>
-                    
-                    <li class="documento-item" data-animate="fade-up" data-delay="100">
-                        <div class="doc-number">02</div>
-                        <div class="doc-info">
-                            <h4>Base de Dados - Negócios de Impacto RJ</h4>
-                            <p><i class="fas fa-database"></i> Produção e difusão de dados do setor</p>
-                        </div>
-                        <button class="btn-doc disabled" disabled aria-label="Em construção">
-                            <i class="fas fa-tools"></i> Em Construção
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Materiais de Apoio -->
-        <section class="categoria-section">
-            <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">04</span>
-                    <div class="categoria-header">
-                        <span class="label">Categoria 04</span>
-                        <h2>Materiais de<br>Apoio</h2>
-                    </div>
-                </div>
-                
-                <ul class="documento-list" style="grid-column: 1 / -1;">
-                    <li class="documento-item" data-animate="fade-up" data-delay="0">
-                        <div class="doc-number">01</div>
-                        <div class="doc-info">
-                            <h4>Apresentação Institucional CENI-RJ</h4>
-                            <p><i class="fas fa-presentation"></i> Material de divulgação atualizado</p>
-                        </div>
-                        <button class="btn-doc disabled" disabled aria-label="Documento em breve">
-                            <i class="fas fa-clock"></i> Em Breve
-                        </button>
-                    </li>
-                    
-                    <li class="documento-item" data-animate="fade-up" data-delay="100">
-                        <div class="doc-number">02</div>
-                        <div class="doc-info">
-                            <h4>Guia: O que são Negócios de Impacto?</h4>
-                            <p><i class="fas fa-book"></i> Material educativo sobre a definição</p>
-                        </div>
-                        <button class="btn-doc disabled" disabled aria-label="Material em elaboração">
-                            <i class="fas fa-hourglass-half"></i> Em Elaboração
-                        </button>
-                    </li>
-                </ul>
             </div>
         </section>
 
@@ -635,7 +485,7 @@
                 </div>
                 
                 <div class="footer-section-enhanced gt-accent-2">
-                    <h4>Contato</h4>
+                   <h4>Contato</h4>
                     <div class="footer-section-content">
                         <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br" class="footer-contact-link">
                             <i class="fas fa-envelope"></i>
@@ -651,7 +501,7 @@
                         </a>
                         <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">SEDEICS - Rio de Janeiro, RJ</span>
+                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
                         </div>
                     </div>
                 </div>
@@ -666,6 +516,9 @@
         </div>
     </footer>
 
+    <!-- Scripts do Sistema Dinâmico -->
+    <script src="ceni-api-client.js"></script>
+    <script src="ceni-utils.js"></script>
     <script src="ceni-animations.js"></script>
     <script src="ceni-footer-enhanced.js"></script>
 
