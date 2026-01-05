@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="ceni-theme-enhanced.css">
     <link rel="stylesheet" href="ceni-header-enhanced.css">
     <link rel="stylesheet" href="ceni-footer-enhanced.css">
+    <link rel="stylesheet" href="ceni-timeline-carousel.css">
     
     <style>
         :root {
@@ -34,11 +35,6 @@
             --text-primary: #000000;
             --text-secondary: #666666;
             --grid-line: #e0e0e0;
-            --gt1-color: #1e3a8a;
-            --gt2-color: #1e5631;
-            --gt3-color: #e89bb8;
-            --gt4-color: #e8632e;
-            --gt5-color: #f4b942;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -125,7 +121,7 @@
                 right: 0;
                 bottom: 0;
                 background: transparent;
-                z-index: 9998;
+                z-index: 10000;
                 transition: opacity 0.3s ease;
             }
             .mobile-overlay.active { display: block; }
@@ -356,60 +352,6 @@
             letter-spacing: 0.15em;
             margin-bottom: 2rem;
         }
-        
-        .timeline {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            margin: 3rem 0;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: calc(100% - 4rem);
-            background: var(--grid-line);
-        }
-        
-        .timeline-item {
-            border: 4px solid var(--accent);
-            padding: 2rem;
-            background: white;
-        }
-        
-        .timeline-month {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .timeline-item ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .timeline-item li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--grid-line);
-            font-size: 1rem;
-        }
-        
-        .timeline-item li:last-child { border-bottom: none; }
-        
-        .timeline-item li::before {
-            content: '→';
-            margin-right: 0.75rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
 
         .back-to-top {
             position: fixed;
@@ -500,16 +442,7 @@
             .section-number { font-size: 6rem; }
             .stats-grid { grid-template-columns: 1fr; gap: 2rem; }
             .gts-simple { grid-template-columns: 1fr; }
-            .timeline { 
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .timeline::before {
-                left: 0;
-                transform: none;
-            }
             .footer-grid { grid-template-columns: 1fr; }
-            
         }
     </style>
 </head>
@@ -546,7 +479,7 @@
 
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="ceni-index.html">CENI-RJ</a></li>
+            <li><a href="index.html">CENI-RJ</a></li>
             <li class="active" aria-current="page">→ Início</li>
         </ol>
     </nav>
@@ -690,25 +623,9 @@
                     </p>
                 </div>
                 
+                <!-- ✅ TIMELINE DINÂMICA - CARROSSEL -->
                 <div class="timeline" style="grid-column: 1 / -1;">
-                    <div class="timeline-item" data-animate="fade-right" data-delay="0">
-                        <div class="timeline-month">Janeiro 2026</div>
-                        <ul>
-                            <li>Contribuições para o Regimento Interno</li>
-                            <li>Inserção em Grupos de Trabalho</li>
-                            <li>Indicação para Colíderes</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="timeline-item" data-animate="fade-left" data-delay="200">
-                        <div class="timeline-month">Fevereiro - Março 2026</div>
-                        <ul>
-                            <li>Consolidação do Regimento Interno</li>
-                            <li>Assinatura ACT | FAPERJ</li>
-                            <li>1ª Reunião Ordinária</li>
-                            <li>Construção Inicial de Estratégia Estadual</li>
-                        </ul>
-                    </div>
+                    <!-- Timeline carregada dinamicamente e transformada em carrossel -->
                 </div>
                 
                 <div class="col-full" style="text-align: center; margin-top: 2rem;" data-animate="fade-up" data-delay="400">
@@ -780,7 +697,7 @@
                         </a>
                         <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">SEDEICS - Rio de Janeiro, RJ</span>
+                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
                         </div>
                     </div>
                 </div>
@@ -795,9 +712,12 @@
         </div>
     </footer>
 
-    <!-- Sistema de Animações -->
-    <script src="ceni-animations.js"></script>
-    <script src="ceni-footer-enhanced.js"></script>
+    <!-- ✅ Scripts do Sistema Dinâmico (ORDEM IMPORTANTE!) -->
+    <script src="ceni-api-client.js"></script>            <!-- 1º - API Client -->
+    <script src="ceni-timeline-carousel.js"></script>     <!-- 2º - Carrossel de Timeline -->
+    <script src="ceni-timeline-dinamico.js"></script>     <!-- 3º - Timeline Dinâmica -->
+    <script src="ceni-animations.js"></script>            <!-- 4º - Animações -->
+    <script src="ceni-footer-enhanced.js"></script>       <!-- 5º - Footer -->
 
     <!-- Scripts do Site -->
     <script>
