@@ -98,7 +98,7 @@
         }
         
         .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
-        .col-6 { grid-column: span 6; position: relative; z-index: 1; }
+        .col-8 { grid-column: span 8; position: relative; z-index: 1; }
 
         @media (max-width: 968px) {
             
@@ -154,61 +154,105 @@
             margin: 4rem 0;
         }
         
+        /* NOVO LAYOUT DE CANAIS - HORIZONTAL */
+        .canais-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
         .canal-card {
             border: 2px solid var(--accent);
-            padding: 3rem;
+            padding: 0;
             margin-bottom: 2rem;
-            transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            min-height: 140px;
         }
         
         .canal-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+        
+        .canal-icon-box {
             background: var(--accent);
             color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border-right: 2px solid var(--accent);
         }
         
-        .canal-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1rem;
-            opacity: 0.7;
+        .canal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
         }
         
-        .canal-card h3 {
-            font-size: 2rem;
+        .canal-number {
+            font-size: 0.875rem;
             font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+        }
+        
+        .canal-content {
+            padding: 2.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .canal-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
             line-height: 1.2;
         }
         
-        .canal-card p {
+        .canal-content p {
             font-size: 1rem;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
         
-        .canal-card a {
+        .canal-content a,
+        .canal-content .canal-info {
+            font-size: 1.125rem;
+            font-weight: 700;
             color: var(--primary);
             text-decoration: none;
-            font-weight: 700;
-            font-size: 1.125rem;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 2px;
             word-break: break-word;
+            transition: color 0.2s;
         }
         
-        .canal-card:hover a {
-            color: white;
-            border-color: white;
+        .canal-content a:hover {
+            color: var(--accent);
+            text-decoration: underline;
         }
         
-        .qr-code-img {
-            width: 180px;
-            height: 180px;
-            margin: 2rem 0;
-            border: 2px solid var(--accent);
+        .canal-info {
+            color: var(--accent);
+        }
+        
+        .canal-extra {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--grid-line);
+        }
+        
+        .canal-extra strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
         }
         
         .faq-section {
@@ -301,59 +345,42 @@
             transform: translateY(-4px);
         }
         
-        .page-footer {
-            background: var(--accent);
-            color: white;
-            padding: 4rem 0 2rem 0;
-            margin-top: 8rem;
-            border-top: 4px solid var(--primary);
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .footer-section h4 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            opacity: 0.6;
-        }
-        
-        .footer-section a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            margin-bottom: 0.75rem;
-            font-size: 0.875rem;
-        }
-        
-        .footer-section a:hover { text-decoration: underline; }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.6;
-        }
-        
         @media (max-width: 968px) {
             .swiss-grid { 
                 padding: 0 2rem; 
                 grid-template-columns: 1fr;
             }
             .breadcrumb { padding: 0 2rem; }
-            .col-6 { grid-column: 1 / -1; }
+            .col-8 { grid-column: 1 / -1; }
             .hero-title { font-size: 2.5rem; }
-            .footer-grid { grid-template-columns: 1fr; }
             
+            /* Layout mobile - vertical */
+            .canal-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .canal-icon-box {
+                border-right: none;
+                border-bottom: 2px solid var(--accent);
+                padding: 1.5rem;
+            }
+            
+            .canal-icon {
+                font-size: 2rem;
+            }
+            
+            .canal-content {
+                padding: 2rem;
+            }
+            
+            .canal-content h3 {
+                font-size: 1.25rem;
+            }
+            
+            .canal-content a,
+            .canal-content .canal-info {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -390,7 +417,7 @@
 
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="ceni-index.html">CENI-RJ</a></li>
+            <li><a href="index.html">CENI-RJ</a></li>
             <li class="active" aria-current="page">→ Canais de Comunicação</li>
         </ol>
     </nav>
@@ -406,7 +433,7 @@
                     <div class="hero-line"></div>
                 </div>
                 
-                <div class="col-6">
+                <div class="col-8">
                     <p style="font-size: 1.25rem; line-height: 1.6;">
                         Entre em contato conosco através dos canais oficiais do CENI-RJ.
                     </p>
@@ -424,51 +451,73 @@
                     </div>
                 </div>
                 
-                <div class="col-6">
-                    <div class="canal-card">
-                        <div class="canal-label">01 / Email</div>
-                        <h3><i class="fas fa-envelope"></i> Email Oficial</h3>
-                        <p>Canal formal para questões relacionadas ao comitê</p>
-                        <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br">
-                            nucleo.acompanhamento@desenvolvimento.rj.gov.br
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-6">
-                    <div class="canal-card">
-                        <div class="canal-label">02 / Telefone</div>
-                        <h3><i class="fas fa-phone"></i> Telefone</h3>
-                        <p>Contato telefônico para informações gerais</p>
-                        <a href="tel:+552133987000">
-                            (21) 3398-7000
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-6">
-                    <div class="canal-card">
-                        <div class="canal-label">03 / WhatsApp</div>
-                        <h3><i class="fab fa-whatsapp"></i> Grupo WhatsApp</h3>
-                        <p>Grupo oficial dos membros do CENI-RJ</p>
-                        <p style="font-size: 0.875rem; margin: 1rem 0; opacity: 0.7;">
-                            <strong>Acesso exclusivo para membros do comitê</strong>
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="col-6">
-                    <div class="canal-card">
-                        <div class="canal-label">04 / Endereço</div>
-                        <h3><i class="fas fa-map-marker-alt"></i> Sede</h3>
-                        <p>Visite nossa sede</p>
-                        <p style="font-size: 1.125rem; font-weight: 700; margin: 0; line-height: 1.6;">
-                            SEDEICS<br>
-                            Rua da Assembleia, 10<br>
-                            Centro, Rio de Janeiro - RJ<br>
-                            CEP 20011-000
-                        </p>
-                    </div>
+                <div class="col-full">
+                    <ul class="canais-list">
+                        <!-- EMAIL -->
+                        <li class="canal-card">
+                            <div class="canal-icon-box">
+                                <i class="fas fa-envelope canal-icon"></i>
+                                <span class="canal-number">01</span>
+                            </div>
+                            <div class="canal-content">
+                                <h3>Email Oficial</h3>
+                                <p>Canal formal para questões relacionadas ao comitê</p>
+                                <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br">
+                                    nucleo.acompanhamento@desenvolvimento.rj.gov.br
+                                </a>
+                            </div>
+                        </li>
+                        
+                        <!-- TELEFONE -->
+                        <li class="canal-card">
+                            <div class="canal-icon-box">
+                                <i class="fas fa-phone canal-icon"></i>
+                                <span class="canal-number">02</span>
+                            </div>
+                            <div class="canal-content">
+                                <h3>Telefone</h3>
+                                <p>Contato telefônico para informações gerais</p>
+                                <a href="tel:+552133987000">(21) 3398-7000</a>
+                                <div class="canal-extra">
+                                    <strong>Horário de atendimento:</strong>
+                                    Segunda a sexta-feira, das 9h às 18h (horário de Brasília)
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <!-- WHATSAPP -->
+                        <li class="canal-card">
+                            <div class="canal-icon-box">
+                                <i class="fab fa-whatsapp canal-icon"></i>
+                                <span class="canal-number">03</span>
+                            </div>
+                            <div class="canal-content">
+                                <h3>Grupo WhatsApp</h3>
+                                <p>Grupo oficial dos membros do CENI-RJ</p>
+                                <span class="canal-info">Acesso exclusivo para membros do comitê</span>
+                                <div class="canal-extra">
+                                    Para solicitar acesso, entre em contato através do email oficial
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <!-- ENDEREÇO -->
+                        <li class="canal-card">
+                            <div class="canal-icon-box">
+                                <i class="fas fa-map-marker-alt canal-icon"></i>
+                                <span class="canal-number">04</span>
+                            </div>
+                            <div class="canal-content">
+                                <h3>Sede - Palácio Guanabara</h3>
+                                <p>Visite nossa sede no Palácio Guanabara</p>
+                                <div class="canal-info">
+                                    Rua Pinheiro Machado s/nº, 3º andar<br>
+                                    Laranjeiras, Rio de Janeiro - RJ<br>
+                                    CEP 20071-004
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -602,7 +651,7 @@
                         </a>
                         <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">SEDEICS - Rio de Janeiro, RJ</span>
+                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
                         </div>
                     </div>
                 </div>
@@ -630,7 +679,7 @@
 
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientElement;
             document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
         });
 
