@@ -37,23 +37,7 @@
     }
 
     // ========================================
-    // PARALLAX DESABILITADO
-    // ========================================
-    const parallaxElements = [];
-    let ticking = false;
-
-    function updateParallax() {
-        // Função vazia - parallax desabilitado
-        ticking = false;
-    }
-
-    function requestParallaxUpdate() {
-        // Não faz nada - parallax desabilitado
-        ticking = false;
-    }
-
-    // ========================================
-    // INDICADOR DE PROGRESSO REFINADO
+    // INDICADOR DE PROGRESSO
     // ========================================
     const progressBar = document.getElementById('progressBar');
     let progressTicking = false;
@@ -78,7 +62,7 @@
     }
 
     // ========================================
-    // DETECÇÃO DE SEÇÃO ATIVA (OTIMIZADA)
+    // DETECÇÃO DE SEÇÃO ATIVA
     // ========================================
     let sectionUpdateTimeout;
     
@@ -86,7 +70,6 @@
         const sections = document.querySelectorAll('section[id], .gt-section[id]');
         const navLinks = document.querySelectorAll('.main-nav a[href^="#"], .nav-grid a[href^="#"]');
         
-        // Usar apenas as seções visíveis
         if (sections.length === 0) return;
         
         let currentSection = '';
@@ -109,21 +92,20 @@
         });
     }
     
-    // Throttle para updateActiveSection
     function requestSectionUpdate() {
         if (!sectionUpdateTimeout) {
             sectionUpdateTimeout = setTimeout(() => {
                 updateActiveSection();
                 sectionUpdateTimeout = null;
-            }, 200); // Executar no máximo a cada 200ms
+            }, 200);
         }
     }
 
     // ========================================
-    // ANIMAÇÕES DE ENTRADA APRIMORADAS (OTIMIZADO)
+    // ANIMAÇÕES DE ENTRADA - CORRIGIDO
     // ========================================
     const observerOptions = {
-        threshold: [0, 0.1],  // Reduzido de [0, 0.1, 0.5] para menos cálculos
+        threshold: 0,
         rootMargin: '0px 0px -10% 0px'
     };
 
@@ -132,34 +114,40 @@
             if (entry.isIntersecting) {
                 const element = entry.target;
                 const delay = element.getAttribute('data-delay') || '0';
-                
-                // Delay simplificado - sem cálculo baseado em posição
                 const totalDelay = parseInt(delay);
                 
                 setTimeout(() => {
                     element.classList.add('animated');
-                    
-                    // Disparar evento customizado
                     element.dispatchEvent(new CustomEvent('ceni:animated', {
                         detail: { element }
                     }));
                 }, totalDelay);
                 
-                // Parar de observar imediatamente
                 animationObserver.unobserve(element);
             }
         });
     }, observerOptions);
 
     // ========================================
-    // SCROLL SNAP DESABILITADO
+    // ANIMAR ELEMENTOS JÁ VISÍVEIS (FALLBACK)
     // ========================================
-    // Snap removido para evitar conflitos com scroll natural
-    let scrollTimeout;
-    let lastScrollTop = 0;
-
-    function handleScrollEnd() {
-        // Função vazia - snap desabilitado para melhor performance
+    function animateVisibleElements() {
+        const animatedElements = document.querySelectorAll('[data-animate]:not(.animated)');
+        
+        animatedElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const isVisible = (
+                rect.top < window.innerHeight &&
+                rect.bottom > 0
+            );
+            
+            if (isVisible) {
+                const delay = element.getAttribute('data-delay') || '0';
+                setTimeout(() => {
+                    element.classList.add('animated');
+                }, parseInt(delay));
+            }
+        });
     }
 
     // ========================================
@@ -172,7 +160,6 @@
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
                 
-                // Ignorar links vazios ou apenas "#"
                 if (href === '#' || href === '') return;
                 
                 const target = document.querySelector(href);
@@ -181,7 +168,6 @@
                     e.preventDefault();
                     smoothScrollTo(target);
                     
-                    // Atualizar URL sem causar scroll
                     if (history.pushState) {
                         history.pushState(null, null, href);
                     }
@@ -191,7 +177,7 @@
     }
 
     // ========================================
-    // BACK TO TOP APRIMORADO
+    // BACK TO TOP
     // ========================================
     function initBackToTop() {
         const backToTop = document.getElementById('backToTop');
@@ -205,30 +191,26 @@
     }
 
     // ========================================
-    // PREVENÇÃO DE JANK EM SCROLL (OTIMIZADO)
+    // SCROLL HANDLER
     // ========================================
     let scrollTimer;
     let isScrolling = false;
     
     function handleScroll() {
-        // Cancelar timer anterior
         clearTimeout(scrollTimer);
         
-        // Adicionar classe durante scroll (apenas uma vez)
         if (!isScrolling) {
             document.body.classList.add('is-scrolling');
             isScrolling = true;
         }
         
-        // Atualizar apenas o progress bar (mais leve)
         requestProgressUpdate();
         
-        // Remover classe após scroll terminar
         scrollTimer = setTimeout(() => {
             document.body.classList.remove('is-scrolling');
             isScrolling = false;
-            // Atualizar seção ativa apenas quando parar de rolar
             requestSectionUpdate();
+            animateVisibleElements(); // Animar novos elementos visíveis
         }, 150);
     }
 
@@ -236,9 +218,12 @@
     // INICIALIZAÇÃO
     // ========================================
     function init() {
-        // Verificar preferência de movimento reduzido
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             console.log('⚡ CENI Scroll: Modo reduzido respeitado');
+            // Ainda assim, mostrar os elementos
+            document.querySelectorAll('[data-animate]').forEach(el => {
+                el.classList.add('animated');
+            });
             return;
         }
 
@@ -246,16 +231,20 @@
         const animatedElements = document.querySelectorAll('[data-animate]');
         animatedElements.forEach(el => animationObserver.observe(el));
 
+        // IMPORTANTE: Animar elementos já visíveis imediatamente
+        setTimeout(() => {
+            animateVisibleElements();
+        }, 100);
+
         // Inicializar navegação suave
         initSmoothLinks();
         initBackToTop();
 
-        // Adicionar listener de scroll otimizado com passive
+        // Adicionar listener de scroll
         window.addEventListener('scroll', handleScroll, { passive: true });
 
-        // Primeira execução (apenas progress)
+        // Primeira execução
         updateProgress();
-        // Atualizar seção ativa após um pequeno delay inicial
         setTimeout(requestSectionUpdate, 100);
 
         console.log(`⚡ CENI Enhanced Scroll: Sistema ativado (OTIMIZADO)`);
@@ -270,6 +259,47 @@
     }
 
     // ========================================
+    // MUTATION OBSERVER - Para conteúdo dinâmico
+    // ========================================
+    const contentObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === 1) { // Element node
+                        // Observar novos elementos com data-animate
+                        const newAnimElements = node.querySelectorAll ? 
+                            node.querySelectorAll('[data-animate]') : [];
+                        
+                        newAnimElements.forEach(el => {
+                            if (!el.classList.contains('animated')) {
+                                animationObserver.observe(el);
+                            }
+                        });
+                        
+                        // Se o próprio node tem data-animate
+                        if (node.hasAttribute && node.hasAttribute('data-animate')) {
+                            if (!node.classList.contains('animated')) {
+                                animationObserver.observe(node);
+                            }
+                        }
+                        
+                        // Animar elementos já visíveis
+                        setTimeout(animateVisibleElements, 50);
+                    }
+                });
+            }
+        });
+    });
+
+    // Observar mudanças no body
+    if (document.body) {
+        contentObserver.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    // ========================================
     // API PÚBLICA
     // ========================================
     window.CENIScroll = {
@@ -277,12 +307,19 @@
         refresh: () => {
             updateProgress();
             requestSectionUpdate();
+            animateVisibleElements();
+        },
+        forceAnimate: () => {
+            document.querySelectorAll('[data-animate]').forEach(el => {
+                el.classList.add('animated');
+            });
         },
         stats: () => {
             console.log('📊 CENI Scroll Stats (Otimizado):');
             console.log(`   Scroll position: ${window.pageYOffset}px`);
             console.log(`   Progress: ${Math.round((window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100)}%`);
-            console.log(`   Performance mode: ACTIVE`);
+            console.log(`   Elementos animados: ${document.querySelectorAll('[data-animate].animated').length}`);
+            console.log(`   Elementos pendentes: ${document.querySelectorAll('[data-animate]:not(.animated)').length}`);
         }
     };
 
