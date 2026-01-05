@@ -1,0 +1,464 @@
+/**
+ * ============================================
+ * CENI-RJ - Estados Dinâmicos
+ * ============================================
+ * 
+ * Estilos para loading, erro, empty state
+ * e animações de conteúdo dinâmico
+ */
+
+/* ========================================
+   LOADING STATE
+   ======================================== */
+
+.loading-state {
+    text-align: center;
+    padding: 6rem 2rem;
+    color: var(--text-secondary, #666);
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.loading-state i {
+    margin-right: 0.75rem;
+    color: var(--primary, #1e3a8a);
+    font-size: 1.5rem;
+}
+
+/* Spinner customizado */
+.loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(30, 58, 138, 0.1);
+    border-top-color: var(--primary, #1e3a8a);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.empty-state {
+    text-align: center;
+    padding: 8rem 2rem;
+    color: var(--text-secondary, #666);
+}
+
+.empty-state i {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+    color: var(--grid-line, #e0e0e0);
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--text-primary, #000);
+}
+
+.empty-state p {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   ERROR STATE
+   ======================================== */
+
+.error-state {
+    text-align: center;
+    padding: 6rem 2rem;
+    color: var(--text-secondary, #666);
+    border: 3px solid #ef4444;
+    background: #fef2f2;
+    margin: 2rem 0;
+}
+
+.error-state i {
+    font-size: 4rem;
+    color: #ef4444;
+    margin-bottom: 1.5rem;
+}
+
+.error-state h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #dc2626;
+    margin-bottom: 1rem;
+}
+
+.error-state p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #7f1d1d;
+}
+
+.error-state button {
+    padding: 1rem 2rem;
+    background: #dc2626;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error-state button:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+.error-state button:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   SKELETON LOADING
+   ======================================== */
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: 4px;
+}
+
+.skeleton-item {
+    margin-bottom: 2rem;
+}
+
+.skeleton-header {
+    height: 40px;
+    width: 70%;
+    margin-bottom: 1rem;
+}
+
+.skeleton-text {
+    height: 20px;
+    margin-bottom: 0.75rem;
+}
+
+.skeleton-text:last-child {
+    width: 40%;
+}
+
+.skeleton-button {
+    height: 50px;
+    width: 150px;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ========================================
+   FADE IN ANIMATION (para conteúdo dinâmico)
+   ======================================== */
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   STAGGER ANIMATION (para listas)
+   ======================================== */
+
+.stagger-item {
+    opacity: 0;
+    animation: staggerIn 0.4s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.05s; }
+.stagger-item:nth-child(2) { animation-delay: 0.1s; }
+.stagger-item:nth-child(3) { animation-delay: 0.15s; }
+.stagger-item:nth-child(4) { animation-delay: 0.2s; }
+.stagger-item:nth-child(5) { animation-delay: 0.25s; }
+.stagger-item:nth-child(n+6) { animation-delay: 0.3s; }
+
+@keyframes staggerIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========================================
+   TOAST NOTIFICATIONS
+   ======================================== */
+
+.toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    pointer-events: none;
+}
+
+.toast {
+    background: #1f2937;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 300px;
+    pointer-events: auto;
+    animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast.success {
+    background: #10b981;
+}
+
+.toast.error {
+    background: #ef4444;
+}
+
+.toast.warning {
+    background: #f59e0b;
+}
+
+.toast.info {
+    background: #3b82f6;
+}
+
+.toast i {
+    font-size: 1.25rem;
+}
+
+.toast-message {
+    flex: 1;
+    font-size: 0.9375rem;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    opacity: 0.7;
+    font-size: 1.25rem;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   REFRESH INDICATOR
+   ======================================== */
+
+.refresh-indicator {
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+    background: var(--primary, #1e3a8a);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9998;
+}
+
+.refresh-indicator.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.refresh-indicator i {
+    margin-right: 0.5rem;
+    animation: spin 1s linear infinite;
+}
+
+/* ========================================
+   CACHE INDICATOR
+   ======================================== */
+
+.cache-badge {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 0.5rem;
+}
+
+.cache-badge i {
+    margin-right: 0.25rem;
+    font-size: 0.7rem;
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   ======================================== */
+
+@media (max-width: 968px) {
+    .loading-state,
+    .empty-state,
+    .error-state {
+        padding: 4rem 1.5rem;
+    }
+    
+    .empty-state i {
+        font-size: 3.5rem;
+    }
+    
+    .error-state i {
+        font-size: 3rem;
+    }
+    
+    .toast-container {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+    
+    .toast {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .refresh-indicator {
+        top: 4.5rem;
+        right: 1rem;
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton,
+    .fade-in,
+    .stagger-item,
+    .toast,
+    .loading-spinner {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+    .stagger-item {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .toast {
+        animation: none !important;
+    }
+}
+
+/* ========================================
+   DARK MODE SUPPORT (opcional)
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    .loading-state,
+    .empty-state {
+        color: #d1d5db;
+    }
+    
+    .error-state {
+        background: #7f1d1d;
+        border-color: #991b1b;
+        color: #fecaca;
+    }
+    
+    .error-state h3 {
+        color: #fca5a5;
+    }
+    
+    .error-state p {
+        color: #fecaca;
+    }
+    
+    .skeleton {
+        background: linear-gradient(
+            90deg,
+            #374151 25%,
+            #4b5563 50%,
+            #374151 75%
+        );
+    }
+}
+
+/* ========================================
+   PRINT
+   ======================================== */
+
+@media print {
+    .loading-state,
+    .error-state,
+    .skeleton,
+    .toast-container,
+    .refresh-indicator {
+        display: none !important;
+    }
+}
