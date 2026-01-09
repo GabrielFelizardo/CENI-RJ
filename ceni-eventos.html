@@ -105,23 +105,6 @@
         
         .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
         .col-8 { grid-column: span 8; position: relative; z-index: 1; }
-
-        @media (max-width: 968px) {
-            .main-nav.active { right: 0; }
-
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: transparent;
-                z-index: 10000;
-                transition: opacity 0.3s ease;
-            }
-            .mobile-overlay.active { display: block; }
-        }
         
         .label {
             font-size: 0.75rem;
@@ -225,8 +208,6 @@
             display: grid;
             grid-template-columns: 200px 1fr;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1;
-            transform: scale(1);
         }
         
         .evento-card.hidden {
@@ -293,25 +274,10 @@
             border-radius: 2px;
         }
         
-        .evento-category.reuniao {
-            background: var(--gt1-color);
-            color: white;
-        }
-        
-        .evento-category.prazo {
-            background: var(--gt4-color);
-            color: white;
-        }
-        
-        .evento-category.ecossistema {
-            background: var(--gt2-color);
-            color: white;
-        }
-        
-        .evento-category.marco {
-            background: var(--gt5-color);
-            color: white;
-        }
+        .evento-category.reuniao { background: var(--gt1-color); color: white; }
+        .evento-category.prazo { background: var(--gt4-color); color: white; }
+        .evento-category.ecossistema { background: var(--gt2-color); color: white; }
+        .evento-category.marco { background: var(--gt5-color); color: white; }
         
         .evento-title {
             font-size: 1.5rem;
@@ -366,18 +332,9 @@
             letter-spacing: 0.1em;
         }
         
-        .evento-status.futuro {
-            color: var(--gt1-color);
-        }
-        
-        .evento-status.hoje {
-            color: var(--gt4-color);
-        }
-        
-        .evento-status.concluido {
-            color: var(--text-secondary);
-            opacity: 0.6;
-        }
+        .evento-status.futuro { color: var(--gt1-color); }
+        .evento-status.hoje { color: var(--gt4-color); }
+        .evento-status.concluido { color: var(--text-secondary); opacity: 0.6; }
         
         .evento-status-dot {
             width: 8px;
@@ -435,7 +392,6 @@
             color: var(--accent);
         }
         
-        /* INFO BOX */
         .info-box {
             border: 4px solid var(--accent);
             padding: 2rem 3rem;
@@ -444,7 +400,6 @@
         
         .info-box.destaque {
             border-color: var(--gt5-color);
-            background: var(--background);
         }
         
         .info-box.destaque .label {
@@ -469,108 +424,38 @@
             z-index: 999;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            background: var(--primary);
-            transform: translateY(-4px);
-        }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: var(--primary); transform: translateY(-4px); }
         
         @media (max-width: 968px) {
-            .swiss-grid { 
-                padding: 0 2rem; 
-                grid-template-columns: 1fr;
-            }
+            .swiss-grid { padding: 0 2rem; grid-template-columns: 1fr; }
             .breadcrumb { padding: 0 2rem; }
-            .col-8, .col-6 { grid-column: 1 / -1; }
+            .col-8 { grid-column: 1 / -1; }
             .hero-title { font-size: 2.5rem; }
             
-            .filters-nav {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-            }
+            .filters-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .filters-nav::-webkit-scrollbar { display: none; }
+            .filter-button { padding: 1.25rem 1.5rem; font-size: 0.75rem; }
             
-            .filters-nav::-webkit-scrollbar {
-                display: none;
-            }
-            
-            .filter-button {
-                padding: 1.25rem 1.5rem;
-                font-size: 0.75rem;
-            }
-            
-            .evento-card {
-                grid-template-columns: 1fr;
-            }
-            
-            .evento-date-box {
-                border-right: none;
-                border-bottom: 2px solid var(--accent);
-                padding: 2rem;
-            }
-            
-            .evento-day {
-                font-size: 3rem;
-            }
-            
-            .evento-content {
-                padding: 2rem;
-            }
-            
-            .evento-title {
-                font-size: 1.25rem;
-            }
-            
-            .evento-footer {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-            
-            .evento-action {
-                width: 100%;
-                text-align: center;
-            }
+            .evento-card { grid-template-columns: 1fr; }
+            .evento-date-box { border-right: none; border-bottom: 2px solid var(--accent); padding: 2rem; }
+            .evento-day { font-size: 3rem; }
+            .evento-content { padding: 2rem; }
+            .evento-title { font-size: 1.25rem; }
+            .evento-footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+            .evento-action { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
     <div class="progress-indicator" id="progressBar"></div>
-    <div class="mobile-overlay" id="mobileOverlay"></div>
 
-    <header class="gov-header">
-        <div class="header-grid">
-            <div class="header-brand">
-                <img src="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png" alt="SEDEICS" class="gov-logo-img" loading="lazy">
-                
-                <div class="header-ceni-mark">
-                    <div class="header-ceni-title">CENI-RJ</div>
-                    <div class="header-ceni-subtitle">Comitê Estadual de Impacto</div>
-                </div>
-            </div>
-            
-            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navegação principal">
-                <a href="ceni-index.html">Início</a>
-                <a href="ceni-sobre.html">Sobre</a>
-                <a href="ceni-gts.html">GTs</a>
-                <a href="ceni-eventos.html" class="active" aria-current="page">Eventos</a>
-                <a href="ceni-canais.html">Canais</a>
-                <a href="ceni-repositorio.html">Repositório</a>
-            </nav>
-        </div>
-    </header>
+    <ceni-header></ceni-header>
 
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="index.html">CENI-RJ</a></li>
+            <li><a href="ceni-index.html">CENI-RJ</a></li>
             <li class="active" aria-current="page">→ Eventos</li>
         </ol>
     </nav>
@@ -579,15 +464,15 @@
         <section class="hero-section">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <span class="label">Agenda</span>
-                    <h1 class="hero-title">
+                    <span class="label" data-animate="fade-up">Agenda</span>
+                    <h1 class="hero-title" data-animate="fade-up" data-delay="100">
                         Calendário de<br>Eventos
                     </h1>
-                    <div class="hero-line"></div>
+                    <div class="hero-line" data-animate="scale-in" data-delay="200"></div>
                 </div>
                 
                 <div class="col-8">
-                    <p style="font-size: 1.25rem; line-height: 1.6;">
+                    <p style="font-size: 1.25rem; line-height: 1.6;" data-animate="fade-up" data-delay="300">
                         Acompanhe reuniões, prazos e eventos do CENI-RJ e do ecossistema de impacto socioambiental no Rio de Janeiro.
                     </p>
                 </div>
@@ -597,7 +482,7 @@
         <section>
             <div class="swiss-grid">
                 <div class="col-full">
-                    <div class="info-box destaque" id="proxima-reuniao-container">
+                    <div class="info-box destaque" id="proxima-reuniao-container" data-animate="scale-in" data-delay="400">
                         <span class="label">Próxima Reunião</span>
                         <h3 style="font-size: 1.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem;">
                             1ª Reunião Ordinária do CENI-RJ
@@ -610,25 +495,24 @@
             </div>
         </section>
 
-        <!-- FILTROS -->
         <section>
             <div class="swiss-grid">
                 <div class="col-full">
-                    <div class="filters-container">
+                    <div class="filters-container" data-animate="fade-up" data-delay="500">
                         <nav class="filters-nav" role="navigation" aria-label="Filtros de eventos">
-                            <button class="filter-button active" data-filter="todos" aria-label="Mostrar todos os eventos">
+                            <button class="filter-button active" data-filter="todos">
                                 Todos <span class="count" id="count-todos">0</span>
                             </button>
-                            <button class="filter-button" data-filter="reuniao" aria-label="Mostrar apenas reuniões">
+                            <button class="filter-button" data-filter="reuniao">
                                 Reuniões <span class="count" id="count-reuniao">0</span>
                             </button>
-                            <button class="filter-button" data-filter="prazo" aria-label="Mostrar apenas prazos">
+                            <button class="filter-button" data-filter="prazo">
                                 Prazos <span class="count" id="count-prazo">0</span>
                             </button>
-                            <button class="filter-button" data-filter="marco" aria-label="Mostrar apenas marcos importantes">
+                            <button class="filter-button" data-filter="marco">
                                 Marcos <span class="count" id="count-marco">0</span>
                             </button>
-                            <button class="filter-button" data-filter="ecossistema" aria-label="Mostrar apenas eventos do ecossistema">
+                            <button class="filter-button" data-filter="ecossistema">
                                 Ecossistema <span class="count" id="count-ecossistema">0</span>
                             </button>
                         </nav>
@@ -637,14 +521,10 @@
             </div>
         </section>
 
-        <!-- LISTA DE EVENTOS - DINÂMICA -->
         <section style="margin-bottom: 6rem;">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <!-- Container dinâmico - será preenchido via JavaScript -->
-                    <div class="eventos-grid" id="eventos-container">
-                        <!-- Eventos serão inseridos aqui via ceni-api-client.js -->
-                    </div>
+                    <div class="eventos-grid" id="eventos-container"></div>
                 </div>
             </div>
         </section>
@@ -654,175 +534,34 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <footer class="page-footer-enhanced" data-animate>
-        <div class="swiss-grid">
-            <div class="footer-grid-enhanced" style="grid-column: 1 / -1;">
-                
-                <div class="footer-brand">
-                    <div class="footer-logo-text">CENI-RJ</div>
-                    <p class="footer-tagline">
-                        Comitê Estadual de Investimentos e Negócios de Impacto do Rio de Janeiro
-                    </p>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-1">
-                    <h4>Navegação</h4>
-                    <div class="footer-section-content">
-                        <a href="ceni-index.html">
-                            <i class="fas fa-home"></i>
-                            <span>Início</span>
-                        </a>
-                        <a href="ceni-sobre.html">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Sobre o Comitê</span>
-                        </a>
-                        <a href="ceni-gts.html">
-                            <i class="fas fa-users"></i>
-                            <span>Grupos de Trabalho</span>
-                        </a>
-                        <a href="ceni-eventos.html">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Eventos</span>
-                        </a>
-                        <a href="ceni-canais.html">
-                            <i class="fas fa-comments"></i>
-                            <span>Canais</span>
-                        </a>
-                        <a href="ceni-repositorio.html">
-                            <i class="fas fa-folder-open"></i>
-                            <span>Repositório</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-2">
-                   <h4>Contato</h4>
-                    <div class="footer-section-content">
-                        <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>nucleo.acompanhamento@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="mailto:gabinete@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>gabinete@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="tel:+552133987000">
-                            <i class="fas fa-phone"></i>
-                            <span>(21) 3398-7000</span>
-                        </a>
-                        <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="footer-bottom-enhanced" style="grid-column: 1 / -1;">
-                <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
-                <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
-                <p>Desenvolvido por Gabriel Felizardo da Silva</p>
-            </div>
-        </div>
-    </footer>
+    <ceni-footer></ceni-footer>
 
-    <!-- Scripts do Sistema Dinâmico -->
     <script src="ceni-api-client.js"></script>
     <script src="ceni-utils.js"></script>
     <script src="proximo-evento-dinamico.js"></script>
     <script src="ceni-animations.js"></script>
     <script src="ceni-footer-enhanced.js"></script>
+    <script src="ceni-components.js"></script>
 
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        const header = document.querySelector('.gov-header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
-
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
         });
 
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-
-        menuToggle.addEventListener('click', () => {
-            const isOpen = mainNav.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        mobileOverlay.addEventListener('click', () => {
-            mainNav.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        });
-
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             backToTop.classList.toggle('visible', window.scrollY > 300);
         });
-
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // ======================================
-        // SISTEMA DE FILTROS COM CONTADORES DINÂMICOS
-        // ======================================
-        
-        // Atualizar contadores após eventos carregarem
-        document.addEventListener('DOMContentLoaded', () => {
-            // Aguardar eventos carregarem
-            setTimeout(() => {
-                updateEventCounts();
-            }, 1000);
-        });
-
-        function updateEventCounts() {
-            const eventoCards = document.querySelectorAll('.evento-card');
-            
-            // Contar por categoria
-            const counts = {
-                todos: eventoCards.length,
-                reuniao: 0,
-                prazo: 0,
-                marco: 0,
-                ecossistema: 0
-            };
-            
-            eventoCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                if (counts.hasOwnProperty(category)) {
-                    counts[category]++;
-                }
-            });
-            
-            // Atualizar badges
-            Object.keys(counts).forEach(key => {
-                const badge = document.getElementById(`count-${key}`);
-                if (badge) {
-                    badge.textContent = counts[key];
-                }
-            });
-        }
-        
         const filterButtons = document.querySelectorAll('.filter-button');
-        const emptyState = document.getElementById('emptyState');
-        
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const filter = button.getAttribute('data-filter');
-                
-                // Atualizar botões ativos
                 filterButtons.forEach(btn => {
                     btn.classList.remove('active');
                     btn.setAttribute('aria-selected', 'false');
@@ -830,34 +569,23 @@
                 button.classList.add('active');
                 button.setAttribute('aria-selected', 'true');
                 
-                // Filtrar eventos
                 const eventoCards = document.querySelectorAll('.evento-card');
-                let visibleCount = 0;
-                
                 eventoCards.forEach(card => {
                     const category = card.getAttribute('data-category');
-                    
                     if (filter === 'todos' || category === filter) {
                         card.classList.remove('hidden');
-                        visibleCount++;
                     } else {
                         card.classList.add('hidden');
                     }
                 });
                 
-                // Scroll suave para os eventos
-                document.querySelector('.eventos-grid').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
+                document.querySelector('.eventos-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
         
-        // Navegação por teclado nos filtros
         filterButtons.forEach((button, index) => {
             button.addEventListener('keydown', (e) => {
                 let newIndex;
-                
                 if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                     e.preventDefault();
                     newIndex = (index + 1) % filterButtons.length;
