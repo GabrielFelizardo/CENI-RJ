@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="ceni-header-enhanced.css">
     <link rel="stylesheet" href="ceni-footer-enhanced.css">
     
-    
     <style>
         :root {
             --primary: #1e3a8a;
@@ -103,38 +102,30 @@
             position: relative;
         }
         
-        .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
-        .col-8 { grid-column: span 8; position: relative; z-index: 1; }
-
-        @media (max-width: 968px) {
-            
-            .main-nav.active { right: 0; }
-
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: transparent;
-                z-index: 10000;
-                transition: opacity 0.3s ease;
-            }
-            .mobile-overlay.active { display: block; }
+        .col-full { 
+            grid-column: 1 / -1; 
+            position: relative;
         }
+        .col-8 { grid-column: span 8; position: relative; }
         
         .section-number {
-            font-size: 10rem;
+            font-size: 13rem;
             font-weight: 900;
             line-height: 1;
             color: var(--primary);
-            opacity: 0.08;
+            opacity: 0.5;
             position: absolute;
-            top: -3rem;
-            left: -2rem;
+            top: 0.5rem;
+            left: 1rem;
             z-index: 0;
+            pointer-events: none;
         }
+        
+        .gt1 .section-number { color: var(--gt1-color); }
+        .gt2 .section-number { color: var(--gt2-color); }
+        .gt3 .section-number { color: var(--gt3-color); }
+        .gt4 .section-number { color: var(--gt4-color); }
+        .gt5 .section-number { color: var(--gt5-color); }
         
         .section-title {
             font-size: 2.5rem;
@@ -208,11 +199,17 @@
             scroll-margin-top: 100px;
         }
         
+        .gt-section > .swiss-grid {
+            position: relative;
+        }
+        
         .gt-header {
             border: 4px solid var(--accent);
             padding: 3rem;
             margin-bottom: 3rem;
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
+            position: relative;
+            z-index: 1;
         }
         
         .gt-header.gt1 { border-color: var(--gt1-color); }
@@ -226,6 +223,8 @@
             font-weight: 900;
             line-height: 1;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
         
         .gt1 .gt-number-large { color: var(--gt1-color); }
@@ -240,11 +239,15 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
             line-height: 1.2;
+            position: relative;
+            z-index: 1;
         }
         
         .gt-header p {
             font-size: 1.125rem;
             line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
         
         .org-item {
@@ -337,95 +340,65 @@
             transform: translateY(-4px);
         }
         
-        .page-footer {
-            background: var(--accent);
-            color: white;
-            padding: 4rem 0 2rem 0;
-            margin-top: 8rem;
-            border-top: 4px solid var(--primary);
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .footer-section h4 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            opacity: 0.6;
-        }
-        
-        .footer-section a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            margin-bottom: 0.75rem;
-            font-size: 0.875rem;
-        }
-        
-        .footer-section a:hover { text-decoration: underline; }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.6;
-        }
-        
+        /* ========================================
+           MOBILE OPTIMIZATIONS
+           ======================================== */
         @media (max-width: 968px) {
             .swiss-grid { 
                 padding: 0 2rem; 
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             .breadcrumb { padding: 0 2rem; }
             .col-8 { grid-column: 1 / -1; }
+            
+            .hero-section { padding: 4rem 0 3rem 0; }
             .hero-title { font-size: 2.5rem; }
             .section-title { font-size: 2rem; }
-            .section-number { font-size: 6rem; }
+            .section-number { 
+                font-size: 7rem; 
+                top: 0.5rem; 
+                left: 0.5rem; 
+                opacity: 0.22;
+            }
             .gt-number-large { font-size: 5rem; }
-            .footer-grid { grid-template-columns: 1fr; }
             
+            .info-box,
+            .gt-header,
+            .orientacoes-box {
+                padding: 2rem !important;
+            }
+            
+            .org-item {
+                padding: 2rem 1.5rem;
+            }
+            
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .swiss-grid { padding: 0 1.5rem; }
+            .breadcrumb { padding: 0 1.5rem; }
+            .hero-title { font-size: 2rem; }
+            .section-title { font-size: 1.75rem; }
+            
+            .gt-number-large { font-size: 4rem; }
+            
+            .org-item h4 { font-size: 0.9rem; }
+            .org-members { font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
     <div class="progress-indicator" id="progressBar"></div>
-    <div class="mobile-overlay" id="mobileOverlay"></div>
 
-    <header class="gov-header">
-        <div class="header-grid">
-            <div class="header-brand">
-                <img src="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png" alt="SEDEICS" class="gov-logo-img" loading="lazy">
-                
-                <div class="header-ceni-mark">
-                    <div class="header-ceni-title">CENI-RJ</div>
-                    <div class="header-ceni-subtitle">Comitê Estadual de Impacto</div>
-                </div>
-            </div>
-            
-            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
-
-           <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navegação principal">
-                <a href="ceni-index.html">Início</a>
-                <a href="ceni-sobre.html">Sobre</a>
-                <a href="ceni-gts.html" class="active" aria-current="page">GTs</a>
-                <a href="ceni-eventos.html">Eventos</a>
-                <a href="ceni-canais.html">Canais</a>
-                <a href="ceni-repositorio.html">Repositório</a>
-            </nav>
-        </div>
-    </header>
+    <ceni-header></ceni-header>
 
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <ol class="breadcrumb">
@@ -438,15 +411,15 @@
         <section class="hero-section">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <span class="label">Estrutura Operacional</span>
-                    <h1 class="hero-title">
+                    <span class="label" data-animate="fade-up">Estrutura Operacional</span>
+                    <h1 class="hero-title" data-animate="fade-up" data-delay="100">
                         Grupos de<br>Trabalho
                     </h1>
-                    <div class="hero-line"></div>
+                    <div class="hero-line" data-animate="scale-in" data-delay="200"></div>
                 </div>
                 
                 <div class="col-8">
-                    <p style="font-size: 1.25rem; line-height: 1.6;">
+                    <p style="font-size: 1.25rem; line-height: 1.6;" data-animate="fade-up" data-delay="300">
                         Os Grupos de Trabalho são as instâncias operacionais do CENI-RJ, responsáveis por 
                         desenvolver e executar as estratégias de fomento aos negócios de impacto no Estado.
                     </p>
@@ -457,7 +430,7 @@
         <section style="margin-bottom: 6rem;">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <div class="info-box">
+                    <div class="info-box" data-animate="scale-in" data-delay="400">
                         <p style="font-size: 1.125rem; line-height: 1.6; margin: 0;">
                             <strong>5 Grupos de Trabalho</strong> • 
                             <strong>17 Organizações</strong> • 
@@ -467,7 +440,7 @@
                 </div>
                 
                 <div class="col-full">
-                    <div class="orientacoes-box">
+                    <div class="orientacoes-box" data-animate="fade-up" data-delay="500">
                         <span class="label">Diretrizes</span>
                         <h3 style="font-size: 1.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2rem;">
                             Orientações Gerais
@@ -482,12 +455,11 @@
             </div>
         </section>
 
-        <!-- GT 1 -->
         <section class="gt-section gt1" id="gt1">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">01</span>
-                    <div class="gt-header gt1">
+                <div class="col-full">
+                    <span class="section-number" aria-hidden="true" data-animate="fade-down">01</span>
+                    <div class="gt-header gt1" data-animate="fade-up" data-delay="100">
                         <div class="gt-number-large">01</div>
                         <h2>Capital e Financiamento<br>de Impacto</h2>
                         <p>Mobilizar mecanismos financeiros e promover acesso a capital para negócios de impacto, articulando investidores, fundos e instituições financeiras.</p>
@@ -496,12 +468,11 @@
             </div>
         </section>
 
-        <!-- GT 2 -->
         <section class="gt-section gt2" id="gt2">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">02</span>
-                    <div class="gt-header gt2">
+                <div class="col-full">
+                    <span class="section-number" aria-hidden="true" data-animate="fade-down">02</span>
+                    <div class="gt-header gt2" data-animate="fade-up" data-delay="100">
                         <div class="gt-number-large">02</div>
                         <h2>Fomento a<br>Negócios de Impacto</h2>
                         <p>Promover ações de formação, capacitação, aceleração e desenvolvimento técnico para negócios de impacto em diferentes estágios de maturidade.</p>
@@ -510,12 +481,11 @@
             </div>
         </section>
 
-        <!-- GT 3 -->
         <section class="gt-section gt3" id="gt3">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">03</span>
-                    <div class="gt-header gt3">
+                <div class="col-full">
+                    <span class="section-number" aria-hidden="true" data-animate="fade-down">03</span>
+                    <div class="gt-header gt3" data-animate="fade-up" data-delay="100">
                         <div class="gt-number-large">03</div>
                         <h2>Fortalecimento de<br>Organizações Intermediárias</h2>
                         <p>Fortalecer aceleradoras, institutos, hubs, coletivos e demais organizações que apoiam o ecossistema de impacto.</p>
@@ -524,12 +494,11 @@
             </div>
         </section>
 
-        <!-- GT 4 -->
         <section class="gt-section gt4" id="gt4">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">04</span>
-                    <div class="gt-header gt4">
+                <div class="col-full">
+                    <span class="section-number" aria-hidden="true" data-animate="fade-down">04</span>
+                    <div class="gt-header gt4" data-animate="fade-up" data-delay="100">
                         <div class="gt-number-large">04</div>
                         <h2>Ambiente Institucional<br>e Normativo</h2>
                         <p>Consolidar um ambiente institucional favorável à agenda de impacto, trabalhando marcos regulatórios e políticas públicas.</p>
@@ -538,12 +507,11 @@
             </div>
         </section>
 
-        <!-- GT 5 -->
         <section class="gt-section gt5" id="gt5">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">05</span>
-                    <div class="gt-header gt5">
+                <div class="col-full">
+                    <span class="section-number" aria-hidden="true" data-animate="fade-down">05</span>
+                    <div class="gt-header gt5" data-animate="fade-up" data-delay="100">
                         <div class="gt-number-large">05</div>
                         <h2>Articulação<br>Interfederativa</h2>
                         <p>Fortalecer a articulação com municípios, consórcios, governos federal e entes federativos para ampliar o alcance das ações de impacto.</p>
@@ -552,27 +520,24 @@
             </div>
         </section>
 
-        <!-- MEMBROS DO COMITÊ -->
         <section style="margin-top: 8rem; margin-bottom: 6rem;">
             <div class="swiss-grid">
-                <div class="col-full" style="position: relative;">
-                    <span class="section-number" aria-hidden="true">17</span>
-                    <span class="label">Composição</span>
-                    <h2 class="section-title">
+                <div class="col-full">
+                    <span class="label" data-animate="fade-up" data-delay="100">Composição</span>
+                    <h2 class="section-title" data-animate="fade-up" data-delay="200">
                         Membros do<br>Comitê
                     </h2>
                 </div>
                 
                 <div class="col-8">
-                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
+                    <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;" data-animate="fade-up" data-delay="300">
                         17 organizações compõem o CENI-RJ, representando governo, sociedade civil, 
                         universidades e setor privado.
                     </p>
                 </div>
                 
                 <div style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                    <!-- GOVERNO -->
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="0">
                         <i class="fas fa-landmark org-icon"></i>
                         <h4>Casa Civil - SECC</h4>
                         <p>Governo do Estado</p>
@@ -584,7 +549,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="50">
                         <i class="fas fa-users org-icon"></i>
                         <h4>SEGOV</h4>
                         <p>Secretaria de Governo</p>
@@ -596,7 +561,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="100">
                         <i class="fas fa-leaf org-icon"></i>
                         <h4>SEAS</h4>
                         <p>Ambiente e Sustentabilidade</p>
@@ -608,7 +573,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="150">
                         <i class="fas fa-briefcase org-icon"></i>
                         <h4>SETRAB</h4>
                         <p>Trabalho e Renda</p>
@@ -620,7 +585,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="200">
                         <i class="fas fa-bolt org-icon"></i>
                         <h4>SEENEMAR</h4>
                         <p>Energia e Economia do Mar</p>
@@ -632,7 +597,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="250">
                         <i class="fas fa-palette org-icon"></i>
                         <h4>SECEC</h4>
                         <p>Cultura e Economia Criativa</p>
@@ -644,7 +609,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="300">
                         <i class="fas fa-venus org-icon"></i>
                         <h4>Secretaria da Mulher</h4>
                         <p>Governo do Estado</p>
@@ -656,7 +621,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="350">
                         <i class="fas fa-globe org-icon"></i>
                         <h4>Comissão ODS RJ</h4>
                         <p>Objetivos de Desenvolvimento</p>
@@ -668,8 +633,7 @@
                         </div>
                     </div>
                     
-                    <!-- SOCIEDADE CIVIL -->
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="400">
                         <i class="fas fa-chart-line org-icon"></i>
                         <h4>SEBRAE-RJ</h4>
                         <p>Apoio a Pequenos Negócios</p>
@@ -681,7 +645,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="450">
                         <i class="fas fa-graduation-cap org-icon"></i>
                         <h4>PUC-Rio</h4>
                         <p>Universidade</p>
@@ -693,7 +657,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="0">
                         <i class="fas fa-lightbulb org-icon"></i>
                         <h4>Impact Hub Rio</h4>
                         <p>Hub de Inovação Social</p>
@@ -705,7 +669,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="50">
                         <i class="fas fa-flask org-icon"></i>
                         <h4>FAPERJ</h4>
                         <p>Fundação de Amparo à Pesquisa</p>
@@ -717,7 +681,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="100">
                         <i class="fas fa-store org-icon"></i>
                         <h4>Fecomércio RJ</h4>
                         <p>Federação do Comércio</p>
@@ -729,7 +693,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="150">
                         <i class="fas fa-industry org-icon"></i>
                         <h4>Firjan</h4>
                         <p>Sistema FIRJAN</p>
@@ -741,7 +705,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="200">
                         <i class="fas fa-university org-icon"></i>
                         <h4>UFRJ</h4>
                         <p>Universidade Federal</p>
@@ -753,7 +717,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="250">
                         <i class="fas fa-building org-icon"></i>
                         <h4>ABERJ</h4>
                         <p>Associação de Bancos</p>
@@ -765,7 +729,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-item">
+                    <div class="org-item" data-animate="fade-up" data-delay="300">
                         <i class="fas fa-water org-icon"></i>
                         <h4>Rio de Impacto</h4>
                         <p>Organização de Impacto</p>
@@ -785,114 +749,21 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <footer class="page-footer-enhanced" data-animate>
-        <div class="swiss-grid">
-            <div class="footer-grid-enhanced" style="grid-column: 1 / -1;">
-                
-                <div class="footer-brand">
-                    <div class="footer-logo-text">CENI-RJ</div>
-                    <p class="footer-tagline">
-                        Comitê Estadual de Investimentos e Negócios de Impacto do Rio de Janeiro
-                    </p>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-1">
-                    <h4>Navegação</h4>
-                    <div class="footer-section-content">
-                        <a href="ceni-index.html">
-                            <i class="fas fa-home"></i>
-                            <span>Início</span>
-                        </a>
-                        <a href="ceni-sobre.html">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Sobre o Comitê</span>
-                        </a>
-                        <a href="ceni-gts.html">
-                            <i class="fas fa-users"></i>
-                            <span>Grupos de Trabalho</span>
-                        </a>
-                        <a href="ceni-eventos.html">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Eventos</span>
-                        </a>
-                        <a href="ceni-canais.html">
-                            <i class="fas fa-comments"></i>
-                            <span>Canais</span>
-                        </a>
-                        <a href="ceni-repositorio.html">
-                            <i class="fas fa-folder-open"></i>
-                            <span>Repositório</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-2">
-                   <h4>Contato</h4>
-                    <div class="footer-section-content">
-                        <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>nucleo.acompanhamento@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="mailto:gabinete@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>gabinete@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="tel:+552133987000">
-                            <i class="fas fa-phone"></i>
-                            <span>(21) 3398-7000</span>
-                        </a>
-                        <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="footer-bottom-enhanced" style="grid-column: 1 / -1;">
-                <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
-                <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
-                <p>Desenvolvido por Gabriel Felizardo da Silva</p>
-            </div>
-        </div>
-    </footer>
+    <ceni-footer></ceni-footer>
 
     <script src="ceni-animations.js"></script>
     <script src="ceni-footer-enhanced.js"></script>
+    <script src="ceni-components.js"></script>
 
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        const header = document.querySelector('.gov-header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
-
+        // Progress bar
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
         });
 
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-
-        menuToggle.addEventListener('click', () => {
-            const isOpen = mainNav.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        mobileOverlay.addEventListener('click', () => {
-            mainNav.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        });
-
+        // Back to top
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             backToTop.classList.toggle('visible', window.scrollY > 300);
