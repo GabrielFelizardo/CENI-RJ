@@ -101,24 +101,6 @@
         .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
         .col-8 { grid-column: span 8; position: relative; z-index: 1; }
         .col-6 { grid-column: span 6; position: relative; z-index: 1; }
-
-        @media (max-width: 968px) {
-            
-            .main-nav.active { right: 0; }
-
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: transparent;
-                z-index: 9998;
-                transition: opacity 0.3s ease;
-            }
-            .mobile-overlay.active { display: block; }
-        }
         
         .label {
             font-size: 0.75rem;
@@ -150,491 +132,435 @@
             margin: 2rem 0;
         }
         
-        /* ======================================
-           SISTEMA DE TABS
-           ====================================== */
-        
-        .tabs-container {
-            margin: 4rem 0;
-        }
-        
-        .tabs-nav {
-            display: flex;
-            gap: 0;
-            border-bottom: 4px solid var(--accent);
+        /* TABS */
+        .tabs-container { margin: 4rem 0; }
+        .tabs-nav { 
+            display: flex; 
+            gap: 0; 
+            border-bottom: 4px solid var(--accent); 
             margin-bottom: 3rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
+        .tabs-nav::-webkit-scrollbar { display: none; }
         
         .tab-button {
-            background: transparent;
-            border: none;
+            background: transparent; 
+            border: none; 
             padding: 1.25rem 2rem;
-            font-size: 0.875rem;
-            font-weight: 700;
+            font-size: 0.875rem; 
+            font-weight: 700; 
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
+            letter-spacing: 0.1em; 
+            color: var(--text-secondary); 
             cursor: pointer;
-            transition: all var(--transition-base);
+            transition: all var(--transition-base); 
             border-bottom: 4px solid transparent;
-            margin-bottom: -4px;
-            white-space: nowrap;
+            margin-bottom: -4px; 
+            white-space: nowrap; 
             position: relative;
+            min-height: 44px;
         }
-        
-        .tab-button:hover {
-            color: var(--text-primary);
-            background: transparent;
+        .tab-button:hover { color: var(--text-primary); background: transparent; }
+        .tab-button.active { 
+            color: var(--primary); 
+            border-bottom-color: var(--primary); 
+            background: rgba(30, 58, 138, 0.03); 
         }
-        
-        .tab-button.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-            background: rgba(30, 58, 138, 0.03);
-        }
-        
-        .tab-button:focus-visible {
-            outline: 3px solid var(--primary);
-            outline-offset: 4px;
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeInUp 0.4s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
+        .tab-button:focus-visible { outline: 3px solid var(--primary); outline-offset: 4px; }
+        .tab-content { display: none; animation: fadeInUp 0.4s ease; }
+        .tab-content.active { display: block; }
         
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* ======================================
-           COMPONENTES DA PÁGINA
-           ====================================== */
-        
-        .definition-box {
-            border: 4px solid var(--accent);
-            padding: 3rem;
-            margin: 3rem 0;
-            background: white;
+        /* COMPONENTES */
+        .definition-box { 
+            border: 4px solid var(--accent); 
+            padding: 3rem; 
+            margin: 3rem 0; 
+            background: white; 
+        }
+        .definition-box p { 
+            font-size: 1.5rem; 
+            line-height: 1.4; 
+            font-weight: 500; 
         }
         
-        .definition-box p {
-            font-size: 1.5rem;
-            line-height: 1.4;
-            font-weight: 500;
+        .exemplo-box { 
+            background: var(--primary); 
+            color: white; 
+            padding: 3rem; 
+            margin: 3rem 0; 
         }
-
-        .exemplo-box {
-            background: var(--primary);
-            color: white;
-            padding: 3rem;
-            margin: 3rem 0;
+        .exemplo-box h4 { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 2rem; 
+            padding-bottom: 1rem; 
+            border-bottom: 2px solid rgba(255,255,255,0.3); 
         }
-
-        .exemplo-box h4 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid rgba(255,255,255,0.3);
+        .exemplo-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 2rem; 
         }
-
-        .exemplo-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+        .exemplo-item { 
+            border-left: 3px solid white; 
+            padding-left: 1.5rem; 
         }
-
-        .exemplo-item {
-            border-left: 3px solid white;
-            padding-left: 1.5rem;
+        .exemplo-item strong { 
+            display: block; 
+            font-size: 0.875rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.1em; 
+            opacity: 0.8; 
+            margin-bottom: 0.5rem; 
         }
-
-        .exemplo-item strong {
-            display: block;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-        }
-
-        .exemplo-item p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin: 0;
+        .exemplo-item p { 
+            font-size: 1rem; 
+            line-height: 1.6; 
+            margin: 0; 
         }
         
-        .caracteristica-list {
-            list-style: none;
-            padding: 0;
+        .caracteristica-list { list-style: none; padding: 0; }
+        .caracteristica-list li { 
+            padding: 1.5rem 0; 
+            border-bottom: 1px solid var(--grid-line); 
+            font-size: 1.125rem; 
+            display: flex; 
+            align-items: start; 
+            gap: 2rem; 
         }
-        
-        .caracteristica-list li {
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--grid-line);
-            font-size: 1.125rem;
-            display: flex;
-            align-items: start;
-            gap: 2rem;
-        }
-        
         .caracteristica-list li:last-child { border-bottom: none; }
-        
-        .caracteristica-number {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--primary);
-            min-width: 60px;
+        .caracteristica-number { 
+            font-size: 2rem; 
+            font-weight: 900; 
+            color: var(--primary); 
+            min-width: 60px; 
         }
         
-        .negative-list {
-            list-style: none;
-            padding: 0;
+        .negative-list { list-style: none; padding: 0; }
+        .negative-list li { 
+            padding: 2rem 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+            font-size: 1.125rem; 
+            display: flex; 
+            gap: 2rem; 
         }
-        
-        .negative-list li {
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            font-size: 1.125rem;
-            display: flex;
-            gap: 2rem;
-        }
-        
         .negative-list li:last-child { border-bottom: none; }
 
-        .marcos-legais-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
+        .marcos-legais-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 2rem; 
+            margin: 3rem 0; 
         }
-
-        .marco-legal-box {
-            border: 2px solid var(--accent);
-            padding: 2.5rem;
+        .marco-legal-box { 
+            border: 2px solid var(--accent); 
+            padding: 2.5rem; 
         }
-
-        .marco-legal-box h4 {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+        .marco-legal-box h4 { 
+            font-size: 0.875rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.1em; 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin-bottom: 1.5rem; 
         }
-
-        .marco-legal-item {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--grid-line);
+        .marco-legal-item { 
+            margin-bottom: 1.5rem; 
+            padding-bottom: 1.5rem; 
+            border-bottom: 1px solid var(--grid-line); 
         }
-
-        .marco-legal-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
+        .marco-legal-item:last-child { 
+            margin-bottom: 0; 
+            padding-bottom: 0; 
+            border-bottom: none; 
         }
-
-        .marco-legal-item strong {
-            display: block;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+        .marco-legal-item strong { 
+            display: block; 
+            font-size: 1rem; 
+            margin-bottom: 0.5rem; 
         }
-
-        .marco-legal-item p {
-            font-size: 0.875rem;
-            line-height: 1.6;
-            margin: 0;
-            color: var(--text-secondary);
+        .marco-legal-item p { 
+            font-size: 0.875rem; 
+            line-height: 1.6; 
+            margin: 0; 
+            color: var(--text-secondary); 
         }
         
-        .marcos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 4rem 0;
+        .marcos-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 2rem; 
+            margin: 4rem 0; 
+        }
+        .marco-card { 
+            border: 2px solid var(--accent); 
+            padding: 3rem 2rem; 
+            text-align: center; 
+        }
+        .marco-number { 
+            font-size: 5rem; 
+            font-weight: 900; 
+            line-height: 1; 
+            color: var(--primary); 
+        }
+        .marco-label { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.1em; 
+            font-weight: 700; 
+            margin-top: 1rem; 
         }
         
-        .marco-card {
-            border: 2px solid var(--accent);
-            padding: 3rem 2rem;
-            text-align: center;
+        .objetivos-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 2rem; 
+            margin: 3rem 0; 
         }
-        
-        .marco-number {
-            font-size: 5rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--primary);
+        .objetivo-item { 
+            border-left: 4px solid var(--primary); 
+            padding: 2rem; 
         }
-        
-        .marco-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-            margin-top: 1rem;
+        .objetivo-item h4 { 
+            font-size: 1.25rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 0.5rem; 
         }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-        
-        .stat-item {
-            border-left: 4px solid var(--primary);
-            padding-left: 2rem;
-        }
-        
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--primary);
-        }
-        
-        .stat-label {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-top: 0.5rem;
-        }
-        
-        .objetivos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .objetivo-item {
-            border-left: 4px solid var(--primary);
-            padding: 2rem;
-        }
-        
-        .objetivo-item h4 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
+        .objetivo-item p { 
+            font-size: 1rem; 
+            line-height: 1.6; 
         }
 
-        .objetivo-item p {
-            font-size: 1rem;
-            line-height: 1.6;
+        .organograma-box { 
+            border: 3px solid var(--accent); 
+            padding: 2.5rem 2rem; 
+            margin: 3rem auto; 
+            text-align: center; 
+            max-width: 700px; 
+        }
+        .organograma-nivel { margin: 1rem 0; }
+        .organograma-nivel-title { 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.1em; 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin-bottom: 0.5rem; 
+        }
+        .organograma-box-item { 
+            display: inline-block; 
+            border: 2px solid var(--accent); 
+            padding: 0.75rem 1.25rem; 
+            margin: 0.25rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 0.75rem; 
+        }
+        .organograma-arrow { 
+            font-size: 1.5rem; 
+            color: var(--primary); 
+            margin: 0.5rem 0; 
         }
 
-        .organograma-box {
-            border: 3px solid var(--accent);
-            padding: 2.5rem 2rem;
-            margin: 3rem auto;
-            text-align: center;
-            max-width: 700px;
+        .recursos-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 2rem; 
+            margin: 3rem 0; 
         }
-
-        .organograma-nivel {
-            margin: 1rem 0;
+        .recurso-card { 
+            border: 2px solid var(--accent); 
+            padding: 2.5rem; 
+            transition: all var(--transition-base); 
+            text-decoration: none; 
+            color: inherit; 
+            display: block; 
         }
-
-        .organograma-nivel-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+        .recurso-card:hover { 
+            background: var(--accent); 
+            color: white; 
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15); 
         }
-
-        .organograma-box-item {
-            display: inline-block;
-            border: 2px solid var(--accent);
-            padding: 0.75rem 1.25rem;
-            margin: 0.25rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.75rem;
+        .recurso-card h4 { 
+            font-size: 1.125rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-bottom: 0.75rem; 
+            line-height: 1.3; 
         }
-
-        .organograma-arrow {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin: 0.5rem 0;
+        .recurso-card p { 
+            font-size: 0.875rem; 
+            line-height: 1.6; 
+            margin: 0; 
+            opacity: 0.8; 
         }
-
-        .recursos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
+        .recurso-card:hover p { opacity: 1; }
+        .recurso-card .recurso-icon { 
+            font-size: 2rem; 
+            color: var(--primary); 
+            margin-bottom: 1rem; 
+            transition: color var(--transition-base); 
         }
-
-        .recurso-card {
-            border: 2px solid var(--accent);
-            padding: 2.5rem;
-            transition: all var(--transition-base);
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .recurso-card:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        }
-
-        .recurso-card h4 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-        }
-
-        .recurso-card p {
-            font-size: 0.875rem;
-            line-height: 1.6;
-            margin: 0;
-            opacity: 0.8;
-        }
-
-        .recurso-card:hover p {
-            opacity: 1;
-        }
-
-        .recurso-card .recurso-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            transition: color var(--transition-base);
-        }
-
-        .recurso-card:hover .recurso-icon {
-            color: white;
-        }
+        .recurso-card:hover .recurso-icon { color: white; }
 
         .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
+            position: fixed; 
+            bottom: 2rem; 
+            right: 2rem; 
+            width: 50px; 
             height: 50px;
-            background: var(--accent);
-            color: white;
-            border: none;
+            background: var(--accent); 
+            color: white; 
+            border: none; 
             border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
+            font-size: 1.5rem; 
+            cursor: pointer; 
+            opacity: 0; 
             visibility: hidden;
-            transition: all 0.3s;
-            z-index: 999;
+            transition: all 0.3s; 
+            z-index: 999; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            min-width: 44px;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
+            min-width: 44px; 
+            min-height: 44px; 
+            display: flex; 
+            align-items: center; 
             justify-content: center;
         }
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .back-to-top:hover {
-            background: var(--primary);
-            transform: translateY(-4px);
-        }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: var(--primary); transform: translateY(-4px); }
         
-        .page-footer {
-            background: var(--accent);
-            color: white;
-            padding: 4rem 0 2rem 0;
-            margin-top: 8rem;
-            border-top: 4px solid var(--primary);
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        .footer-section h4 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            opacity: 0.6;
-        }
-        
-        .footer-section a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            margin-bottom: 0.75rem;
-            font-size: 0.875rem;
-        }
-        
-        .footer-section a:hover { text-decoration: underline; }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.6;
-        }
-        
+        /* ========================================
+           MOBILE OPTIMIZATIONS
+           ======================================== */
         @media (max-width: 968px) {
             .swiss-grid { 
                 padding: 0 2rem; 
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; 
+                gap: 1.5rem;
             }
             .breadcrumb { padding: 0 2rem; }
             .col-8, .col-6 { grid-column: 1 / -1; }
+            
+            .hero-section { padding: 4rem 0 3rem 0; }
             .hero-title { font-size: 2.5rem; }
-            .marcos-grid, .stats-grid, .objetivos-grid, 
-            .marcos-legais-grid, .recursos-grid, .exemplo-grid { 
+            
+            /* Tabs mobile */
+            .tabs-nav { 
+                gap: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .tab-button { 
+                padding: 1rem 1.5rem; 
+                font-size: 0.75rem; 
+            }
+            
+            /* Grids colapsam */
+            .marcos-grid, 
+            .objetivos-grid, 
+            .marcos-legais-grid, 
+            .recursos-grid, 
+            .exemplo-grid { 
                 grid-template-columns: 1fr; 
+                gap: 1.5rem;
             }
-            .footer-grid { grid-template-columns: 1fr; }
-
-            /* Tabs mobile - ativar scroll horizontal */
-            .tabs-nav {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+            
+            /* Boxes mobile */
+            .definition-box, 
+            .exemplo-box, 
+            .marco-legal-box, 
+            .recurso-card, 
+            .organograma-box { 
+                padding: 2rem !important; 
             }
+            
+            /* Características mobile */
+            .caracteristica-list li {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.25rem 0;
+            }
+            .caracteristica-number {
+                font-size: 1.5rem;
+            }
+            
+            /* Negative list mobile */
+            .negative-list li {
+                flex-direction: column;
+                gap: 1rem;
+                font-size: 1rem;
+            }
+            .negative-list li span {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Exemplo grid mobile */
+            .exemplo-item {
+                border-left: none;
+                border-top: 3px solid white;
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+            .exemplo-item:first-child {
+                border-top: none;
+                padding-top: 0;
+            }
+            
+            /* Marco cards mobile */
+            .marco-card {
+                padding: 2rem 1.5rem;
+            }
+            .marco-number {
+                font-size: 4rem;
+            }
+            
+            /* Organograma mobile */
+            .organograma-box-item {
+                font-size: 0.65rem;
+                padding: 0.5rem 1rem;
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            /* Objetivos mobile */
+            .objetivo-item {
+                padding: 1.5rem;
+            }
+            .objetivo-item h4 {
+                font-size: 1.125rem;
+            }
+            
+            /* Back to top mobile */
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .swiss-grid { padding: 0 1.5rem; }
+            .breadcrumb { padding: 0 1.5rem; }
+            .hero-title { font-size: 2rem; }
             
             .tab-button {
-                padding: 1.25rem 1.5rem;
-                font-size: 0.75rem;
+                padding: 1rem;
+                font-size: 0.7rem;
             }
             
-            .definition-box,
-            .exemplo-box,
-            .marco-legal-box,
-            .recurso-card,
-            .organograma-box {
-                padding: 2rem !important;
+            .definition-box p,
+            .exemplo-box h4 {
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -642,33 +568,8 @@
 <body>
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
     <div class="progress-indicator" id="progressBar"></div>
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-
-    <header class="gov-header">
-        <div class="header-grid">
-            <div class="header-brand">
-                <img src="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png" alt="SEDEICS" class="gov-logo-img" loading="lazy">
-                
-                <div class="header-ceni-mark">
-                    <div class="header-ceni-title">CENI-RJ</div>
-                    <div class="header-ceni-subtitle">Comitê Estadual de Impacto</div>
-                </div>
-            </div>
-            
-            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
-
-           <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navegação principal">
-                <a href="ceni-index.html">Início</a>
-                <a href="ceni-sobre.html" class="active" aria-current="page">Sobre</a>
-                <a href="ceni-gts.html">GTs</a>
-                <a href="ceni-eventos.html">Eventos</a>
-                <a href="ceni-canais.html">Canais</a>
-                <a href="ceni-repositorio.html">Repositório</a>
-            </nav>
-        </div>
-    </header>
+    
+    <ceni-header></ceni-header>
 
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <ol class="breadcrumb">
@@ -681,16 +582,16 @@
         <section class="hero-section">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <span class="label">Institucional</span>
-                    <h1 class="hero-title">
+                    <span class="label" data-animate="fade-up">Institucional</span>
+                    <h1 class="hero-title" data-animate="fade-up" data-delay="100">
                         Sobre o<br>CENI-RJ
                     </h1>
-                    <div class="hero-line"></div>
+                    <div class="hero-line" data-animate="scale-in" data-delay="200"></div>
                 </div>
                 
                 <div class="col-8">
-                    <p style="font-size: 1.25rem; line-height: 1.6;">
-                        O <strong>Comitê Estadual de Investimentos e Negócios de Impacto</strong> é uma 
+                    <p style="font-size: 1.25rem; line-height: 1.6;" data-animate="fade-up" data-delay="300">
+                        O <strong>Comitê Estadual de Investimentos e Negócios de Impacto – CENI-RJ</strong> é uma 
                         instância estratégica do Governo do Estado do Rio de Janeiro responsável por promover a 
                         articulação entre governo, instituições de fomento, sociedade civil, universidades, 
                         organizações intermediárias e setor privado.
@@ -699,10 +600,9 @@
             </div>
         </section>
 
-        <!-- SISTEMA DE TABS -->
         <section class="tabs-container">
             <div class="swiss-grid">
-                <div class="col-full">
+                <div class="col-full" data-animate="fade-up" data-delay="400">
                     <nav class="tabs-nav" role="tablist" aria-label="Seções de conteúdo">
                         <button class="tab-button active" role="tab" aria-selected="true" aria-controls="tab-marcos" id="btn-marcos">
                             Marcos Legais
@@ -721,7 +621,6 @@
                         </button>
                     </nav>
 
-                    <!-- TAB 1: MARCOS LEGAIS -->
                     <div class="tab-content active" role="tabpanel" id="tab-marcos" aria-labelledby="btn-marcos">
                         <div class="col-8">
                             <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
@@ -781,7 +680,6 @@
                         </div>
                     </div>
 
-                    <!-- TAB 2: DEFINIÇÃO -->
                     <div class="tab-content" role="tabpanel" id="tab-definicao" aria-labelledby="btn-definicao">
                         <div class="definition-box">
                             <p>
@@ -884,7 +782,6 @@
                         </div>
                     </div>
 
-                    <!-- TAB 3: GOVERNANÇA -->
                     <div class="tab-content" role="tabpanel" id="tab-governanca" aria-labelledby="btn-governanca">
                         <div class="organograma-box">
                             <div class="organograma-nivel">
@@ -927,32 +824,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-number">17</div>
-                                <div class="stat-label">
-                                    Organizações Participantes
-                                </div>
-                            </div>
-                            
-                            <div class="stat-item">
-                                <div class="stat-number">5</div>
-                                <div class="stat-label">
-                                    Grupos de Trabalho
-                                </div>
-                            </div>
-                            
-                            <div class="stat-item">
-                                <div class="stat-number">34</div>
-                                <div class="stat-label">
-                                    Membros (Titular + Suplente)
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- TAB 4: OBJETIVOS -->
                     <div class="tab-content" role="tabpanel" id="tab-objetivos" aria-labelledby="btn-objetivos">
                         <div class="objetivos-grid">
                             <div class="objetivo-item">
@@ -987,7 +860,6 @@
                         </div>
                     </div>
 
-                    <!-- TAB 5: RECURSOS -->
                     <div class="tab-content" role="tabpanel" id="tab-recursos" aria-labelledby="btn-recursos">
                         <p style="font-size: 1.125rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 3rem;">
                             Acesse materiais, estudos e recursos externos para aprofundar seu conhecimento 
@@ -1053,115 +925,18 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <footer class="page-footer-enhanced" data-animate>
-        <div class="swiss-grid">
-            <div class="footer-grid-enhanced" style="grid-column: 1 / -1;">
-                
-                <div class="footer-brand">
-                    <div class="footer-logo-text">CENI-RJ</div>
-                    <p class="footer-tagline">
-                        Comitê Estadual de Investimentos e Negócios de Impacto do Rio de Janeiro
-                    </p>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-1">
-                    <h4>Navegação</h4>
-                    <div class="footer-section-content">
-                        <a href="ceni-index.html">
-                            <i class="fas fa-home"></i>
-                            <span>Início</span>
-                        </a>
-                        <a href="ceni-sobre.html">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Sobre o Comitê</span>
-                        </a>
-                       <a href="ceni-gts.html">
-                            <i class="fas fa-users"></i>
-                            <span>Grupos de Trabalho</span>
-                        </a>
-                        <a href="ceni-eventos.html">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Eventos</span>
-                        </a>
-                        <a href="ceni-canais.html">
-                            <i class="fas fa-comments"></i>
-                            <span>Canais</span>
-                        </a>
-                        <a href="ceni-repositorio.html">
-                            <i class="fas fa-folder-open"></i>
-                            <span>Repositório</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-2">
-                    <h4>Contato</h4>
-                    <div class="footer-section-content">
-                        <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>nucleo.acompanhamento@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="mailto:gabinete@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>gabinete@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="tel:+552133987000">
-                            <i class="fas fa-phone"></i>
-                            <span>(21) 3398-7000</span>
-                        </a>
-                        <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="footer-bottom-enhanced" style="grid-column: 1 / -1;">
-                <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
-                <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
-                <p>Desenvolvido por Gabriel Felizardo da Silva</p>
-            </div>
-        </div>
-    </footer>
+    <ceni-footer></ceni-footer>
 
     <script src="ceni-animations.js"></script>
     <script src="ceni-footer-enhanced.js"></script>
+    <script src="ceni-components.js"></script>
 
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Header sticky
-        const header = document.querySelector('.gov-header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
-
         // Progress indicator
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
-        });
-
-        // Mobile menu
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-
-        menuToggle.addEventListener('click', () => {
-            const isOpen = mainNav.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        mobileOverlay.addEventListener('click', () => {
-            mainNav.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
         });
 
         // Back to top
@@ -1174,16 +949,12 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // ======================================
-        // SISTEMA DE TABS
-        // ======================================
-        
+        // Sistema de tabs
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
         
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active de todos
                 tabButtons.forEach(btn => {
                     btn.classList.remove('active');
                     btn.setAttribute('aria-selected', 'false');
@@ -1192,15 +963,12 @@
                     content.classList.remove('active');
                 });
                 
-                // Adiciona active ao clicado
                 button.classList.add('active');
                 button.setAttribute('aria-selected', 'true');
                 
-                // Mostra conteúdo correspondente
                 const tabId = button.getAttribute('aria-controls');
                 document.getElementById(tabId).classList.add('active');
                 
-                // Scroll suave ao início das tabs
                 document.querySelector('.tabs-container').scrollIntoView({ 
                     behavior: 'smooth', 
                     block: 'start' 
