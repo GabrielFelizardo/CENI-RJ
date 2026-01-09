@@ -99,24 +99,6 @@
         
         .col-full { grid-column: 1 / -1; position: relative; z-index: 1; }
         .col-8 { grid-column: span 8; position: relative; z-index: 1; }
-
-        @media (max-width: 968px) {
-            
-            .main-nav.active { right: 0; }
-
-            .mobile-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: transparent;
-                z-index: 10000;
-                transition: opacity 0.3s ease;
-            }
-            .mobile-overlay.active { display: block; }
-        }
         
         .label {
             font-size: 0.75rem;
@@ -154,7 +136,7 @@
             margin: 4rem 0;
         }
         
-        /* NOVO LAYOUT DE CANAIS - HORIZONTAL */
+        /* LAYOUT HORIZONTAL DOS CANAIS */
         .canais-list {
             list-style: none;
             padding: 0;
@@ -255,6 +237,7 @@
             color: var(--text-primary);
         }
         
+        /* FAQ SECTION */
         .faq-section {
             margin-top: 6rem;
             padding-top: 6rem;
@@ -346,78 +329,29 @@
         }
         
         @media (max-width: 968px) {
-            .swiss-grid { 
-                padding: 0 2rem; 
-                grid-template-columns: 1fr;
-            }
+            .swiss-grid { padding: 0 2rem; grid-template-columns: 1fr; }
             .breadcrumb { padding: 0 2rem; }
             .col-8 { grid-column: 1 / -1; }
             .hero-title { font-size: 2.5rem; }
             
-            /* Layout mobile - vertical */
-            .canal-card {
-                grid-template-columns: 1fr;
-            }
-            
-            .canal-icon-box {
-                border-right: none;
-                border-bottom: 2px solid var(--accent);
-                padding: 1.5rem;
-            }
-            
-            .canal-icon {
-                font-size: 2rem;
-            }
-            
-            .canal-content {
-                padding: 2rem;
-            }
-            
-            .canal-content h3 {
-                font-size: 1.25rem;
-            }
-            
-            .canal-content a,
-            .canal-content .canal-info {
-                font-size: 1rem;
-            }
+            .canal-card { grid-template-columns: 1fr; }
+            .canal-icon-box { border-right: none; border-bottom: 2px solid var(--accent); padding: 1.5rem; }
+            .canal-icon { font-size: 2rem; }
+            .canal-content { padding: 2rem; }
+            .canal-content h3 { font-size: 1.25rem; }
+            .canal-content a, .canal-content .canal-info { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
     <div class="progress-indicator" id="progressBar"></div>
-    <div class="mobile-overlay" id="mobileOverlay"></div>
 
-    <header class="gov-header">
-        <div class="header-grid">
-            <div class="header-brand">
-                <img src="https://raw.githubusercontent.com/GabrielFelizardo/almoxarifado-sistema/main/logo.png" alt="SEDEICS" class="gov-logo-img" loading="lazy">
-                
-                <div class="header-ceni-mark">
-                    <div class="header-ceni-title">CENI-RJ</div>
-                    <div class="header-ceni-subtitle">Comitê Estadual de Impacto</div>
-                </div>
-            </div>
-            
-            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <nav class="main-nav" id="mainNav" role="navigation" aria-label="Navegação principal">
-                <a href="ceni-index.html">Início</a>
-                <a href="ceni-sobre.html">Sobre</a>
-                <a href="ceni-gts.html">GTs</a>
-                <a href="ceni-eventos.html">Eventos</a>
-                <a href="ceni-canais.html" class="active" aria-current="page">Canais</a>
-                <a href="ceni-repositorio.html">Repositório</a>
-            </nav>
-        </div>
-    </header>
+    <ceni-header></ceni-header>
 
     <nav class="breadcrumb-container" aria-label="Breadcrumb">
         <ol class="breadcrumb">
-            <li><a href="index.html">CENI-RJ</a></li>
+            <li><a href="ceni-index.html">CENI-RJ</a></li>
             <li class="active" aria-current="page">→ Canais de Comunicação</li>
         </ol>
     </nav>
@@ -426,15 +360,15 @@
         <section class="hero-section">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <span class="label">Comunicação</span>
-                    <h1 class="hero-title">
+                    <span class="label" data-animate="fade-up">Comunicação</span>
+                    <h1 class="hero-title" data-animate="fade-up" data-delay="100">
                         Canais de<br>Comunicação
                     </h1>
-                    <div class="hero-line"></div>
+                    <div class="hero-line" data-animate="scale-in" data-delay="200"></div>
                 </div>
                 
                 <div class="col-8">
-                    <p style="font-size: 1.25rem; line-height: 1.6;">
+                    <p style="font-size: 1.25rem; line-height: 1.6;" data-animate="fade-up" data-delay="300">
                         Entre em contato conosco através dos canais oficiais do CENI-RJ.
                     </p>
                 </div>
@@ -444,7 +378,7 @@
         <section style="margin-bottom: 6rem;">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <div class="info-box">
+                    <div class="info-box" data-animate="scale-in" data-delay="400">
                         <p style="font-size: 1.125rem; margin: 0;">
                             <strong>Importante:</strong> Utilize os canais oficiais abaixo para comunicações relacionadas ao CENI-RJ.
                         </p>
@@ -453,8 +387,7 @@
                 
                 <div class="col-full">
                     <ul class="canais-list">
-                        <!-- EMAIL -->
-                        <li class="canal-card">
+                        <li class="canal-card" data-animate="fade-up" data-delay="0">
                             <div class="canal-icon-box">
                                 <i class="fas fa-envelope canal-icon"></i>
                                 <span class="canal-number">01</span>
@@ -468,8 +401,7 @@
                             </div>
                         </li>
                         
-                        <!-- TELEFONE -->
-                        <li class="canal-card">
+                        <li class="canal-card" data-animate="fade-up" data-delay="100">
                             <div class="canal-icon-box">
                                 <i class="fas fa-phone canal-icon"></i>
                                 <span class="canal-number">02</span>
@@ -485,8 +417,7 @@
                             </div>
                         </li>
                         
-                        <!-- WHATSAPP -->
-                        <li class="canal-card">
+                        <li class="canal-card" data-animate="fade-up" data-delay="200">
                             <div class="canal-icon-box">
                                 <i class="fab fa-whatsapp canal-icon"></i>
                                 <span class="canal-number">03</span>
@@ -501,8 +432,7 @@
                             </div>
                         </li>
                         
-                        <!-- ENDEREÇO -->
-                        <li class="canal-card">
+                        <li class="canal-card" data-animate="fade-up" data-delay="300">
                             <div class="canal-icon-box">
                                 <i class="fas fa-map-marker-alt canal-icon"></i>
                                 <span class="canal-number">04</span>
@@ -525,15 +455,15 @@
         <section class="faq-section">
             <div class="swiss-grid">
                 <div class="col-full">
-                    <span class="label">FAQ</span>
-                    <h2 style="font-size: 2.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 3rem;">
+                    <span class="label" data-animate="fade-up" data-delay="400">FAQ</span>
+                    <h2 style="font-size: 2.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 3rem;" data-animate="fade-up" data-delay="500">
                         Informações<br>Úteis
                     </h2>
                 </div>
                 
                 <div class="col-full">
                     <ul class="faq-list">
-                        <li class="faq-item">
+                        <li class="faq-item" data-animate="fade-up" data-delay="0">
                             <button class="faq-question" aria-expanded="false">
                                 <span>Como participar do CENI-RJ?</span>
                                 <i class="fas fa-chevron-down faq-icon"></i>
@@ -546,7 +476,7 @@
                             </div>
                         </li>
                         
-                        <li class="faq-item">
+                        <li class="faq-item" data-animate="fade-up" data-delay="100">
                             <button class="faq-question" aria-expanded="false">
                                 <span>Como acompanhar as ações do comitê?</span>
                                 <i class="fas fa-chevron-down faq-icon"></i>
@@ -559,7 +489,7 @@
                             </div>
                         </li>
                         
-                        <li class="faq-item">
+                        <li class="faq-item" data-animate="fade-up" data-delay="200">
                             <button class="faq-question" aria-expanded="false">
                                 <span>Horário de atendimento</span>
                                 <i class="fas fa-chevron-down faq-icon"></i>
@@ -571,7 +501,7 @@
                             </div>
                         </li>
                         
-                        <li class="faq-item">
+                        <li class="faq-item" data-animate="fade-up" data-delay="300">
                             <button class="faq-question" aria-expanded="false">
                                 <span>Onde encontrar mais informações?</span>
                                 <i class="fas fa-chevron-down faq-icon"></i>
@@ -593,112 +523,17 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <footer class="page-footer-enhanced" data-animate>
-        <div class="swiss-grid">
-            <div class="footer-grid-enhanced" style="grid-column: 1 / -1;">
-                
-                <div class="footer-brand">
-                    <div class="footer-logo-text">CENI-RJ</div>
-                    <p class="footer-tagline">
-                        Comitê Estadual de Investimentos e Negócios de Impacto do Rio de Janeiro
-                    </p>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-1">
-                    <h4>Navegação</h4>
-                    <div class="footer-section-content">
-                        <a href="ceni-index.html">
-                            <i class="fas fa-home"></i>
-                            <span>Início</span>
-                        </a>
-                        <a href="ceni-sobre.html">
-                            <i class="fas fa-info-circle"></i>
-                            <span>Sobre o Comitê</span>
-                        </a>
-                        <a href="ceni-gts.html">
-                            <i class="fas fa-users"></i>
-                            <span>Grupos de Trabalho</span>
-                        </a>
-                        <a href="ceni-eventos.html">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Eventos</span>
-                        </a>
-                        <a href="ceni-canais.html">
-                            <i class="fas fa-comments"></i>
-                            <span>Canais</span>
-                        </a>
-                        <a href="ceni-repositorio.html">
-                            <i class="fas fa-folder-open"></i>
-                            <span>Repositório</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-section-enhanced gt-accent-2">
-                    <h4>Contato</h4>
-                    <div class="footer-section-content">
-                        <a href="mailto:nucleo.acompanhamento@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>nucleo.acompanhamento@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="mailto:gabinete@desenvolvimento.rj.gov.br" class="footer-contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>gabinete@desenvolvimento.rj.gov.br</span>
-                        </a>
-                        <a href="tel:+552133987000">
-                            <i class="fas fa-phone"></i>
-                            <span>(21) 3398-7000</span>
-                        </a>
-                        <div style="margin-top: 1rem; color: rgba(255,255,255,0.75); font-size: 0.875rem;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span style="margin-left: 0.75rem;">Palácio Guanabara - Laranjeiras, Rio de Janeiro - RJ</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="footer-bottom-enhanced" style="grid-column: 1 / -1;">
-                <p>© <span id="current-year"></span> CENI-RJ - Comitê Estadual de Investimentos e Negócios de Impacto</p>
-                <p>SEDEICS - Secretaria de Desenvolvimento Econômico, Indústria, Comércio e Serviços</p>
-                <p>Desenvolvido por Gabriel Felizardo da Silva</p>
-            </div>
-        </div>
-    </footer>
+    <ceni-footer></ceni-footer>
 
     <script src="ceni-animations.js"></script>
     <script src="ceni-footer-enhanced.js"></script>
+    <script src="ceni-components.js"></script>
 
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        const header = document.querySelector('.gov-header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
-
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientElement;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('progressBar').style.width = ((winScroll / height) * 100) + '%';
-        });
-
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-
-        menuToggle.addEventListener('click', () => {
-            const isOpen = mainNav.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-
-        mobileOverlay.addEventListener('click', () => {
-            mainNav.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
         });
 
         const backToTop = document.getElementById('backToTop');
@@ -717,13 +552,11 @@
                 const faqItem = question.parentElement;
                 const isActive = faqItem.classList.contains('active');
                 
-                // Close all other items
                 document.querySelectorAll('.faq-item').forEach(item => {
                     item.classList.remove('active');
                     item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                 });
                 
-                // Toggle current item
                 if (!isActive) {
                     faqItem.classList.add('active');
                     question.setAttribute('aria-expanded', 'true');
